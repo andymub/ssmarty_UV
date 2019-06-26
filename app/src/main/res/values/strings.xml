@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ssmarty</string>
+    <string name="nfc_state_shower">NFC state shower</string>
+    <string name="nfc_SUBT">SSMARTY</string>
+    <string name="nfc_activ">NFC activé</string>
+    <string name="activer_la_fonctionalit_nfc_pour_se_biper_votre_carte">Activer la fonctionalité NFC pour se biper votre Carte</string>
+    <string name="ntc_activE">NFC Activé</string>
+    <string name="veuill_activE_Nfc">Veuillez activer votre NFC</string>
+</resources>
