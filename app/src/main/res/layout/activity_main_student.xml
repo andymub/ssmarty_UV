@@ -8,11 +8,215 @@
     >
 
     <android.support.v7.widget.Toolbar
+
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
     </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/hr1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="#4acbfa"
+        tools:ignore="UnknownId"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/txtNom_univ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/hr1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="right"
+        android:text="Nom univ"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/hr2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="29dp"
+        android:background="#4acbfa" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_student_act"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/hr2"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="3dp"
+        android:layout_alignParentLeft="true">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corners_imagebutton"
+            android:contentDescription="TODO"
+            android:src="@drawable/horaire" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/rounded_corners_imagebutton"
+            app:srcCompat="@drawable/exam" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/rounded_corners_imagebutton"
+            app:srcCompat="@drawable/commu_interfac" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/rounded_corners_imagebutton"
+            app:srcCompat="@drawable/comm_publ" />
+    </LinearLayout>
+    <View
+        android:id="@+id/hr3"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:background="#4acbfa"
+        android:layout_below="@+id/layout_student_act"/>
+
+    <TextView
+        android:id="@+id/textView_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_student_act"
+        android:layout_centerHorizontal="true"
+        android:text="Nouvelles récentes de la faculté"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:id="@+id/scroll_student_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView_3"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="3dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txt_titre_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="journée Fac Agro" />
+
+            <TextView
+                android:id="@+id/auteur_message1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CP X" />
+
+            <TextView
+                android:id="@+id/txtmessage1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
+                android:textColor="@android:color/black" />
+            <View
+                android:id="@+id/hr4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:background="#4acbfa"
+                android:layout_below="@+id/txt_message1"/>
+            <TextView
+                android:id="@+id/txt_titre_message2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/auteur_message2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/txtmessage2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
+                android:textColor="@android:color/black" />
+            <View
+                android:id="@+id/hr5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:background="#4acbfa"
+                android:layout_below="@+id/txt_message1"/>
+            <TextView
+                android:id="@+id/txt_titre_message3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/auteur_message3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/txtmessage3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
+                android:textColor="@android:color/black" />
+            <View
+                android:id="@+id/hr6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:background="#4acbfa"
+                android:layout_below="@+id/txt_message1"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
