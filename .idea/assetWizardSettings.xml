@@ -58,10 +58,12 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundLayerName" value="ic_launcher1" />
-                                      <entry key="foregroundImage" value="C:\Users\Andymub\Documents\ssmarty\LOGO\ssmart_logo.png" />
-                                      <entry key="foregroundLayerName" value="ssmart_nfc_deconnect1" />
+                                      <entry key="backgroundImage" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
+                                      <entry key="backgroundLayerName" value="nfc_opened1" />
+                                      <entry key="foregroundImage" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
+                                      <entry key="foregroundLayerName" value="nfc_opened2" />
                                       <entry key="legacyIconShape" value="NONE" />
+                                      <entry key="outputName" value="nfc_ouvert" />
                                       <entry key="webIconShape" value="NONE" />
                                     </map>
                                   </option>
@@ -73,6 +75,17 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="image">
                                         <value>
                                           <PersistentState>
@@ -92,7 +105,8 @@
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\Andymub\Documents\ssmarty\LOGO\ssmart_logo.png" />
+                                      <entry key="imageAsset" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
+                                      <entry key="outputName" value="nfc_opened" />
                                     </map>
                                   </option>
                                 </PersistentState>

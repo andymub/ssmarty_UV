@@ -6,4 +6,11 @@
     <string name="activer_la_fonctionalit_nfc_pour_se_biper_votre_carte">Activer la fonctionalité NFC pour se biper votre Carte</string>
     <string name="ntc_activE">NFC Activé</string>
     <string name="veuill_activE_Nfc">Veuillez activer votre NFC</string>
+    <string name="title_activity_main__student">MainActivity_Student</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
