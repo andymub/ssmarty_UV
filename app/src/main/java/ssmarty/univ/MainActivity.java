@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         imgNfcState.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                Intent studentIntent;
+                studentIntent=new Intent(MainActivity.this, MainActivity_Prof.class);
+                startActivity(studentIntent);
                 return false;
             }
         });
