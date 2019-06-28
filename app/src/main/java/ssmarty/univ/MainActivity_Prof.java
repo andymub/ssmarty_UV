@@ -21,6 +21,8 @@ public class MainActivity_Prof extends AppCompatActivity {
         btnBuildList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
+                startActivity(switch_prof_acti);
 
             }
         });
@@ -35,13 +37,16 @@ public class MainActivity_Prof extends AppCompatActivity {
         btnMyList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_MyList_prof.class);
+                startActivity(switch_prof_acti);
 
             }
         });
         btnContactUniv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_contatUniv_prof.class);
+                startActivity(switch_prof_acti);
             }
         });
     }

@@ -7,13 +7,7 @@
     tools:context=".MainActivity_student"
     >
 
-    <android.support.v7.widget.Toolbar
 
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-    </android.support.v7.widget.Toolbar>
 
     <View
         android:id="@+id/hr1"

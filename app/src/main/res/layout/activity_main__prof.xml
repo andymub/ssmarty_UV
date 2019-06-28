@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity_Prof">
 
-    <android.support.v7.widget.Toolbar
-
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-
-    </android.support.v7.widget.Toolbar>
 
     <View
         android:layout_width="match_parent"
@@ -31,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/hr1"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="right"
         android:paddingRight="5dp"
         android:text="Nom univ"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:paddingEnd="5dp" />
 
     <RelativeLayout
         android:id="@+id/layout_student_act"
@@ -50,7 +43,8 @@
         android:orientation="vertical"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:paddingTop="3dp">
+        android:paddingTop="3dp"
+        android:layout_alignParentLeft="true">
 
         <ImageButton
             android:id="@+id/imgbtn_liste"
@@ -61,7 +55,9 @@
             android:layout_marginStart="21dp"
             android:background="@drawable/rounded_corners_imagebutton"
             android:contentDescription="TODO"
-            android:src="@drawable/prof_liste1" />
+            android:src="@drawable/prof_liste1"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="21dp" />
 
         <ImageButton
             android:id="@+id/imgbtn_communi_prof"
@@ -71,7 +67,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="21dp"
             android:background="@drawable/rounded_corners_imagebutton"
-            app:srcCompat="@drawable/communique" />
+            app:srcCompat="@drawable/communique"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="21dp" />
 
         <ImageButton
             android:id="@+id/imgbtn_my_listes"
@@ -81,7 +79,8 @@
             android:layout_alignStart="@+id/imgbtn_liste"
             android:layout_marginBottom="13dp"
             android:background="@drawable/rounded_corners_imagebutton"
-            app:srcCompat="@drawable/mes_listes_prof" />
+            app:srcCompat="@drawable/mes_listes_prof"
+            android:layout_alignLeft="@+id/imgbtn_liste" />
 
         <ImageButton
             android:id="@+id/imgbtn_contact_univ"
@@ -90,15 +89,17 @@
             android:layout_alignStart="@+id/imgbtn_communi_prof"
             android:layout_alignTop="@+id/imgbtn_my_listes"
             android:background="@drawable/rounded_corners_imagebutton"
-            app:srcCompat="@drawable/ecrire" />
+            app:srcCompat="@drawable/ecrire"
+            android:layout_alignLeft="@+id/imgbtn_communi_prof" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textView5"
             android:layout_below="@+id/imgbtn_liste"
-            android:text="Lancer une liste présence"
-            android:textSize="8sp" />
+            android:text="@string/lancer_une_liste_pr_sence"
+            android:textSize="8sp"
+            android:layout_alignLeft="@+id/textView5" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,8 +107,10 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="65dp"
-            android:text="Ecrire à l'université"
-            android:textSize="8sp" />
+            android:text="@string/contacter_l_universit"
+            android:textSize="8sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="65dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -116,16 +119,20 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="45dp"
-            android:text="Vérifier mes listes de présence"
-            android:textSize="8sp" />
+            android:text="@string/v_rifier_mes_listes_de_pr_sence"
+            android:textSize="8sp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="45dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/imgbtn_liste"
-            android:layout_marginEnd="13dp"
-            android:text="Ecrire une @string/communication_de_l_universit"
+            android:layout_marginEnd="33dp"
+            android:layout_marginRight="33dp"
+            android:text="@string/r_diger_une_communication"
             android:textSize="8sp" />
     </RelativeLayout>
     <View
@@ -158,7 +165,8 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:paddingLeft="3dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingStart="3dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -180,7 +188,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -207,7 +214,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -228,13 +234,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
+                android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_aliquam_rutrum_convallis_justo_faucibus_condimentum_massa_mollis_id_vestibulum_tempor_elementum_est_vel_vestibulum_nulla_facilisi_maecenas_eget_tristique_lorem_aliquam_leo_arcu_tempor_quis_neque_vel_rhoncus_interdum_neque_aliquam_interdum_consectetur_massa_at_dignissim_suspendisse_pharetra_erat_sed_consectetur_porta_ante_ante_auctor_dui_id_pellentesque_tortor_odio_vel_mi_suspendisse_mattis_arcu_nec_sodales_vestibulum_curabitur_erat_orci_finibus_a_dictum_a_interdum_in_eros_duis_turpis_turpis_maximus_quis_nisl_vitae_vestibulum_imperdiet_nisi_vestibulum_eu_enim_eu_est_rhoncus_pulvinar_nulla_vel_tortor_non_diam_cursus_vulputate"
                 android:textColor="@android:color/black" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
