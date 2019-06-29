@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -133,8 +134,14 @@ public class Activity_liste_presence extends AppCompatActivity {
         btnStartList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkIfEditEmpty()){
-
+                if(checkIfEditEmpty())
+                {
+                    edittxtAutreRainson.setEnabled(true);
+                    editxtIntutuleListe.setEnabled(true);
+                    spinnerTypePresence.setClickable(true);
+                    btnStartList.setImageResource(R.drawable.ic_done_red_24dp);
+                    //set visible Scrollliste
+                    scrollListePresence.setVisibility(View.INVISIBLE);
                 }
                 else{
 
@@ -147,6 +154,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                 edittxtAutreRainson.setEnabled(false);
                 editxtIntutuleListe.setEnabled(false);
                 spinnerTypePresence.setClickable(false);
+                    spinnerTypePresence.setEnabled(false);
                 if(edittxtAutreRainson.getVisibility() == View.VISIBLE){
                     edittxtAutreRainson.setEnabled(false);
                 }
@@ -208,28 +216,36 @@ public class Activity_liste_presence extends AppCompatActivity {
         String strDate = "Date et Heure : " + mdformat.format(calendar.getTime());
         txtdate.setText(strDate );
     }
-    @SuppressLint("ResourceAsColor")
+
     public Boolean checkIfEditEmpty(){
         Boolean chk=true;
-        if ((editxtIntutuleListe.getTextSize()==0)){
+        if (editxtIntutuleListe.length()==0){
             //////////////
-            editxtIntutuleListe.setHintTextColor(R.color.RED_nfc);
-        }
-        else if (editxtIntutuleListe.getTextSize()!=0){
-            if(edittxtAutreRainson.getVisibility() == View.VISIBLE){
+            editxtIntutuleListe.setHintTextColor(getResources().getColor(R.color.RED_nfc));
+            chk=true;
 
+        }
+        else if (editxtIntutuleListe.length()!=0){
+            //Toast.makeText(getApplicationContext(),"c est bon"+editxtIntutuleListe.getTextSize(),Toast.LENGTH_LONG).show();
+            if(edittxtAutreRainson.getVisibility() == View.VISIBLE)
+            {
+               // Toast.makeText(getApplicationContext(),"c est bon2",Toast.LENGTH_LONG).show();
                     //////////////
 
-                    editxtIntutuleListe.setHintTextColor(R.color.RED_nfc);
-                    editxtIntutuleListe.setHint("Ex: Autre raison");
-                    chk=false;
+                if (edittxtAutreRainson.length()!=0){ chk=false;}
+                    else {chk=true;edittxtAutreRainson.setHintTextColor(getResources().getColor(R.color.RED_nfc));}
 
+            }
+            else{
+               // Toast.makeText(getApplicationContext(),"c est bon3",Toast.LENGTH_LONG).show();
+                chk=false;
             }
         }
         else{
+           // Toast.makeText(getApplicationContext(),"c est pas bon",Toast.LENGTH_LONG).show();
             chk=false;
         }
 
-        return false;
+        return chk;
     }
 }
