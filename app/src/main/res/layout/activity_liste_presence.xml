@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relaLayout_presence"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_liste_presence">
+
     <TextView
         android:id="@+id/txtListpresTitre"
         android:layout_width="match_parent"
@@ -27,12 +29,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtListpresTitre"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
@@ -60,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ex: Droit 2011"
+            android:hint="Ex:Intro droit/ Droit 2011"
             android:inputType="textPersonName" />
 
         <TextView
@@ -70,6 +72,67 @@
             android:layout_marginRight="20dp"
             android:gravity="right"
             android:text="Date et Heure" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgbtnStarList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_done_one_24dp" />
+
+            <ImageButton
+                android:id="@+id/ImgSendcloud"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_cloud_upload_black_24dp" />
+
+            <TextView
+                android:id="@+id/txtmesageEtatList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="Message d'etat" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_liste_presence"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/addBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    android:text="BIP NFC" />
+
+                <ListView
+                    android:id="@+id/listView_presence"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/addBtn"
+                    android:background="@color/WHITE_nfc"
+                    android:drawSelectorOnTop="false"
+                    android:stackFromBottom="false"
+                    android:transcriptMode="alwaysScroll" />
+            </RelativeLayout>
+        </ScrollView>
     </LinearLayout>
 
 </RelativeLayout>

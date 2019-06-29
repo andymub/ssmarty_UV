@@ -3,4 +3,7 @@
     <color name="colorPrimary">#5799ce</color>
     <color name="colorPrimaryDark">#69bcff</color>
     <color name="colorAccent">#61798e</color>
+    <color name="bipNfc_etudiant_added">#FF32C1F5</color>
+    <color name="WHITE_nfc">#ffffff</color>
+    <color name="RED_nfc">#ff0202</color>
 </resources>
