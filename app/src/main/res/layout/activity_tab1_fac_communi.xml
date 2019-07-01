@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TabFacCommuni">
+
     <TextView
         android:id="@+id/txtMessageFacTitre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Message" />
+        android:text="@string/mon_message_pour_la_fac_d_partement" />
 
     <View
         android:id="@+id/hr1"
@@ -23,5 +24,71 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="#4acbfa" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtMessageFacTitre"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="5dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/d_stination" />
+
+        <Spinner
+            android:id="@+id/spinner_fac_message_Univ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/objetMessage_fac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:hint="@string/objet_du_message"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/txtSenderDateMessage_Fac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:hint="@string/nom_xpediteur"
+            android:paddingRight="10dp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editxtxMessage_fac"
+                android:layout_width="303dp"
+                android:layout_height="111dp"
+                android:layout_marginRight="5dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                tools:ignore="LabelFor"
+                android:layout_marginEnd="5dp" />
+
+            <ImageButton
+                android:id="@+id/btnSendFacMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                app:srcCompat="@drawable/ic_send_black_24dp"
+                tools:ignore="RtlHardcoded,VectorDrawableCompat"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -17,6 +17,15 @@
     <string name="r_diger_une_communication">Rédiger une communication</string>
     <string name="country_prompt">Choisir</string>
     <string name="autre_raison">Autre raison</string>
+    <string name="message_all_students">Message à tout les étudiants </string>
+    <string name="mon_message_pour_la_fac_d_partement">Mon message à Fac/Département</string>
+    <string name="objet_du_message">Objet du message</string>
+    <string name="d_stination">Déstination</string>
+    <string name="nom_xpediteur">Nom éxpediteur</string>
+    <string name="todo">TODO</string>
+    <string name="nom_de_l_univ">Nom de l\'univ</string>
+    <string name="univ_gmail_com">univ@gmail.com</string>
+    <string name="_243972518932">+243972518932</string>
     <string-array name="typeListePresence">
         <item>En cours</item>
         <item>Interrogation</item>

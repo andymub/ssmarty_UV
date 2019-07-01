@@ -212,7 +212,7 @@ public class Activity_liste_presence extends AppCompatActivity {
 
     public void getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat mdformat = new SimpleDateFormat("yyyy / MM / dd , HH:mm");
+        SimpleDateFormat mdformat = new SimpleDateFormat("dd / MM / yyyy , HH:mm");
         String strDate = "Date et Heure : " + mdformat.format(calendar.getTime());
         txtdate.setText(strDate );
     }
@@ -223,6 +223,15 @@ public class Activity_liste_presence extends AppCompatActivity {
             //////////////
             editxtIntutuleListe.setHintTextColor(getResources().getColor(R.color.RED_nfc));
             chk=true;
+            if(edittxtAutreRainson.getVisibility() == View.VISIBLE)
+            {
+                // Toast.makeText(getApplicationContext(),"c est bon2",Toast.LENGTH_LONG).show();
+                //////////////
+
+                if (edittxtAutreRainson.length()!=0){ chk=true;}
+                else {chk=true;edittxtAutreRainson.setHintTextColor(getResources().getColor(R.color.RED_nfc));}
+
+            }
 
         }
         else if (editxtIntutuleListe.length()!=0){

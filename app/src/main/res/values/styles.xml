@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">#9e9e9e</item>
+        <item name="colorControlActivated">@color/bipNfc_etudiant_added</item>
+        <item name="colorControlHighlight">@color/bipNfc_etudiant_added</item>
     </style>
 
 
