@@ -2,6 +2,7 @@ package ssmarty.univ;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgNfcState;
     private TextView txtStateNfc;
     public  AnimationDrawable frameAnimation;
+    public static final String DATABASE_NAME =  "ssmarty_univ";
+    //sqlite
+    SQLiteDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Context context=getApplicationContext();
         imgNfcState= findViewById(R.id.imgNfcState);
+
 
        // imgNfcState.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.ssmart_nfc_connect, null));
         txtStateNfc=findViewById(R.id.txtStateNfc);
@@ -51,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //creating a database
+        mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
     }
 
     @Override

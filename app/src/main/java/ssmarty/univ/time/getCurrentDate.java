@@ -1,4 +1,4 @@
-package ssmarty.univ.get_local_info;
+package ssmarty.univ.time;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

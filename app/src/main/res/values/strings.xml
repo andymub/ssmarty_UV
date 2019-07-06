@@ -32,4 +32,5 @@
         <item>Examen</item>
         <item>Autre</item>
     </string-array>
+    <string name="database_name_sqlite">ssmarty_univ</string>
 </resources>

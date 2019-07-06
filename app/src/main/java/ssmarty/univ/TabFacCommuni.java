@@ -11,13 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import ssmarty.univ.get_local_info.getCurrentDate;
+import ssmarty.univ.time.getCurrentDate;
 
 public class TabFacCommuni extends AppCompatActivity {
     private Spinner spinnerSelecteFac;

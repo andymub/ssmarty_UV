@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ssmarty.univ.get_local_info.getCurrentDate;
+import ssmarty.univ.time.getCurrentDate;
 
 public class TabUnivCommuni extends AppCompatActivity {
     private EditText objectMessage, messageTextFac;
