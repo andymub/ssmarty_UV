@@ -1,9 +1,9 @@
 package ssmarty.univ.database.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.view.LayoutInflater;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,13 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import ssmarty.univ.R;
-import ssmarty.univ.database.model.listViewModel;
+import ssmarty.univ.database.model.ListsModel;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
     private Context context;
-    private List<listViewModel> notesList;
+    private List<ListsModel> notesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView note;
@@ -36,7 +35,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     }
 
 
-    public ListAdapter(Context context, List<listViewModel> notesList) {
+    public ListAdapter(Context context, List<ListsModel> notesList) {
         this.context = context;
         this.notesList = notesList;
     }

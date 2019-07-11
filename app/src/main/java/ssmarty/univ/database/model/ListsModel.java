@@ -1,6 +1,6 @@
 package ssmarty.univ.database.model;
 
-public class listViewModel {
+public class ListsModel {
     public static final String TABLE_NAME = "Listes";
 
     public static final String COLUMN_ID = "id";
@@ -15,7 +15,6 @@ public class listViewModel {
     private String Liste;
     private String Etat;
 
-
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
@@ -23,13 +22,12 @@ public class listViewModel {
                     + COLUMN_N0M_DATE + " TEXT,"
                     + COLUMN_TYPE_INTITULE + " TEXT,"
                     + COLUMN_LISTE + " TEXT,"
-                    + COLUMN_ETAT + " TEXT,"
-                    + ")";
+                    + COLUMN_ETAT + " TEXT)";
 
-    public listViewModel() {
+    public ListsModel() {
     }
 
-    public listViewModel(int id, String nom_Date, String type, String liste, String etat) {
+    public ListsModel(int id, String nom_Date, String type, String liste, String etat) {
         this.id = id;
         Nom_Date = nom_Date;
         Type = type;

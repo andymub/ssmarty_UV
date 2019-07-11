@@ -1,9 +1,7 @@
 package ssmarty.univ;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -12,7 +10,6 @@ import android.media.RingtoneManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +25,8 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -226,6 +225,26 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         });
 
+        sendToCloud.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String typeEtINtitule;
+                if (spinnerTypePresence.getSelectedItem().toString().equals("Autre"))
+                {
+                    typeEtINtitule=edittxtAutreRainson.getText().toString()+"/"+editxtIntutuleListe.getText().toString();
+                }else{
+                    typeEtINtitule=spinnerTypePresence.getSelectedItem().toString()+"/"+editxtIntutuleListe.getText().toString();
+
+                }
+                sendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
+                messageEvolution.setText("Liste non envoyéé, stockéé dans Mes Listes");
+                setListMyDB(txtExpediteurDate.getText().toString(),
+                        typeEtINtitule,convertListToString(ListElementsArrayList),"non");
+                sendToCloud.setEnabled(false);
+                return false;
+            }
+        });
+
         //LISTEvIEW add //todo to be replace with NFC LISTENER
         Addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,7 +298,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     public String setListMyDB (String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList){
        String rec= "Not save";
         try {
-            addEmployee(nomEtDateEditeur,typeEtIntutile,listeOfStudents,etatDeList);
+            addStudentList(nomEtDateEditeur,typeEtIntutile,listeOfStudents,etatDeList);
             rec= "saved";
         }catch (Exception ex)
 
@@ -347,7 +366,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     }
 
     //In this method we will do the create operation
-    private void addEmployee(String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
+    private void addStudentList(String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
        // DatabaseHelper DatabaseHelper=new DatabaseHelper(getApplicationContext());
         //DatabaseHelper.onCreate();
         String insertSQL = "INSERT INTO Listes \n" +
@@ -359,7 +378,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         //first is the sql string and second is the parameters that is to be binded with the query
         mDatabase.execSQL(insertSQL, new String[]{nomEtDateEditeur, typeEtIntutile, listeOfStudents, etatDeList});
 
-        Toast.makeText(this, "Employee Added Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "List Added Successfully", Toast.LENGTH_SHORT).show();
     }
     private void createEmployeeTable() {
         mDatabase.execSQL(
@@ -370,6 +389,6 @@ public class Activity_liste_presence extends AppCompatActivity {
                         + COLUMN_LISTE + " TEXT,"
                         + COLUMN_ETAT + " TEXT"+" )"
         );
-        Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
     }
 }

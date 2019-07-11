@@ -2,63 +2,138 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="15dp"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/txtNomDateListeProf"
+    <LinearLayout
+        android:id="@+id/lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="TextView"
-        android:layout_alignParentLeft="true" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtNombreDePresent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:layout_marginStart="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:srcCompat="@drawable/ic_person_24dp"
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                app:srcCompat="@drawable/ic_cours_24dp"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:srcCompat="@drawable/ic_group_black_24dp"
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="@string/todo" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNomDateListeProf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtNomDateListeProf"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:paddingLeft="10dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtIntitulePresent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtIntitulePresent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:paddingLeft="10dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtNombrePresence"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:paddingLeft="10dp"
+                android:text="TextView"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtNomDateListeProf"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="TextView"
-        android:layout_alignParentLeft="true" />
+        android:layout_below="@+id/lin"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="right"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/imgbtnSendCloud_ProfListe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtNombreDePresent"
-        android:layout_marginEnd="109dp"
-        app:srcCompat="@drawable/ic_cloud_upload_black_24dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="109dp"
-        tools:ignore="VectorDrawableCompat" />
+        <ImageButton
+            android:id="@+id/imgbtnSendCloudProfList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imgbtnbckgrn"
+            app:srcCompat="@drawable/ic_cloud_upload_black_24dp"
+            tools:ignore="VectorDrawableCompat"
+            android:contentDescription="@string/todo" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtNomDateListeProf"
-        android:layout_below="@+id/txtNombreDePresent"
-        app:srcCompat="@drawable/ic_visibility_black_24dp"
-        android:layout_alignRight="@+id/txtNomDateListeProf"
-        tools:ignore="VectorDrawableCompat" />
+        <ImageButton
+            android:id="@+id/imgModifyMyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/imgbtnbckgrn"
+            app:srcCompat="@drawable/ic_mode_edit_black_24dp"
+            tools:ignore="VectorDrawableCompat"
+            android:contentDescription="TODO" />
 
-    <View
-        android:id="@+id/hr"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/imgbtnSendCloud_ProfListe"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="#4acbfa" />
+        <ImageButton
+            android:id="@+id/imgSeeMyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/imgbtnbckgrn"
+            app:srcCompat="@drawable/ic_visibility_black_24dp"
+            tools:ignore="VectorDrawableCompat"
+            android:contentDescription="TODO" />
+    </LinearLayout>
+
+
+    android:id="@+id/txtNombreDePresent"
+
 </RelativeLayout>

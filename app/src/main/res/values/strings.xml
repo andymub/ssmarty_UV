@@ -22,7 +22,6 @@
     <string name="objet_du_message">Objet du message</string>
     <string name="d_stination">Déstination</string>
     <string name="nom_xpediteur">Nom éxpediteur</string>
-    <string name="todo">TODO</string>
     <string name="nom_de_l_univ">Nom de l\'univ</string>
     <string name="univ_gmail_com">univ@gmail.com</string>
     <string name="_243972518932">+243972518932</string>
@@ -32,5 +31,6 @@
         <item>Examen</item>
         <item>Autre</item>
     </string-array>
-    <string name="database_name_sqlite">ssmarty_univ</string>
+    <string name="todo">TODO</string>
+
 </resources>

@@ -37,7 +37,6 @@
         android:layout_marginStart="5dp">
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/d_stination" />

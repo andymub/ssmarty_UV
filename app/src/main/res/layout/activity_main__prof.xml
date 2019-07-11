@@ -153,7 +153,13 @@
         android:text="Nouvelles récentes de l'université"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp" />
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView_3"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="true">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -168,17 +174,28 @@
             android:layout_height="wrap_content"
             android:paddingStart="3dp">
 
+            <ProgressBar
+                android:id="@+id/simpleProgressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:indeterminateOnly="true"/>
+
             <TextView
+                android:id="@+id/txtmsgtitre1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="journée Fac Agro" />
 
             <TextView
+                android:id="@+id/txtmsgediteur1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CP X" />
 
             <TextView
+                android:id="@+id/txtmsg1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -194,17 +211,21 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@android:color/holo_green_light" />
+
             <TextView
+                android:id="@+id/txtmsgtitre2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/txtmsgediteur2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/txtmsg2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -220,17 +241,21 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@android:color/holo_green_light" />
+
             <TextView
+                android:id="@+id/txtmsgtitre3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/txtmsgediteur3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/txtmsg3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -250,6 +275,7 @@
 
 
         </LinearLayout>
-    </ScrollView>
 
+    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

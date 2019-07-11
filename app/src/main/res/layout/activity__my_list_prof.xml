@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_MyList_prof">
+
     <TextView
         android:id="@+id/txtmyListTitre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="@string/mes_listes_de_pr_sence_enregistr_es" />
 
@@ -23,11 +25,12 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="#4acbfa" />
+
     <ListView
-        android:id="@+id/listView"
-        android:layout_below="@+id/hr1"
+        android:id="@+id/listViewMyListePres"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr1" />
 
 
 </RelativeLayout>

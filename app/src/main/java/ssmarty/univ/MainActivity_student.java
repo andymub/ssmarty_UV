@@ -1,15 +1,17 @@
 package ssmarty.univ;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity_student extends AppCompatActivity {
 
     private ImageButton btnHoraire, btnExam, btnComFac, btnComUniv;
     Intent switchActiv;
+    TextView displayUnivName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,10 @@ public class MainActivity_student extends AppCompatActivity {
         btnComUniv=findViewById(R.id.imgbtn_com_univ);
         btnExam=findViewById(R.id.imgbtn_communi_prof);
         btnHoraire=findViewById(R.id.imgbtn_liste);
-
+        displayUnivName=findViewById(R.id.studen_txtNom_univ);
+        //todo get student's name and uniV n
+        String []getDataFromCard = getIntent().getStringArrayExtra("ID");
+        displayUnivName.setText("mon univ");
         //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override

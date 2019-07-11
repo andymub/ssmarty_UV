@@ -6,16 +6,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
-import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG ="NFC" ;
@@ -25,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATABASE_NAME =  "ssmarty_univ";
     //sqlite
     SQLiteDatabase mDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String []dataTosend;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Context context=getApplicationContext();
@@ -38,11 +40,17 @@ public class MainActivity extends AppCompatActivity {
         txtStateNfc=findViewById(R.id.txtStateNfc);
         ncfCompatible ();
 
+        //todo get univ name and user name
+
+        dataTosend= new String[]{"univ", "prof Didier Ortega"};
+
+
         imgNfcState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent studentIntent;
                 studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
+                studentIntent.putExtra("id",dataTosend);
                 startActivity(studentIntent);
             }
         });
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 Intent studentIntent;
                 studentIntent=new Intent(MainActivity.this, MainActivity_Prof.class);
+                studentIntent.putExtra("ID",dataTosend);
                 startActivity(studentIntent);
                 return false;
             }
@@ -58,7 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
+
+
+
+
     }
+
+
+
 
     @Override
     protected void onRestart() {
@@ -84,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             if (nfcAdapter.isNdefPushEnabled()){
                 Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_LONG).show();
-                imgNfcState.setImageResource(R.mipmap.nfc_ouvert_round);
+                //imgNfcState.setImageResource(R.mipmap.nfc_ouvert_round);
                 txtStateNfc.setText(R.string.ntc_activE);
 
 

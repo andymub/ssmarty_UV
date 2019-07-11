@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="45" />
+                                                <entry key="scalingPercent" value="132" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="45" />
+                                                <entry key="scalingPercent" value="96" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -58,13 +58,14 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundImage" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
-                                      <entry key="backgroundLayerName" value="nfc_opened1" />
-                                      <entry key="foregroundImage" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
-                                      <entry key="foregroundLayerName" value="nfc_opened2" />
+                                      <entry key="backgroundImage" value="C:\Users\Andymub\Documents\ssmarty\bck.png" />
+                                      <entry key="backgroundLayerName" value="bck1" />
+                                      <entry key="foregroundImage" value="C:\Users\Andymub\Documents\ssmarty\bck.png" />
+                                      <entry key="foregroundLayerName" value="bck2" />
                                       <entry key="legacyIconShape" value="NONE" />
-                                      <entry key="outputName" value="nfc_ouvert" />
-                                      <entry key="webIconShape" value="NONE" />
+                                      <entry key="outputName" value="bck" />
+                                      <entry key="previewDensity" value="HIGH" />
+                                      <entry key="webIconShape" value="HRECT" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -114,20 +115,16 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\Andymub\Documents\ssmarty\LOGO\1.png" />
-                                      <entry key="outputName" value="ic_exam" />
+                                      <entry key="imageAsset" value="C:\Users\Andymub\Documents\ssmarty\ssmart_logo_140x140.png" />
+                                      <entry key="outputName" value="logoimg" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
@@ -153,7 +150,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_visibility_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_group_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -163,10 +160,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="color" value="529afe" />
+                            <entry key="height" value="40" />
                             <entry key="opacityPercent" value="83" />
-                            <entry key="outputName" value="ic_visibility_black_24dp" />
+                            <entry key="outputName" value="ic_group_beu_40dp" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Andymub\Documents\ssmarty\LOGO\nfc ouvert.psd" />
+                            <entry key="width" value="40" />
                           </map>
                         </option>
                       </PersistentState>

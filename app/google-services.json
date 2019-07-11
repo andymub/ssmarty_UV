@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "263436929611",
+    "firebase_url": "https://ssmartyuniv.firebaseio.com",
+    "project_id": "ssmartyuniv",
+    "storage_bucket": "ssmartyuniv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263436929611:android:76543b47cae19590",
+        "android_client_info": {
+          "package_name": "ssmarty.univ"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263436929611-o88nf7dv3cg4tl1247dfu13mu2nol79n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ssmarty.univ",
+            "certificate_hash": "829e96d30508975b3486634f306473597b30b4f6"
+          }
+        },
+        {
+          "client_id": "263436929611-9qd2acidopd1sedl7fvu0gi5eq1hrslo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC69_vNWGra2kci5HexEeosRudGbyPEoaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263436929611-9qd2acidopd1sedl7fvu0gi5eq1hrslo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

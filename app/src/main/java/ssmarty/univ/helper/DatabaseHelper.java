@@ -1,16 +1,19 @@
 package ssmarty.univ.helper;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import ssmarty.univ.database.model.listViewModel;
+import ssmarty.univ.Activity_liste_presence;
+import ssmarty.univ.database.model.ListsModel;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -19,9 +22,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String DATABASE_NAME = "ssmarty_univ";
     // Database Version
     private static final int DATABASE_VERSION = 1;
+    Context context;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+
     }
 
 
@@ -31,14 +37,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // create notes table
-        db.execSQL(listViewModel.CREATE_TABLE);
+        File dbtest = new File("/data/data/ssmarty.univ/databases/ssmarty.univ");
+        if (dbtest.exists()){
+            db.execSQL(ListsModel.CREATE_TABLE);
+        }
+        else{
+//            Toast.makeText(context,"Aucune liste enregistrée",Toast.LENGTH_LONG ).show();
+//            Intent intent=new Intent(context.getApplicationContext(), Activity_liste_presence.class);
+//            context.startActivity(intent);
+        }
     }
 
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + listViewModel.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + ListsModel.TABLE_NAME);
 
         // Create tables again
         onCreate(db);
@@ -62,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Insert the row into your table
             //db = dbHelper.getWritableDatabase();
             // insert row
-            id = db.insert(listViewModel.TABLE_NAME, null, newValues);
+            id = db.insert(ListsModel.TABLE_NAME, null, newValues);
             System.out.print(id);
             //  Toast.makeText(getApplicationContaxt, "Liste enregistrée", Toast.LENGTH_LONG).show();
             Log.e("Liste", "One row entered");
@@ -81,12 +95,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public List<listViewModel> getAllNotes() {
-        List<listViewModel> ArraylistViewModel = new ArrayList<>();
+    public List<ListsModel> getAllList() {
+        List<ListsModel> arraylistModel = new ArrayList<>();
 
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + listViewModel.TABLE_NAME + " ORDER BY " +
-                listViewModel.COLUMN_ID + " DESC";
+        String selectQuery = "SELECT  * FROM " + ListsModel.TABLE_NAME + " ORDER BY " +
+                ListsModel.COLUMN_ID + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -94,14 +108,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                listViewModel listViewModel = new listViewModel();
-                listViewModel.setId(cursor.getInt(cursor.getColumnIndex(listViewModel.COLUMN_ID)));
-                listViewModel.setNom_Date(cursor.getString(cursor.getColumnIndex(listViewModel.COLUMN_N0M_DATE)));
-                listViewModel.setType(cursor.getString(cursor.getColumnIndex(listViewModel.COLUMN_TYPE_INTITULE)));
-                listViewModel.setListe(cursor.getString(cursor.getColumnIndex(listViewModel.COLUMN_LISTE)));
-                listViewModel.setEtat(cursor.getString(cursor.getColumnIndex(listViewModel.COLUMN_ETAT)));
+                ListsModel ListsModel = new ListsModel();
+                ListsModel.setId(cursor.getInt(cursor.getColumnIndex(ListsModel.COLUMN_ID)));
+                ListsModel.setNom_Date(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_N0M_DATE)));
+                ListsModel.setType(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_TYPE_INTITULE)));
+                ListsModel.setListe(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_LISTE)));
+                ListsModel.setEtat(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_ETAT)));
 
-                ArraylistViewModel.add(listViewModel);
+                arraylistModel.add(ListsModel);
             } while (cursor.moveToNext());
         }
 
@@ -109,6 +123,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         // return notes list
-        return ArraylistViewModel;
+        return arraylistModel;
     }
 }
