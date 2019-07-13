@@ -333,6 +333,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 return null;
             }
         };
+        String list="";
         // Select All Query
         String selectQuery = "SELECT  * FROM " + InfoPresistance.TABLE_NAME_INFO;
         try {
@@ -348,13 +349,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 InfoPresistance infoPresistance = new InfoPresistance();
                 infoPresistance.setId(cursor.getInt(cursor.getColumnIndex(InfoPresistance.COLUMN_ID)));
-                infoPresistance.setFacEnum(cursor.getString(cursor.getColumnIndex(InfoPresistance.COLUMN_FAC)));
+                infoPresistance.setListeFacDep(cursor.getString(cursor.getColumnIndex(InfoPresistance.COLUMN_FAC)));
                 arrayListFac.add(infoPresistance);
+                list=list+"|"+ (infoPresistance.getListeFacDep());
             } while (cursor.moveToNext());
         }
 
-        String d="";//arrayListFac.get(0).getListeFacDep().toString();
-        return "ezez|zezzzze";
+        return list;
     }
 
     public List<ListsModel> getAllList(String nameUniv) {

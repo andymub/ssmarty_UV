@@ -47,6 +47,7 @@ public class MainActivity_Prof extends AppCompatActivity {
     public messageUniv myMessageUniv;
     SwipeRefreshLayout mSwipeRefreshLayout;
     InternetConnectionStatus internetConnectionStatus;
+    public String nomUnivDisplayed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +81,17 @@ public class MainActivity_Prof extends AppCompatActivity {
         //todo get prof's name and uniV n
         final String []getDataFromCard = getIntent().getStringArrayExtra("ID");
         displayUnivName.setText(getDataFromCard[0]);
+        nomUnivDisplayed=getDataFromCard[0];
 
         btnBuildList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+                //databaseHelper.insertIntoTableInfo(listFacDep);
+                String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
                 switch_prof_acti.putExtra("nom_univ",getDataFromCard[0]);
+                switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
 
             }
@@ -282,27 +288,39 @@ public class MainActivity_Prof extends AppCompatActivity {
     }
 
     public void saveListFacDepSQLITE (List<String> listFacDep){
-
+        DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+        //databaseHelper.insertIntoTableInfo(listFacDep);
+        String fac=databaseHelper.getAllFacDepFromLocal();
         String listString="";
-        String insertSQL = "INSERT INTO \n" +InfoPresistance.TABLE_NAME_INFO+
-                " VALUES \n" +
-                "(?);";
+//        String insertSQL = "INSERT INTO " +InfoPresistance.TABLE_NAME_INFO+ " VALUES " + "(?);";
         //using the same method execsql for inserting values
         //this time it has two parameters
         //first is the sql string and second is the parameters that is to be binded with the query
         for (String s : listFacDep)
         {
-            listString += s + "\t";
+            listString += s + "|";
         }
-        String [] facDep= listFacDep.get(1).split("|");
-        try{
-        mDatabase.execSQL(insertSQL, new String[]{listString});}catch (Exception ex){}
+        String insertSQL = "INSERT INTO "+InfoPresistance.TABLE_NAME_INFO
+                +"(LISTE_FACDEP)\n"
+                +" VALUES " +
+                "(?);";
+        String [] facDep;
+        if (fac==""){
+            try{
+                mDatabase.execSQL(insertSQL, new String[]{listString});}
+//        mDatabase.execSQL(insertSQL, new String[]{listString});}
+            catch (Exception ex){
+                Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
 
-        DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
-        //databaseHelper.insertIntoTableInfo(listFacDep);
-        String fac=databaseHelper.getAllFacDepFromLocal();
-        facDep= fac.split("|");
-        int i= facDep.length;
+            int d;
+        }
+
+        mDatabase.close();
+//        facDep= fac.split("|");
+//        int i= facDep.length;
     }
 
 
@@ -325,5 +343,9 @@ public class MainActivity_Prof extends AppCompatActivity {
         }catch (Exception ex){
 
         }
+    }
+
+    public String getNomUnivDisplayed() {
+        return nomUnivDisplayed;
     }
 }

@@ -56,12 +56,19 @@
             android:hint="@string/autre_raison"
             android:inputType="textPersonName" />
 
+        <Spinner
+            android:id="@+id/spinnerfac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/typeListePresence"
+            android:prompt="@string/country_prompt" />
+
         <EditText
             android:id="@+id/editxtObjet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ex:Intro droit/ Droit 2011"
+            android:hint="   Nom du cours (Ex : Intro à"
             android:inputType="textPersonName" />
 
         <TextView

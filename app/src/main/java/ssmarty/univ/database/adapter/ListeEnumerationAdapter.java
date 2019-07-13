@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class ListeEnumerationAdapter extends ArrayAdapter<ListeEnumerationModel>
         ImageButton btnSendMyListCloud = view.findViewById(R.id.imgbtnSendCloudProfList);
         ImageButton btnSeeMylist = view.findViewById(R.id.imgSeeMyList);
         ImageButton btnModifyMyList = view.findViewById(R.id.imgModifyMyList);
+        //txtIntitule.setMovementMethod(new ScrollingMovementMethod());
 
         //getting the hero of the specified position
         final ListeEnumerationModel listeEnumerationModel = listPresencec.get(position);

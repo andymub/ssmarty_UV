@@ -29,6 +29,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +54,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
     int clickCounter=0;
     private TextView txtExpediteurDate,messageEvolution;
-    Spinner spinnerTypePresence;
+    Spinner spinnerTypePresence,spinnerListFacDep;
     ImageButton btnStartList,sendToCloud;
     int i=1;
    // public String DATABASE_NAME1 =  getResources().getString(R.string.database_name_sqlite);
@@ -75,6 +76,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         relaLayout_presence=findViewById(R.id.relaLayout_presence);
         txtExpediteurDate =findViewById(R.id.txtdate);
         spinnerTypePresence=findViewById(R.id.spinnerType);
+        spinnerListFacDep=findViewById(R.id.spinnerfac);
         edittxtAutreRainson=findViewById(R.id.edtxtAutrerainson);
         editxtIntutuleListe=findViewById(R.id.editxtObjet);
         btnStartList=findViewById(R.id.imgbtnStarList);
@@ -87,6 +89,21 @@ public class Activity_liste_presence extends AppCompatActivity {
         scrollListePresence = findViewById(R.id.scroll_liste_presence);
 
         final String getIntentNomUniv = getIntent().getStringExtra("nom_univ");
+
+
+        //spinnerListeFac
+        List<String> listFac;
+
+        String getListFacDetIntent= getIntent().getStringExtra("list_fac");
+        getListFacDetIntent=getListFacDetIntent.replace("|",",");
+        getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
+       // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
+        String [] tabl=getListFacDetIntent.split(",");
+        listFac=Arrays.asList(tabl);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, listFac);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerListFacDep.setAdapter(dataAdapter);
 
         //SQLITE
         //opening the database
@@ -165,16 +182,27 @@ public class Activity_liste_presence extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkIfEditEmpty())
                 {
-                    edittxtAutreRainson.setEnabled(true);
-                    editxtIntutuleListe.setEnabled(true);
-                    spinnerTypePresence.setClickable(true);
-                    btnStartList.setImageResource(R.drawable.ic_done_red_24dp);
-                    //set visible Scrollliste
-                    scrollListePresence.setVisibility(View.INVISIBLE);
+                    if (spinnerListFacDep.getSelectedItemPosition()+1==1)
+                    {
+                        Toast.makeText(getApplicationContext(),"Choisir une Faculté",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        edittxtAutreRainson.setEnabled(true);
+                        editxtIntutuleListe.setEnabled(true);
+                        spinnerTypePresence.setClickable(true);
+                        btnStartList.setImageResource(R.drawable.ic_done_red_24dp);
+                        //set visible Scrollliste
+                        scrollListePresence.setVisibility(View.INVISIBLE);
+                    }
                 }
                 else{
 
 
+                    if (spinnerListFacDep.getSelectedItemPosition()+1==1)
+                    {
+                        Toast.makeText(getApplicationContext(),"Choisir une Faculté",Toast.LENGTH_LONG).show();
+                    }
+                    else {
                 btnStartList.setImageResource(R.drawable.ic_done_bleu_24dp);
                 messageEvolution.setText("Pour remplir la liste, bipé vos cartes");
 
@@ -189,6 +217,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                 }
 
 
+                }
                 }
             }
         });
@@ -209,7 +238,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                     sendToCloud.setImageResource(R.drawable.ic_cloud_done_black_24dp);
                    // messageEvolution.setText("Liste envoyéé");
                     String f=setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
-                            typeEtINtitule,convertListToString(ListElementsArrayList),"oui");
+                            spinnerListFacDep.getSelectedItem().toString()+"|"+typeEtINtitule,convertListToString(ListElementsArrayList),"oui");
                     sendToCloud.setEnabled(false);
                     i++;
                    // f=f+"";
@@ -218,7 +247,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                     sendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
                     messageEvolution.setText("Liste non envoyéé, stockéé dans Mes Listes");
                     setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
-                            typeEtINtitule,convertListToString(ListElementsArrayList),"non");
+                            spinnerListFacDep.getSelectedItem().toString()+"|"+typeEtINtitule,convertListToString(ListElementsArrayList),"non");
                     sendToCloud.setEnabled(false);
                 }
 
@@ -369,7 +398,8 @@ public class Activity_liste_presence extends AppCompatActivity {
 
     //In this method we will do the create operation
     private void addStudentList(String tableName,String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
-       // DatabaseHelper DatabaseHelper=new DatabaseHelper(getApplicationContext());
+
+        // DatabaseHelper DatabaseHelper=new DatabaseHelper(getApplicationContext());
         //DatabaseHelper.onCreate();
         String insertSQL = "INSERT INTO \n" +tableName+
                 "(Nom_Date, Type, Liste, Etat)\n" +
@@ -391,7 +421,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                         + COLUMN_LISTE + " TEXT,"
                         + COLUMN_ETAT + " TEXT"+" )"
         );
-        mDatabase.close();
+        //mDatabase.close();
         //Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
     }
 }

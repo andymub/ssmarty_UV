@@ -1,5 +1,7 @@
 package ssmarty.univ.database.model;
 
+import ssmarty.univ.MainActivity_Prof;
+
 public class InfoPresistance {
 
     public static final String TABLE_NAME_INFO = "Infos";
