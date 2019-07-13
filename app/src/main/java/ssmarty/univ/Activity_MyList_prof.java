@@ -26,12 +26,12 @@ public class Activity_MyList_prof extends AppCompatActivity {
         listpresence= new ArrayList<>();
         MyListePresListView = (ListView) findViewById(R.id.listViewMyListePres);
 
-
+        final String getIntentNomUniv = getIntent().getStringExtra("nom_univ");
 
         //todo Get data from sqlite Datbase et display
         db = new DatabaseHelper(this);
         List<ListsModel> arraylistModel = new ArrayList<>();
-        arraylistModel= db.getAllList();
+        arraylistModel= db.getAllList(getIntentNomUniv);
         if (arraylistModel.isEmpty()) {
             //adding some values to our list
             String [] Myliste =new String[]{"Etudiant(e) 0","Etudiant(e) 1","Etudiant(e) 2","Etudiant(e) 3","Etudiant(e)"};

@@ -1,12 +1,12 @@
 package ssmarty.univ;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,8 +24,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.opencensus.stats.Aggregation;
+import ssmarty.univ.database.model.InfoPresistance;
 import ssmarty.univ.database.model.messageUniv;
+import ssmarty.univ.helper.DatabaseHelper;
 import ssmarty.univ.network.InternetConnectionStatus;
+
 
 public class MainActivity_Prof extends AppCompatActivity {
     private ImageButton btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
@@ -34,10 +38,12 @@ public class MainActivity_Prof extends AppCompatActivity {
             txtMsgTitre2,txtMsgEditeur2,txtMsg2,
             txtMsgTitre3,txtMsgEditeur3,txtMsg3;
     ProgressBar simpleProgressBar;
+    SQLiteDatabase mDatabase;
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public List<String[]> listOfMessage;
     public List<messageUniv> listeOfMessageUniv;
+    public List<String> listeOfFacDep;
     public messageUniv myMessageUniv;
     SwipeRefreshLayout mSwipeRefreshLayout;
     InternetConnectionStatus internetConnectionStatus;
@@ -67,6 +73,10 @@ public class MainActivity_Prof extends AppCompatActivity {
         clearfield ();
 
 
+        //SQLITE
+        mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);
+
+
         //todo get prof's name and uniV n
         final String []getDataFromCard = getIntent().getStringArrayExtra("ID");
         displayUnivName.setText(getDataFromCard[0]);
@@ -75,6 +85,7 @@ public class MainActivity_Prof extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
+                switch_prof_acti.putExtra("nom_univ",getDataFromCard[0]);
                 startActivity(switch_prof_acti);
 
             }
@@ -91,6 +102,7 @@ public class MainActivity_Prof extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_MyList_prof.class);
+                switch_prof_acti.putExtra("nom_univ",getDataFromCard[0]);
                 startActivity(switch_prof_acti);
 
             }
@@ -115,6 +127,19 @@ public class MainActivity_Prof extends AppCompatActivity {
         //fetch3LastMessages(getDataFromCard[0].toLowerCase()+" message");
         getAllMessage(getDataFromCard[0].toLowerCase()+" message");
         int i=0;
+
+
+        // Run on background task todo save liste of all fac_dep and all message in table
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                /*
+                 * Do something
+                 */
+                getAllFacDepart (getDataFromCard[0].toLowerCase());
+            }
+        });
+
+        t.start();
     }
 
     public void fetch3LastMessages (String nomUniv){
@@ -233,5 +258,72 @@ public class MainActivity_Prof extends AppCompatActivity {
         txtMsgTitre3.setText("");
         txtMsgEditeur3.setText("");
         txtMsg3.setText("");
+    }
+
+    public void getAllFacDepart (String nonUniv){
+        String [] x;
+        db.collection(nonUniv).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    listeOfFacDep = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        listeOfFacDep.add(document.getId());
+
+                    }
+                    Log.d("TAG", listeOfFacDep.toString());
+                    createListeTable();
+                    saveListFacDepSQLITE(listeOfFacDep);
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void saveListFacDepSQLITE (List<String> listFacDep){
+
+        String listString="";
+        String insertSQL = "INSERT INTO \n" +InfoPresistance.TABLE_NAME_INFO+
+                " VALUES \n" +
+                "(?);";
+        //using the same method execsql for inserting values
+        //this time it has two parameters
+        //first is the sql string and second is the parameters that is to be binded with the query
+        for (String s : listFacDep)
+        {
+            listString += s + "\t";
+        }
+        String [] facDep= listFacDep.get(1).split("|");
+        try{
+        mDatabase.execSQL(insertSQL, new String[]{listString});}catch (Exception ex){}
+
+        DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+        //databaseHelper.insertIntoTableInfo(listFacDep);
+        String fac=databaseHelper.getAllFacDepFromLocal();
+        facDep= fac.split("|");
+        int i= facDep.length;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    ///SQLITE
+
+    private void createListeTable() {
+        try {
+
+            mDatabase.execSQL(InfoPresistance.CREATE_TABLE_INFO);
+        }catch (Exception ex){
+
+        }
     }
 }

@@ -86,11 +86,13 @@ public class Activity_liste_presence extends AppCompatActivity {
         myListview.setBackgroundResource(R.color.WHITE_nfc);
         scrollListePresence = findViewById(R.id.scroll_liste_presence);
 
+        final String getIntentNomUniv = getIntent().getStringExtra("nom_univ");
+
         //SQLITE
         //opening the database
         mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);
         db = new DatabaseHelper(this);
-        createEmployeeTable();
+        createListeTable(getIntentNomUniv);
         //Todo nom prof from sqlite
         nomDuProf="prof M";
 
@@ -206,7 +208,7 @@ public class Activity_liste_presence extends AppCompatActivity {
 
                     sendToCloud.setImageResource(R.drawable.ic_cloud_done_black_24dp);
                    // messageEvolution.setText("Liste envoyéé");
-                    String f=setListMyDB(txtExpediteurDate.getText().toString(),
+                    String f=setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
                             typeEtINtitule,convertListToString(ListElementsArrayList),"oui");
                     sendToCloud.setEnabled(false);
                     i++;
@@ -215,7 +217,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                 else {
                     sendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
                     messageEvolution.setText("Liste non envoyéé, stockéé dans Mes Listes");
-                    setListMyDB(txtExpediteurDate.getText().toString(),
+                    setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
                             typeEtINtitule,convertListToString(ListElementsArrayList),"non");
                     sendToCloud.setEnabled(false);
                 }
@@ -238,7 +240,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                 }
                 sendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
                 messageEvolution.setText("Liste non envoyéé, stockéé dans Mes Listes");
-                setListMyDB(txtExpediteurDate.getText().toString(),
+                setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
                         typeEtINtitule,convertListToString(ListElementsArrayList),"non");
                 sendToCloud.setEnabled(false);
                 return false;
@@ -295,10 +297,10 @@ public class Activity_liste_presence extends AppCompatActivity {
         return Arrays.asList(str.split(LIST_SEPARATOR));
     }
 
-    public String setListMyDB (String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList){
+    public String setListMyDB (String tableName,String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList){
        String rec= "Not save";
         try {
-            addStudentList(nomEtDateEditeur,typeEtIntutile,listeOfStudents,etatDeList);
+            addStudentList(tableName,nomEtDateEditeur,typeEtIntutile,listeOfStudents,etatDeList);
             rec= "saved";
         }catch (Exception ex)
 
@@ -366,10 +368,10 @@ public class Activity_liste_presence extends AppCompatActivity {
     }
 
     //In this method we will do the create operation
-    private void addStudentList(String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
+    private void addStudentList(String tableName,String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
        // DatabaseHelper DatabaseHelper=new DatabaseHelper(getApplicationContext());
         //DatabaseHelper.onCreate();
-        String insertSQL = "INSERT INTO Listes \n" +
+        String insertSQL = "INSERT INTO \n" +tableName+
                 "(Nom_Date, Type, Liste, Etat)\n" +
                 "VALUES \n" +
                 "(?, ?, ?, ?);";
@@ -380,15 +382,16 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         Toast.makeText(this, "List Added Successfully", Toast.LENGTH_SHORT).show();
     }
-    private void createEmployeeTable() {
+    private void createListeTable(String nomUniv) {
         mDatabase.execSQL(
-                "CREATE TABLE IF NOT EXISTS "+ TABLE_NAME + "( "
+                "CREATE TABLE IF NOT EXISTS "+ nomUniv+TABLE_NAME + "( "
                         + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                         + COLUMN_N0M_DATE + " TEXT,"
                         + COLUMN_TYPE_INTITULE + " TEXT,"
                         + COLUMN_LISTE + " TEXT,"
                         + COLUMN_ETAT + " TEXT"+" )"
         );
+        mDatabase.close();
         //Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
     }
 }
