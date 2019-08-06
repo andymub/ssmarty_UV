@@ -34,7 +34,7 @@ import ssmarty.univ.network.InternetConnectionStatus;
 public class MainActivity_Prof extends AppCompatActivity {
     private ImageButton btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
     Intent switch_prof_acti;
-    TextView displayUnivName,txtMsgTitre1,txtMsgEditeur1,txtMsg1,
+    TextView displayUnivName,displayProfName,txtMsgTitre1,txtMsgEditeur1,txtMsg1,
             txtMsgTitre2,txtMsgEditeur2,txtMsg2,
             txtMsgTitre3,txtMsgEditeur3,txtMsg3;
     ProgressBar simpleProgressBar;
@@ -48,6 +48,9 @@ public class MainActivity_Prof extends AppCompatActivity {
     SwipeRefreshLayout mSwipeRefreshLayout;
     InternetConnectionStatus internetConnectionStatus;
     public String nomUnivDisplayed;
+//    DatabaseHelper databaseHelper =new DatabaseHelper(this);
+//    //databaseHelper.insertIntoTableInfo(listFacDep);
+//    String fac=databaseHelper.getAllFacDepFromLocal();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class MainActivity_Prof extends AppCompatActivity {
         txtMsgEditeur3=findViewById(R.id.txtmsgediteur3);
         txtMsg3=findViewById(R.id.txtmsg3);
         simpleProgressBar=findViewById(R.id.simpleProgressBar);
+        displayProfName=findViewById(R.id.nom_Prof);
         clearfield ();
 
 
@@ -79,9 +83,11 @@ public class MainActivity_Prof extends AppCompatActivity {
 
 
         //todo get prof's name and uniV n
-        final String []getDataFromCard = getIntent().getStringArrayExtra("ID");
+        final String []getDataFromCard = getIntent().getStringArrayExtra("data");
         displayUnivName.setText(getDataFromCard[0]);
         nomUnivDisplayed=getDataFromCard[0];
+        String getUserName= getDataFromCard[1]; //todo send username to activities
+        displayProfName.setText(getUserName);
 
         btnBuildList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +96,7 @@ public class MainActivity_Prof extends AppCompatActivity {
                 //databaseHelper.insertIntoTableInfo(listFacDep);
                 String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
-                switch_prof_acti.putExtra("nom_univ",getDataFromCard[0]);
+                switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
                 switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
 
@@ -99,7 +105,12 @@ public class MainActivity_Prof extends AppCompatActivity {
         btnCOmmuni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+                //databaseHelper.insertIntoTableInfo(listFacDep);
+                String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_Communi_Prof.class);
+                switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
 
             }
@@ -108,7 +119,7 @@ public class MainActivity_Prof extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_MyList_prof.class);
-                switch_prof_acti.putExtra("nom_univ",getDataFromCard[0]);
+                switch_prof_acti.putExtra("data",getDataFromCard[1]);
                 startActivity(switch_prof_acti);
 
             }
@@ -289,7 +300,7 @@ public class MainActivity_Prof extends AppCompatActivity {
 
     public void saveListFacDepSQLITE (List<String> listFacDep){
         DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
-        //databaseHelper.insertIntoTableInfo(listFacDep);
+       // databaseHelper.insertIntoTableInfo(listFacDep);
         String fac=databaseHelper.getAllFacDepFromLocal();
         String listString="";
 //        String insertSQL = "INSERT INTO " +InfoPresistance.TABLE_NAME_INFO+ " VALUES " + "(?);";
@@ -305,12 +316,17 @@ public class MainActivity_Prof extends AppCompatActivity {
                 +" VALUES " +
                 "(?);";
         String [] facDep;
-        if (fac==""){
+        if ((fac=="") || (fac=="|")){
             try{
-                mDatabase.execSQL(insertSQL, new String[]{listString});}
+                mDatabase.execSQL(insertSQL, new String[]{listString});
+                Toast.makeText(getApplicationContext(),"saved LOCAL",Toast.LENGTH_LONG).show();
+                int i =4;
+            }
+
 //        mDatabase.execSQL(insertSQL, new String[]{listString});}
             catch (Exception ex){
                 Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"TABANII",Toast.LENGTH_LONG).show();
             }
         }
         else {

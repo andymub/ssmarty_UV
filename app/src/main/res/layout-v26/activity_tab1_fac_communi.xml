@@ -79,7 +79,7 @@
                 android:ems="10"
                 android:hint="Message"
                 android:inputType="textMultiLine"
-                tools:ignore="LabelFor"
+                tools:ignore="LabelFor,RtlHardcoded"
                 android:autofillHints="" />
 
             <ImageButton
@@ -91,6 +91,7 @@
                 app:srcCompat="@drawable/ic_send_black_24dp"
                 tools:ignore="RtlHardcoded,VectorDrawableCompat" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +101,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/l2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/l1"
@@ -113,8 +113,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginRight="3dp"
-            android:contentDescription="TODO"
             app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
+            android:contentDescription="TODO"
             tools:ignore="VectorDrawableCompat" />
 
         <ImageButton
@@ -123,20 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="3dp"
-            android:contentDescription="@string/todo"
             app:srcCompat="@drawable/ic_image_black_24dp"
             tools:ignore="VectorDrawableCompat" />
-
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/gv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/l2"
-        android:layout_weight="1"
-        android:numColumns="3">
-
-    </ImageView>
 
 </RelativeLayout>

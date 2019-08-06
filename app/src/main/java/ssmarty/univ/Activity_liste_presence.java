@@ -2,6 +2,7 @@ package ssmarty.univ;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -91,6 +92,8 @@ public class Activity_liste_presence extends AppCompatActivity {
         final String getIntentNomUniv = getIntent().getStringExtra("nom_univ");
 
 
+        //intent get userName
+        nomDuProf= getIntent().getStringExtra("data_nom_user");
         //spinnerListeFac
         List<String> listFac;
 
@@ -111,7 +114,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         db = new DatabaseHelper(this);
         createListeTable(getIntentNomUniv);
         //Todo nom prof from sqlite
-        nomDuProf="prof M";
+
 
         //Storing data in DB
         // get Instance of Database Adapter

@@ -1,8 +1,14 @@
 package ssmarty.univ;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +24,8 @@ public class Activity_MyList_prof extends AppCompatActivity {
     private DatabaseHelper db;
     //the listview
     ListView MyListePresListView;
+    public  String[] getIntentUserName;
+    public  String getIntentNomUniv ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +34,30 @@ public class Activity_MyList_prof extends AppCompatActivity {
         listpresence= new ArrayList<>();
         MyListePresListView = (ListView) findViewById(R.id.listViewMyListePres);
 
-        final String getIntentNomUniv = getIntent().getStringExtra("nom_univ");
+        //final String getIntentNomUniv ;//= getIntent().getStringExtra("nom_univ");
+        //final String[] getIntentUserName;
+        try {
+            getIntentUserName = getIntent().getStringArrayExtra("data");
+            getIntentNomUniv = getIntentUserName[0];
+
+            if ((getIntentNomUniv=="") || (getIntentNomUniv==null))
+            {
+                finish();
+                //Intent intentGoTOPresenceListe =new Intent(this, MainActivity_Prof.class);
+                Toast toast= Toast.makeText(getApplicationContext(),"Aucune liste enregistrée",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.END, 0, 0);
+                LinearLayout toastContentView = (LinearLayout) toast.getView();
+                ImageView imageView = new ImageView(getApplicationContext());
+                imageView.setImageResource(R.drawable.ic_empty_list_box);
+                toastContentView.addView(imageView, 0);
+                toast.show();
+            }
+
+        }
+        catch (Exception ex)
+        {
+           // startActivity(intentGoTOPresenceListe);
+        }
 
         //todo Get data from sqlite Datbase et display
         db = new DatabaseHelper(this);

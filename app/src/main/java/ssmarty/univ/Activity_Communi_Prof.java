@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+import java.util.List;
+
 public class Activity_Communi_Prof extends ActivityGroup {
 
     @Override
@@ -16,16 +18,32 @@ public class Activity_Communi_Prof extends ActivityGroup {
         tabHost.setup(this.getLocalActivityManager());
 
 
+        String userName =getIntent().getStringExtra("data_nom_user");
+        List<String> listFac;
+
+        String getListFacDetIntent= getIntent().getStringExtra("list_fac");
+
+        //intent
+        Intent intentFac =new Intent(this,TabFacCommuni.class);
+        intentFac.putExtra("data_nom_user",userName);
+        intentFac.putExtra("list_fac",getListFacDetIntent);
+        Intent intentUniv =new Intent(this,TabUnivCommuni.class);
+        intentUniv.putExtra("data_nom_user",userName);
+        intentUniv.putExtra("list_fac",getListFacDetIntent);
+
         TabHost.TabSpec tab1 = tabHost.newTabSpec("Message à la Fac/Département");
+
         TabHost.TabSpec tab2 = tabHost.newTabSpec("Message à l'Univerité");
+        tab2.setContent(intentFac);
         // Set the Tab name and Activity
         // that will be opened when particular Tab will be selected
         tab1.setIndicator("Message à la Fac/Département");
-        tab1.setContent(new Intent(this,TabFacCommuni.class));
+        //tab1.setContent(new Intent(this,TabFacCommuni.class));
+        tab1.setContent(intentFac);
 
         tab2.setIndicator("Message à l'Univerité");
-        tab2.setContent(new Intent(this,TabUnivCommuni.class));
-
+//        tab2.setContent(new Intent(this,TabUnivCommuni.class));
+        tab2.setContent(intentUniv);
 
         /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);

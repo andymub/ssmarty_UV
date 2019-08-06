@@ -49,62 +49,63 @@
                 app:srcCompat="@drawable/ic_group_black_24dp"
                 tools:ignore="VectorDrawableCompat" />
         </LinearLayout>
+
         <ScrollView
-            android:id="@+id/SCROLLER_ID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:fillViewport="true">
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
 
-            <TextView
-                android:id="@+id/txtNomDateListeProf"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/txtNomDateListeProf"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="3dp"
-                android:paddingLeft="10dp"
-                android:text="TextView"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtIntitulePresent"
-                android:layout_width="398dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtIntitulePresent"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="5dp"
-                android:paddingLeft="10dp"
-                android:scrollbars="vertical"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:text="TextView"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/txtNomDateListeProf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNomDateListeProf"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="TextView"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtNombrePresence"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="3dp"
-                android:paddingLeft="10dp"
-                android:text="TextView"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/txtIntitulePresent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtIntitulePresent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="TextView"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/txtNombrePresence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:text="TextView"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
@@ -143,7 +144,8 @@
             android:background="@drawable/imgbtnbckgrn"
             app:srcCompat="@drawable/ic_visibility_black_24dp"
             tools:ignore="VectorDrawableCompat"
-            android:contentDescription="TODO" />
+            android:contentDescription="TODO"
+            android:layout_alignParentRight="true" />
     </LinearLayout>
 
 

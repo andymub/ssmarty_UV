@@ -11,7 +11,7 @@ public class MainActivity_student extends AppCompatActivity {
 
     private ImageButton btnHoraire, btnExam, btnComFac, btnComUniv;
     Intent switchActiv;
-    TextView displayUnivName;
+    TextView displayUnivName,displayStudentName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +20,11 @@ public class MainActivity_student extends AppCompatActivity {
         btnComUniv=findViewById(R.id.imgbtn_com_univ);
         btnExam=findViewById(R.id.imgbtn_communi_prof);
         btnHoraire=findViewById(R.id.imgbtn_liste);
-        displayUnivName=findViewById(R.id.studen_txtNom_univ);
+        displayUnivName=findViewById(R.id.studen_txtNom_univ); displayStudentName=findViewById(R.id.nom_etudiant);
         //todo get student's name and uniV n
-        String []getDataFromCard = getIntent().getStringArrayExtra("ID");
-        displayUnivName.setText("mon univ");
+        String []getDataFromCard = getIntent().getStringArrayExtra("data");
+        displayUnivName.setText(getDataFromCard[0]+"");
+        displayStudentName.setText(getDataFromCard[1]+" - ");
         //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override
