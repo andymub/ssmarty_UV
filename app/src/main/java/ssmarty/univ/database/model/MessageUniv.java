@@ -1,9 +1,9 @@
 package ssmarty.univ.database.model;
 
-public class messageUniv {
+public class MessageUniv {
     String titre,message,editeur;
 
-    public messageUniv(String titre, String message, String editeur) {
+    public MessageUniv(String titre, String message, String editeur) {
         this.titre = titre;
         this.message = message;
         this.editeur = editeur;

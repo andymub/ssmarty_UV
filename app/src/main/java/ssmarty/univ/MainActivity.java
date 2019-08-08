@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //todo get univ name and user name
 
-        dataTosend= new String[]{"univ", "prof Didier Ortega1"};
+        dataTosend= new String[]{"univ", "prof Didier Ortega1","Fac x Dép Y _ G3 _ 2019"};
 
 
         imgNfcState.setOnClickListener(new View.OnClickListener() {
@@ -118,24 +118,24 @@ public class MainActivity extends AppCompatActivity {
         NfcAdapter nfcAdapter = nfcManager.getDefaultAdapter();
         if (nfcAdapter == null) {
             // Device not compatible for NFC support
-            Toast.makeText(getApplicationContext(),"Votre dispositif n'est pas supporte pas la téchnologie NFC",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Votre dispositif ne supporte pas de NFC",Toast.LENGTH_LONG).show();
         }
         else{
             if (nfcAdapter.isNdefPushEnabled()){
-                Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_SHORT).show();
                 //imgNfcState.setImageResource(R.mipmap.nfc_ouvert_round);
                 txtStateNfc.setText(R.string.ntc_activE);
 
 
             }
             else if (nfcAdapter.isEnabled()){
-                Toast.makeText(getApplicationContext(),"ouvert",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"ouvert",Toast.LENGTH_SHORT).show();
                // imgNfcState.setImageResource(R.mipmap.ssmart_nfc_connect);
                 // Start the animation (looped playback by default).
                 frameAnimation.start();
             }
             else {
-                Toast.makeText(getApplicationContext(), R.string.veuill_activE_Nfc,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.veuill_activE_Nfc,Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
             }
 
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             //je définis l'accées suivant le code d acces 1=Etudiant 1..= Etud-Chef 2-prof
             switch (codeDacce) {
                 case "1": //Etudiant     1
-                    dataTosend= new String[]{univ,nomEtPrenom };
+                    dataTosend= new String[]{univ, nomEtPrenom , facDep+" _ "+promo +"_"+annee};
                     studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
                     studentIntent.putExtra("data",dataTosend);
                     //studentIntent.putExtra("userName",dataTosend)

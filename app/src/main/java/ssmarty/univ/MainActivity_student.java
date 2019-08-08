@@ -12,6 +12,7 @@ public class MainActivity_student extends AppCompatActivity {
     private ImageButton btnHoraire, btnExam, btnComFac, btnComUniv;
     Intent switchActiv;
     TextView displayUnivName,displayStudentName;
+    String facDep,promo,annee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +26,19 @@ public class MainActivity_student extends AppCompatActivity {
         String []getDataFromCard = getIntent().getStringArrayExtra("data");
         displayUnivName.setText(getDataFromCard[0]+"");
         displayStudentName.setText(getDataFromCard[1]+" - ");
+        String promoYear = getDataFromCard[2];
+        String[] facPromoYear = promoYear.split("_");
+        facDep= facPromoYear[0];
+        promo=facPromoYear[1];
+        annee=facPromoYear[2];
+
+
         //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, HoraireActivity.class);
+                switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
                 startActivity(switchActiv);
 
             }
@@ -39,6 +48,7 @@ public class MainActivity_student extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, ExamActivity.class);
+                switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
                 startActivity(switchActiv);
 
             }
@@ -49,6 +59,7 @@ public class MainActivity_student extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, CommuFacActivity.class);
+                switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
                 startActivity(switchActiv);
 
             }

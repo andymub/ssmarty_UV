@@ -24,9 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.opencensus.stats.Aggregation;
 import ssmarty.univ.database.model.InfoPresistance;
-import ssmarty.univ.database.model.messageUniv;
+import ssmarty.univ.database.model.MessageUniv;
 import ssmarty.univ.helper.DatabaseHelper;
 import ssmarty.univ.network.InternetConnectionStatus;
 
@@ -42,9 +41,9 @@ public class MainActivity_Prof extends AppCompatActivity {
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public List<String[]> listOfMessage;
-    public List<messageUniv> listeOfMessageUniv;
+    public List<MessageUniv> listeOfMessageUniv;
     public List<String> listeOfFacDep;
-    public messageUniv myMessageUniv;
+    public MessageUniv myMessageUniv;
     SwipeRefreshLayout mSwipeRefreshLayout;
     InternetConnectionStatus internetConnectionStatus;
     public String nomUnivDisplayed;
@@ -187,14 +186,14 @@ public class MainActivity_Prof extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
     }
 
-    private void getAllMessage(String univ) {
+    private void getAllMessage(final String univ) {
         listeOfMessageUniv=new ArrayList<>();
         internetConnectionStatus= new InternetConnectionStatus();
 
         //connction ok
         if (internetConnectionStatus.checkConnection(this)){
             simpleProgressBar.setVisibility(View.VISIBLE);
-        db.collection("univ message")
+        db.collection(univ+" message")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -205,12 +204,12 @@ public class MainActivity_Prof extends AppCompatActivity {
 //                                    int d;
 //                                }else
 //                                {
-//                                    messageUniv = new messageUniv((document.get("titre")., document.get("message").toString(),
+//                                    MessageUniv = new MessageUniv((document.get("titre")., document.get("message").toString(),
 //                                        document.get("editeur").toString());
                                     String r= (String) document.get("titre");
                                     String rr= (String)(document.get("message"));
                                     String rrr=(String) document.get("editeur");
-                                    myMessageUniv=new messageUniv(r,rr,rrr);
+                                    myMessageUniv=new MessageUniv(r,rr,rrr);
                                 Log.d("TAG", document.getId() + " => " + document.getData());
                                 listeOfMessageUniv.add(myMessageUniv);
                                 }
@@ -219,7 +218,7 @@ public class MainActivity_Prof extends AppCompatActivity {
 
                             //}
                         } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
+                            Log.d("TAG", "Error getting news for "+univ, task.getException());
 
                         }
                     }
@@ -237,7 +236,7 @@ public class MainActivity_Prof extends AppCompatActivity {
     }
 
 
-    public void displayMessageUniv(List<messageUniv> listeMessage){
+    public void displayMessageUniv(List<MessageUniv> listeMessage){
         simpleProgressBar.setVisibility(View.INVISIBLE);
         int j=listeMessage.size()-1;
         for(int i=0; listeMessage.size()>i;i++){

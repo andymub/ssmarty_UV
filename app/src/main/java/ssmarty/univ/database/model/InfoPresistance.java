@@ -8,12 +8,12 @@ public class InfoPresistance {
 
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_FAC = "LISTE_FACDEP";
-   // public static final List<messageUniv> COLUMN_ALLMESSAGE = null; //todo save all message
+   // public static final List<MessageUniv> COLUMN_ALLMESSAGE = null; //todo save all message
 
     private int id;
     private String facEnum;
     private String ListeFacDep;
-   // private List<messageUniv> allMesage ;
+   // private List<MessageUniv> allMesage ;
 
     // Create table SQL query
     public static final String CREATE_TABLE_INFO =

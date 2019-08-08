@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".CommuFacActivity">
 
+    <ListView
+        android:id="@+id/listViewCommUniv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtCommUnivPromo"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:paddingTop="3dp" />
+
+    <TextView
+        android:id="@+id/txtCommUnivPromo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hr1"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:gravity="right"
+        android:text="TextView"
+        android:textColor="#000000"
+        tools:ignore="HardcodedText,RtlHardcoded" />
+
     <TextView
         android:id="@+id/txtCommuFac"
         android:layout_width="match_parent"
