@@ -77,6 +77,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     ImageButton btnStartList,btnSendToCloud;
     private NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
+    public String getListFacDetIntent;
     int i=1;
    // public String DATABASE_NAME1 =  getResources().getString(R.string.database_name_sqlite);
     String receieveOk,nomDuProf, getIntentNomUniv;
@@ -147,22 +148,31 @@ public class Activity_liste_presence extends AppCompatActivity {
         //spinnerListeFac
         List<String> listFac;
 
-        String getListFacDetIntent= getIntent().getStringExtra("list_fac");
-        getListFacDetIntent=getListFacDetIntent.replace("|",",");
-        getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
-       // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
-        String [] tabl=getListFacDetIntent.split(",");
-        listFac=Arrays.asList(tabl);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listFac);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerListFacDep.setAdapter(dataAdapter);
+        try {
+            getListFacDetIntent= getIntent().getStringExtra("list_fac");
+            getListFacDetIntent=getListFacDetIntent.replace("|",",");
+            getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
+            String [] tabl=getListFacDetIntent.split(",");
+            listFac=Arrays.asList(tabl);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, listFac);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerListFacDep.setAdapter(dataAdapter);
 
-        //SQLITE
-        //opening the database
-        mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);
-        db = new DatabaseHelper(this);
-        createListeTable(getIntentNomUniv);
+            //SQLITE
+            //opening the database
+            mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);
+            db = new DatabaseHelper(this);
+            createListeTable(getIntentNomUniv);
+        }
+        catch (Exception ex){
+            Intent intent =new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }
+
+       // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
+
+
         //Todo nom prof from sqlite
 
 
