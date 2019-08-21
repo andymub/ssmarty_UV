@@ -7,17 +7,17 @@
     tools:context=".CommuFacActivity">
 
     <ListView
-        android:id="@+id/listViewCommUniv"
+        android:id="@+id/listViewCommfac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtCommUnivPromo"
+        android:layout_below="@+id/txtCommfacPromo"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="2dp"
         android:paddingTop="3dp" />
 
     <TextView
-        android:id="@+id/txtCommUnivPromo"
+        android:id="@+id/txtCommfacPromo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/hr1"

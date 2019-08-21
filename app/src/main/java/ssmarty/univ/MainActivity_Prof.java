@@ -96,6 +96,7 @@ public class MainActivity_Prof extends AppCompatActivity {
                 String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
                 switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
                 switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
 
@@ -119,6 +120,7 @@ public class MainActivity_Prof extends AppCompatActivity {
             public void onClick(View v) {
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_MyList_prof.class);
                 switch_prof_acti.putExtra("data",getDataFromCard[1]);
+                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
                 startActivity(switch_prof_acti);
 
             }

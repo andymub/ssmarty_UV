@@ -12,16 +12,16 @@ import java.util.List;
 import ssmarty.univ.R;
 import ssmarty.univ.database.model.MessageUniv;
 
-public class ListCommUnivAdapter extends ArrayAdapter {
-    List<MessageUniv> messageUnivListe;
+public class ListCommFacAdapter extends ArrayAdapter {
+   List<MessageUniv> messageUnivListe;
 
-    Context context;
+   Context context;
 
-    int resource;
-    TextView messageComm,titreComm,editeurComm;
+   int resource;
+   TextView messageComm,titreComm,editeurComm;
 
 
-    public ListCommUnivAdapter(Context context, int resource, List<MessageUniv> messageUnivListe) {
+    public ListCommFacAdapter(Context context, int resource, List<MessageUniv> messageUnivListe) {
         super(context, resource, messageUnivListe);
         this.context=context;
         this.resource=resource;

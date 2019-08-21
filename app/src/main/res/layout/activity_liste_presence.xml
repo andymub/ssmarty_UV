@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Genre de presence" />
+            android:text="Type de liste de presence" />
 
         <Spinner
             android:id="@+id/spinnerType"
@@ -60,15 +60,25 @@
             android:id="@+id/spinnerfac"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:entries="@array/typeListePresence"
             android:prompt="@string/country_prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerpromo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:entries="@array/typeListepromo"
+            />
 
         <EditText
             android:id="@+id/editxtObjet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:ems="10"
-            android:hint="   Nom du cours (Ex : Intro à"
+            android:hint="@string/nom_du_cours_ex_intro"
             android:inputType="textPersonName" />
 
         <TextView
@@ -90,14 +100,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/imgbtnbckgrn"
-                app:srcCompat="@drawable/ic_done_one_24dp" />
+                app:srcCompat="@drawable/ic_done_one_24dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <ImageButton
                 android:id="@+id/ImgSendcloud"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/imgbtnbckgrn"
-                app:srcCompat="@drawable/ic_cloud_upload_black_24dp" />
+                app:srcCompat="@drawable/ic_cloud_upload_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/txtmesageEtatList"

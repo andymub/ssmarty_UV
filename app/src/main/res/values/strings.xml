@@ -26,11 +26,23 @@
     <string name="univ_gmail_com">univ@gmail.com</string>
     <string name="_243972518932">+243972518932</string>
     <string-array name="typeListePresence">
-        <item>En cours</item>
+        <item>Cours</item>
         <item>Interrogation</item>
         <item>Examen</item>
         <item>Autre</item>
     </string-array>
+    <string-array name="typeListepromo">
+        <item>Choisir la promotion</item>
+        <item>Prépa</item>
+        <item>G1</item>
+        <item>G2</item>
+        <item>G3</item>
+        <item>L1</item>
+        <item>L2</item>
+        <item>Msc 1</item>
+        <item>Msc 2</item>
+    </string-array>
     <string name="todo">TODO</string>
+    <string name="nom_du_cours_ex_intro">Nom du cours (Ex : Intro à ...</string>
 
 </resources>

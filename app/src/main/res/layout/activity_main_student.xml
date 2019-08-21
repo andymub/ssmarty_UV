@@ -90,7 +90,9 @@
             android:layout_marginStart="21dp"
             android:background="@drawable/rounded_corners_imagebutton"
             android:contentDescription="TODO"
-            android:src="@drawable/horaire_" />
+            android:src="@drawable/horaire_"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="21dp" />
 
         <ImageButton
             android:id="@+id/imgbtn_communi_prof"
@@ -128,7 +130,9 @@
             android:layout_below="@+id/imgbtn_liste"
             android:layout_marginStart="84dp"
             android:text="Horaire"
-            android:textSize="8sp" />
+            android:textSize="8sp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="84dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -173,108 +177,80 @@
         android:layout_below="@+id/layout_student_act"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="Nouvelles récentes de la faculté"
+        android:text="Situation financière"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp" />
 
     <ScrollView
+        android:id="@+id/scrvresearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/textView_3"
         android:layout_centerHorizontal="true"
+        android:background="#F0B6B8B6"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="3dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="journée Fac Agro" />
+                android:text="Numéro matricule de l'étudiant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <SearchView
+                android:id="@+id/recherchSituationFinance"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="#A4C3FBFF"
+                android:orientation="horizontal"
+                android:queryHint="Saisir numéro..."
+                android:visibility="visible" />
 
             <TextView
+                android:id="@+id/txtNomEtudiantSituationFinance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CP X" />
+                android:layout_marginTop="5dp"
+                android:text="Mr X" />
 
             <TextView
+                android:id="@+id/txtediteurSituationFinance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Signé par :  Mr Y"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:id="@+id/messageSituationFinance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:gravity="center"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
                 android:textColor="@android:color/black" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/holo_green_light" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
-                android:textColor="@android:color/black" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/holo_green_light" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum convallis justo, faucibus condimentum massa mollis id. Vestibulum tempor elementum est vel vestibulum. Nulla facilisi. Maecenas eget tristique lorem. Aliquam leo arcu, tempor quis neque vel, rhoncus interdum neque. Aliquam interdum consectetur massa at dignissim. Suspendisse pharetra, erat sed consectetur porta, ante ante auctor dui, id pellentesque tortor odio vel mi. Suspendisse mattis arcu nec sodales vestibulum. Curabitur erat orci, finibus a dictum a, interdum in eros. Duis turpis turpis, maximus quis nisl vitae, vestibulum imperdiet nisi. Vestibulum eu enim eu est rhoncus pulvinar. Nulla vel tortor non diam cursus vulputate. "
-                android:textColor="@android:color/black" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/txt_message1"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/holo_green_light" />
-
 
 
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/scrvresearch"
+        android:layout_gravity="right|center_horizontal|end"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:color/holo_green_light" />
 
 </RelativeLayout>

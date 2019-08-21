@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"ouvert",Toast.LENGTH_SHORT).show();
                // imgNfcState.setImageResource(R.mipmap.ssmart_nfc_connect);
                 // Start the animation (looped playback by default).
-                frameAnimation.start();
+                //frameAnimation.start();
             }
             else {
                 Toast.makeText(getApplicationContext(), R.string.veuill_activE_Nfc,Toast.LENGTH_SHORT).show();

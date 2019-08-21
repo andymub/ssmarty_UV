@@ -1,16 +1,26 @@
 package ssmarty.univ;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ssmarty.univ.database.adapter.ListeEnumerationAdapter;
@@ -18,14 +28,17 @@ import ssmarty.univ.database.model.ListeEnumerationModel;
 import ssmarty.univ.database.model.ListsModel;
 import ssmarty.univ.helper.DatabaseHelper;
 
+import static ssmarty.univ.Activity_liste_presence.MIME_TEXT_PLAIN;
+
 public class Activity_MyList_prof extends AppCompatActivity {
     //a List of type ListeEnumerationModel for holding list items
     List<ListeEnumerationModel> listpresence;
     private DatabaseHelper db;
     //the listview
     ListView MyListePresListView;
-    public  String[] getIntentUserName;
+    public String getIntentUserName;
     public  String getIntentNomUniv ;
+    private NfcAdapter mNfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +50,8 @@ public class Activity_MyList_prof extends AppCompatActivity {
         //final String getIntentNomUniv ;//= getIntent().getStringExtra("nom_univ");
         //final String[] getIntentUserName;
         try {
-            getIntentUserName = getIntent().getStringArrayExtra("data");
-            getIntentNomUniv = getIntentUserName[0];
+            getIntentUserName = getIntent().getStringExtra("data");
+            getIntentNomUniv = getIntent().getStringExtra("data_nom_univ");
 
             if ((getIntentNomUniv=="") || (getIntentNomUniv==null))
             {
@@ -62,7 +75,15 @@ public class Activity_MyList_prof extends AppCompatActivity {
         //todo Get data from sqlite Datbase et display
         db = new DatabaseHelper(this);
         List<ListsModel> arraylistModel = new ArrayList<>();
-        arraylistModel= db.getAllList(getIntentNomUniv);
+      //  try {
+
+            arraylistModel= db.getAllList(getIntentNomUniv);
+//        }
+//        catch (Exception ex)
+//        {
+//            super.onBackPressed();
+//            Toast.makeText(getApplicationContext(),"Aucune liste enregistrée",Toast.LENGTH_LONG).show();
+//        }
         if (arraylistModel.isEmpty()) {
             //adding some values to our list
             String [] Myliste =new String[]{"Etudiant(e) 0","Etudiant(e) 1","Etudiant(e) 2","Etudiant(e) 3","Etudiant(e)"};
@@ -89,7 +110,11 @@ public class Activity_MyList_prof extends AppCompatActivity {
         //attaching adapter to the listview
         MyListePresListView.setAdapter(listeEnumerationAdapter);
 
+
+
     }
 
 
 }
+
+

@@ -34,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor cursor;
 
 
 
@@ -366,7 +367,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListsModel.COLUMN_ID + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        try {
+
+             cursor = db.rawQuery(selectQuery, null);
+        }catch (Exception e){
+            //super.onBackPressed();
+        }
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

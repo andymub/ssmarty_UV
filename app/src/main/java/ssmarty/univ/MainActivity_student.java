@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SearchView;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 public class MainActivity_student extends AppCompatActivity {
 
     private ImageButton btnHoraire, btnExam, btnComFac, btnComUniv;
     Intent switchActiv;
-    TextView displayUnivName,displayStudentName;
+    TextView displayUnivName,displayStudentName,searchStudentName,searchEditorName,searchMessage;
+    SearchView researchFinace;
     String facDep,promo,annee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,14 @@ public class MainActivity_student extends AppCompatActivity {
         btnExam=findViewById(R.id.imgbtn_communi_prof);
         btnHoraire=findViewById(R.id.imgbtn_liste);
         displayUnivName=findViewById(R.id.studen_txtNom_univ); displayStudentName=findViewById(R.id.nom_etudiant);
+        searchEditorName =findViewById(R.id.txtediteurSituationFinance);
+        searchMessage=findViewById(R.id.messageSituationFinance);
+        searchStudentName=findViewById(R.id.txtNomEtudiantSituationFinance);
+        researchFinace= findViewById(R.id.recherchSituationFinance);
+        researchFinace.setVisibility(View.VISIBLE);
+
+       // setSearchWidgetInvisible();
+        
         //todo get student's name and uniV n
         String []getDataFromCard = getIntent().getStringArrayExtra("data");
         displayUnivName.setText(getDataFromCard[0]+"");
@@ -33,7 +44,22 @@ public class MainActivity_student extends AppCompatActivity {
         annee=facPromoYear[2];
 
 
-        //boutton Horaire
+        researchFinace.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                setSearchWidgetInvisible();
+            }
+        });
+        researchFinace.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String getResearchTxt= String.valueOf(researchFinace.getInputType());
+                searchInDB(getResearchTxt);
+            }
+        });
+        
+        
+                //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,8 +97,36 @@ public class MainActivity_student extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, CommuUnivActivity.class);
+                switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
                 startActivity(switchActiv);
             }
         });
     }
+    
+    public void searchInDB(String matricu)
+    {
+        //todo search in DB 
+        
+        
+        //TODO gET RESULTES AND DISPLAYS
+        
+        setSearchWidgetVisible();
+        
+    }
+    
+    public void setSearchWidgetInvisible(){
+        //set all research widget affiliated invible
+        searchStudentName.setVisibility(View.INVISIBLE);
+        searchMessage.setVisibility(View.INVISIBLE);
+        searchEditorName.setVisibility(View.INVISIBLE);
+        
+    }
+    public void setSearchWidgetVisible(){
+        //set all research widget affiliated invible
+        searchStudentName.setVisibility(View.VISIBLE);
+        searchMessage.setVisibility(View.VISIBLE);
+        searchEditorName.setVisibility(View.VISIBLE);
+
+    }
+
 }
