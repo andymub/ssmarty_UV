@@ -54,7 +54,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/autre_raison"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColorLink="#FF32C1F5" />
 
         <Spinner
             android:id="@+id/spinnerfac"
@@ -125,7 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:layout_marginEnd="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
