@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
     buildTypes {
@@ -42,8 +43,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-functions:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:20.1.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
-
     implementation 'com.google.android.material:material:1.0.0'
+
 
 }
 

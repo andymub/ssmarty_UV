@@ -5,6 +5,7 @@
     android:id="@+id/relaLayout_presence"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgapps"
     tools:context=".Activity_liste_presence">
 
     <TextView

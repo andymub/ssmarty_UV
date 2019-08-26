@@ -3,35 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgapps"
     tools:context=".Activity_contatUniv_prof">
-    <TextView
-        android:id="@+id/txtContatTitre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/contact_de_l_universit" />
-
-    <View
-        android:id="@+id/hr1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtContatTitre"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#4acbfa" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/txtContatTitre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txtContactNomUniv"
@@ -48,10 +31,10 @@
             android:layout_height="wrap_content"
             android:autoLink="phone"
             android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
             android:text="@string/_243972518932"
-            android:textSize="18sp"
-            android:focusable="true" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txtxNumUniv2"
@@ -71,6 +54,7 @@
             android:text="@string/univ_gmail_com"
             android:textColor="@color/design_default_color_primary"
             android:textSize="18sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -79,5 +63,24 @@
             android:layout_marginRight="50dp"
             android:background="@color/design_default_color_primary" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtContatTitre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/contact_de_l_universit" />
+
+    <View
+        android:id="@+id/hr1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/txtContatTitre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#4acbfa" />
 
 </RelativeLayout>

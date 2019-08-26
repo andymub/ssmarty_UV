@@ -4,102 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity_student"
-    >
-
-
-
-    <View
-        android:id="@+id/hr1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:background="#4acbfa"
-        tools:ignore="UnknownId"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:id="@+id/studen_txtNom_univ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hr1"
-        android:layout_alignEnd="@+id/hr2"
-        android:layout_alignRight="@+id/hr2"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:foregroundGravity="left"
-        android:gravity="left"
-        android:paddingRight="5dp"
-        android:text="Nom univ"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/nom_etudiant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hr1"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="6dp"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="5dp"
-        android:foregroundGravity="left"
-        android:gravity="left"
-        android:paddingRight="5dp"
-        android:text="Nom univ"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <View
-        android:id="@+id/hr2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="29dp"
-        android:background="@android:color/background_light"
-        android:layout_alignParentLeft="true" />
+    android:background="@drawable/background"
+    tools:context=".MainActivity_student">
 
 
     <RelativeLayout
         android:id="@+id/layout_student_act"
         android:layout_width="match_parent"
         android:layout_height="334dp"
-        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/hr2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:paddingTop="3dp"
-        android:layout_alignParentLeft="true">
+        android:paddingRight="5dp">
 
         <ImageButton
             android:id="@+id/imgbtn_liste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="21dp"
+            android:layout_marginLeft="21dp"
             android:background="@drawable/rounded_corners_imagebutton"
             android:contentDescription="TODO"
-            android:src="@drawable/horaire_"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="21dp" />
+            android:src="@drawable/horaire_" />
 
         <ImageButton
             android:id="@+id/imgbtn_communi_prof"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="21dp"
             android:background="@drawable/rounded_corners_imagebutton"
             app:srcCompat="@drawable/exam" />
@@ -108,8 +48,8 @@
             android:id="@+id/imgbtn_my_listes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/imgbtn_liste"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="13dp"
             android:background="@drawable/rounded_corners_imagebutton"
             app:srcCompat="@drawable/comm_priv" />
@@ -126,19 +66,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/imgbtn_liste"
-            android:layout_marginStart="84dp"
-            android:text="Horaire"
-            android:textSize="8sp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="84dp" />
+            android:layout_marginStart="84dp"
+            android:layout_marginLeft="84dp"
+            android:text="Horaire"
+            android:textSize="8sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="50dp"
             android:text="Communication Université"
             android:textSize="8sp" />
@@ -147,8 +87,8 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="55dp"
             android:text="Communication Faculté"
             android:textSize="8sp" />
@@ -156,30 +96,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_below="@+id/imgbtn_liste"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="84dp"
             android:text="Examen"
             android:textSize="8sp" />
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="2dp"
-        android:background="#4acbfa"
-        android:layout_below="@+id/layout_student_act"/>
-
-    <TextView
-        android:id="@+id/textView_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_student_act"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Situation financière"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
 
     <ScrollView
         android:id="@+id/scrvresearch"
@@ -187,7 +109,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView_3"
         android:layout_centerHorizontal="true"
-        android:background="#F0B6B8B6"
         android:fillViewport="true">
 
         <LinearLayout
@@ -198,12 +119,6 @@
             android:layout_marginRight="2dp"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Numéro matricule de l'étudiant"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
             <SearchView
                 android:id="@+id/recherchSituationFinance"
                 android:layout_width="match_parent"
@@ -212,6 +127,12 @@
                 android:orientation="horizontal"
                 android:queryHint="Saisir numéro..."
                 android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Numéro matricule de l'étudiant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <TextView
                 android:id="@+id/txtNomEtudiantSituationFinance"
@@ -242,6 +163,84 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/studen_txtNom_univ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr1"
+        android:layout_alignEnd="@+id/hr2"
+        android:layout_alignRight="@+id/hr2"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:foregroundGravity="left"
+        android:gravity="left"
+        android:paddingRight="5dp"
+        android:text="Nom univ"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_student_act"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Situation financière"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:id="@+id/nom_etudiant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hr1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="5dp"
+        android:foregroundGravity="left"
+        android:gravity="left"
+        android:paddingRight="5dp"
+        android:text="Nom univ"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/layout_student_act"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:background="#4acbfa" />
+
+    <View
+        android:id="@+id/hr2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="29dp"
+        android:background="@android:color/background_light" />
+
+    <View
+        android:id="@+id/hr1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="#4acbfa"
+        tools:ignore="UnknownId" />
 
     <View
         android:layout_width="match_parent"
