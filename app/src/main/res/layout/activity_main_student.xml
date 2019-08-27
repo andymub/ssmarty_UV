@@ -30,7 +30,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="21dp"
             android:layout_marginLeft="21dp"
-            android:background="@drawable/rounded_corners_imagebutton"
+            android:background="#00FFFFFF"
             android:contentDescription="TODO"
             android:src="@drawable/horaire_" />
 
@@ -41,7 +41,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="21dp"
-            android:background="@drawable/rounded_corners_imagebutton"
+            android:background="#00FFFFFF"
             app:srcCompat="@drawable/exam" />
 
         <ImageButton
@@ -51,7 +51,7 @@
             android:layout_alignStart="@+id/imgbtn_liste"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="13dp"
-            android:background="@drawable/rounded_corners_imagebutton"
+            android:background="#00FFFFFF"
             app:srcCompat="@drawable/comm_priv" />
 
         <ImageButton
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/imgbtn_communi_prof"
             android:layout_alignTop="@+id/imgbtn_my_listes"
-            android:background="@drawable/rounded_corners_imagebutton"
+            android:background="#00FFFFFF"
             app:srcCompat="@drawable/comm_priv_" />
 
         <TextView

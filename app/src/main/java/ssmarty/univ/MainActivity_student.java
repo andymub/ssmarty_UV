@@ -5,31 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
 public class MainActivity_student extends AppCompatActivity {
 
-    private ImageButton btnHoraire, btnExam, btnComFac, btnComUniv;
+    private ImageView btnHoraire, btnExam, btnComFac, btnComUniv;
     Intent switchActiv;
     TextView displayUnivName,displayStudentName,searchStudentName,searchEditorName,searchMessage;
-    SearchView researchFinace;
+    //SearchView researchFinace;
     String facDep,promo,annee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_student);
+        setContentView(R.layout.activity_main_student2);
         btnComFac=findViewById(R.id.imgbtn_my_listes);
         btnComUniv=findViewById(R.id.imgbtn_com_univ);
         btnExam=findViewById(R.id.imgbtn_communi_prof);
         btnHoraire=findViewById(R.id.imgbtn_liste);
-        displayUnivName=findViewById(R.id.studen_txtNom_univ); displayStudentName=findViewById(R.id.nom_etudiant);
+        displayUnivName=findViewById(R.id.studen_txtNom_univ);
+        displayStudentName=findViewById(R.id.nom_etudiant);
         searchEditorName =findViewById(R.id.txtediteurSituationFinance);
         searchMessage=findViewById(R.id.messageSituationFinance);
         searchStudentName=findViewById(R.id.txtNomEtudiantSituationFinance);
-        researchFinace= findViewById(R.id.recherchSituationFinance);
-        researchFinace.setVisibility(View.VISIBLE);
+//        researchFinace= findViewById(R.id.recherchSituationFinance);
+//        researchFinace.setVisibility(View.VISIBLE);
 
        // setSearchWidgetInvisible();
         
@@ -44,20 +46,20 @@ public class MainActivity_student extends AppCompatActivity {
         annee=facPromoYear[2];
 
 
-        researchFinace.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                setSearchWidgetInvisible();
-            }
-        });
-        researchFinace.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String getResearchTxt= String.valueOf(researchFinace.getInputType());
-                searchInDB(getResearchTxt);
-            }
-        });
-        
+//        researchFinace.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View view, boolean b) {
+//                setSearchWidgetInvisible();
+//            }
+//        });
+//        researchFinace.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String getResearchTxt= String.valueOf(researchFinace.getInputType());
+//                searchInDB(getResearchTxt);
+//            }
+//        });
+//
         
                 //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {

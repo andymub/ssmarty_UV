@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ import ssmarty.univ.network.InternetConnectionStatus;
 
 
 public class MainActivity_Prof extends AppCompatActivity {
-    private ImageButton btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
+    private ImageView btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
     Intent switch_prof_acti;
     TextView displayUnivName,displayProfName,txtMsgTitre1,txtMsgEditeur1,txtMsg1,
             txtMsgTitre2,txtMsgEditeur2,txtMsg2,
@@ -54,7 +55,7 @@ public class MainActivity_Prof extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main__prof);
+        setContentView(R.layout.activity_main_prof);
         btnBuildList=findViewById(R.id.imgbtn_liste);
         btnCOmmuni=findViewById(R.id.imgbtn_communi_prof);
         btnContactUniv=findViewById(R.id.imgbtn_contact_univ);

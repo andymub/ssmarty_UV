@@ -59,7 +59,8 @@
         </activity>
         <activity
             android:name=".MainActivity_student"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".HoraireActivity"
             android:screenOrientation="portrait"
@@ -78,7 +79,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity_Prof"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity_liste_presence"
             android:screenOrientation="portrait"
