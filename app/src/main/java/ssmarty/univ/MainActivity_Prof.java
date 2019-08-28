@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,6 +90,14 @@ public class MainActivity_Prof extends AppCompatActivity {
         String getUserName= getDataFromCard[1]; //todo send username to activities
         displayProfName.setText(getUserName);
 
+        displayUnivName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_contatUniv_prof.class);
+                startActivity(switch_prof_acti);
+            }
+        });
+
         btnBuildList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +138,11 @@ public class MainActivity_Prof extends AppCompatActivity {
         btnContactUniv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_contatUniv_prof.class);
+                DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+                String fac=databaseHelper.getAllFacDepFromLocal();
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_ajouts_horaire_prof.class);
+                switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
             }
         });

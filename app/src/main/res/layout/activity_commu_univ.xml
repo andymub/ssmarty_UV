@@ -42,12 +42,12 @@
         android:id="@+id/hr1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/txtCommuUnivTitre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#4acbfa" />
+        android:background="#0F1E24" />
 
 </RelativeLayout>

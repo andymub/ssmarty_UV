@@ -18,27 +18,36 @@
         android:id="@+id/hrmessageUniv"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/txtMessageUnivTitre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#4acbfa" />
+        android:background="#0F1E24" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/hrmessageUniv"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
+        android:gravity="start"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nom Univ" />
+
+        <TextView
+            android:id="@+id/txtSenderDateMessage_Univ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="TextView" />
 
         <EditText
             android:id="@+id/objetMessage_Univ"
@@ -49,17 +58,10 @@
             android:inputType="textPersonName"
             android:textColorHighlight="@color/bipNfc_etudiant_added" />
 
-        <TextView
-            android:id="@+id/txtSenderDateMessage_Univ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:text="TextView" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal">
 
             <EditText

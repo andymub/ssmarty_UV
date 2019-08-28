@@ -61,7 +61,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:background="@color/design_default_color_primary" />
+            android:background="#0F1E24" />
     </LinearLayout>
 
     <TextView
@@ -81,6 +81,6 @@
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#4acbfa" />
+        android:background="#0F1E24" />
 
 </RelativeLayout>

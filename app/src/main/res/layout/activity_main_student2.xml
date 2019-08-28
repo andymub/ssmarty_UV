@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#42ffff"
+    android:background="@drawable/bgapps"
     tools:context=".MainActivity_student"
     >
 
@@ -12,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="230dp"
-        android:background="@drawable/bgheaderstudents"
+        android:background="@drawable/bgheader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,7 +103,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/presenceliste"
+                    android:src="@drawable/horairestudent"
                     />
 
                 <TextView
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
-                    android:text="@string/lancer_une_liste_pr_sence"
+                    android:text="@string/horaire"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -129,7 +129,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/communicationprof"
+                    android:src="@drawable/test"
                     />
 
                 <TextView
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
-                    android:text="@string/r_diger_une_communication"
+                    android:text="@string/horaire_d_examens"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -155,14 +155,14 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/myfolderliste" />
+                    android:src="@drawable/facmessage" />
 
                 <TextView
                     android:id="@+id/plugins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
-                    android:text="@string/v_rifier_mes_listes_de_pr_sence"
+                    android:text="Faculté"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
@@ -180,8 +180,8 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/contactuniv"
-                    app:srcCompat="@drawable/contactuniv" />
+                    android:src="@drawable/univmessage"
+                    />
 
                 <TextView
                     android:id="@+id/myapps"
@@ -223,12 +223,6 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-2dp">
-
-        <include
-            layout="@layout/content_activity_main_prof"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        tools:layout_editor_absoluteX="-2dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
