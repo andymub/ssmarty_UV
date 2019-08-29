@@ -156,13 +156,13 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Choisir une Promotion" ,LENGTH_LONG).show();
                 }
                 else {
-                    mStorageRef = FirebaseStorage.getInstance().getReference();
+                    //mStorageRef = FirebaseStorage.getInstance().getReference();
                     final Map<String, Object> horaireDataMap = new HashMap<>();
-                    horaireDataMap.put("cours",nomCoursHoraire.getText().toString());
-                    horaireDataMap.put("lieu",lieuHoraire.getText().toString());
-                    horaireDataMap.put("date",dateHoraire.getText().toString());
-                    horaireDataMap.put("titulaire",titulaireHoraire.getText().toString());
-                    horaireDataMap.put("details",detailsHoraire.getText().toString());
+                    horaireDataMap.put("Cours",nomCoursHoraire.getText().toString());
+                    horaireDataMap.put("Lieu",lieuHoraire.getText().toString());
+                    horaireDataMap.put("Date",dateHoraire.getText().toString());
+                    horaireDataMap.put("Titulaire",titulaireHoraire.getText().toString());
+                    horaireDataMap.put("Details",detailsHoraire.getText().toString());
                     progressBar.setVisibility(View.VISIBLE);
                     // Hierarchical Data with Subcollection-Document in a Document
                     db.collection(getUnivName).document(facDep)

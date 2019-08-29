@@ -22,17 +22,20 @@ public class Activity_Communi_Prof extends ActivityGroup {
         List<String> listFac;
 
         String getListFacDetIntent= getIntent().getStringExtra("list_fac");
+        String getListUnivName = getIntent().getStringExtra("data_nom_univ");
 
         //intent
         Intent intentFac =new Intent(this,TabFacCommuni.class);
         intentFac.putExtra("data_nom_user",userName);
         intentFac.putExtra("list_fac",getListFacDetIntent);
+        intentFac.putExtra("data_nom_univ",getListUnivName);
+
         Intent intentUniv =new Intent(this,TabUnivCommuni.class);
         intentUniv.putExtra("data_nom_user",userName);
-        intentUniv.putExtra("list_fac",getListFacDetIntent);
+        intentUniv.putExtra("data_nom_univ",getListUnivName);
 
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("Message à la Fac/Département");
-
+        TabHost.TabSpec tab1 = tabHost.newTabSpec("Message Faculté");
+        //tabHost.getTabWidget().getChildAt(0).setBackgroundColor(R.color.Tab);
         TabHost.TabSpec tab2 = tabHost.newTabSpec("Message à l'Univerité");
         tab2.setContent(intentFac);
         // Set the Tab name and Activity

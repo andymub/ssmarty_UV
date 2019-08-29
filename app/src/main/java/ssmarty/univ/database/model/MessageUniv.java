@@ -9,6 +9,10 @@ public class MessageUniv {
         this.editeur = editeur;
     }
 
+    public MessageUniv() {
+
+    }
+
     public String getTitre() {
         return titre;
     }

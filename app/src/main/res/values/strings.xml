@@ -17,8 +17,8 @@
     <string name="r_diger_une_communication">Message</string>
     <string name="country_prompt">Choisir</string>
     <string name="autre_raison">Autre raison</string>
-    <string name="message_all_students">Message à tout les étudiants </string>
-    <string name="mon_message_pour_la_fac_d_partement">Mon message à Fac/Département</string>
+    <string name="message_all_students">Message à toute l\'université </string>
+    <string name="mon_message_pour_la_fac_d_partement">Mon message à Département/Fac.</string>
     <string name="objet_du_message">Objet du message</string>
     <string name="d_stination">Déstination</string>
     <string name="nom_xpediteur">Nom éxpediteur</string>

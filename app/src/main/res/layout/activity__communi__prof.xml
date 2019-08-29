@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:outlineAmbientShadowColor="@android:color/holo_green_light"
-    tools:context=".Activity_Communi_Prof">
+    tools:context=".Activity_Communi_Prof"
+    android:background="@drawable/bgapps">
 
     <LinearLayout
         android:layout_width="fill_parent"

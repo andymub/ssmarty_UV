@@ -883,7 +883,7 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         }
         btnSendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
-        messageEvolution.setText("Liste non envoyée sur serveur, stockéé dans mes Listes");
+        messageEvolution.setText("Liste stockéé dans mes Listes");
         setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
                 spinnerListFacDep.getSelectedItem().toString()+"-"+spinnerPromo.getSelectedItem().toString()+
                         "|"+typeEtINtitule,convertListToString(ListElementsArrayList),"non");

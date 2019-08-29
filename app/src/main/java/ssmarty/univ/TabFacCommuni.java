@@ -21,6 +21,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,8 +44,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ssmarty.univ.database.model.MessageUniv;
 import ssmarty.univ.time.getCurrentDate;
 
 import android.content.ClipData;
@@ -53,10 +58,18 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 public class TabFacCommuni extends AppCompatActivity {
     private static final int REQUEST_CAMERA = 1;
     private static final int SELECT_FILE = 1;
-    private Spinner spinnerSelecteFac;
+    private Spinner spinnerSelecteFac,spinnerPromo;
     private EditText objectMessage, messageTextFac;
     private ImageButton btnSendFacMessag,imgBtnGalleriePhoto,imgBtnTakePhoto;
     private TextView txtSenderAndDate;
@@ -69,6 +82,11 @@ public class TabFacCommuni extends AppCompatActivity {
 
     String currentPhotoPath;
     ImageView imageView14;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String TAG="TAG";
+    ProgressBar progeProgressBar;
+    int count=0;
+    String getUnivName;
 
 
 
@@ -86,12 +104,16 @@ public class TabFacCommuni extends AppCompatActivity {
         imgBtnTakePhoto=findViewById(R.id.imgBtntakePhotos);
         btnGatlerie=findViewById(R.id.imgBtnGallerie);
         btnTakePicture=findViewById(R.id.imgBtntakePhotos);
+        spinnerPromo=findViewById(R.id.spinnerPromoCommFca);
         imageView14=findViewById(R.id.gv);
+        progeProgressBar=findViewById(R.id.progressBar3);
+        progeProgressBar.setVisibility(View.INVISIBLE);
 
 
         //View v = this.getLayoutInflater().inflate(R.layout.activity_tab1_fac_communi,null);
         //todo get name of sender
         nameOfSender= getIntent().getStringExtra("data_nom_user");
+         getUnivName =getIntent().getStringExtra("data_nom_univ");
         //set sender name and date
         getCurrentDate getCurrentDate = new getCurrentDate();
         txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
@@ -127,8 +149,66 @@ public class TabFacCommuni extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkIfMessageIsEmpty())btnSendFacMessag.setImageResource(R.drawable.ic_send_red_24dp);
                 else{
-                    btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
-                    Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
+                    btnSendFacMessag.setClickable(false);
+                    MessageUniv messageUniv = new MessageUniv();
+                    messageUniv.setTitre(objectMessage.getText().toString());
+                    messageUniv.setEditeur(txtSenderAndDate.getText().toString());
+                    messageUniv.setMessage(messageTextFac.getText().toString());
+                    final Map<String, Object> messageToMap = new HashMap<>();
+                    messageToMap.put("Titre",messageUniv.getTitre());
+                    messageToMap.put("Editeur",messageUniv.getEditeur());
+                    messageToMap.put("Message",messageUniv.getMessage());
+                    progeProgressBar.setVisibility(View.VISIBLE);
+
+                    db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
+                            .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
+                            .collection("Message")
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (DocumentSnapshot document : task.getResult()) {
+                                            count++;
+                                        }
+                                        db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
+                                                .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
+                                                .collection("Message").document("Message"+count)
+                                                .set(messageToMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        btnSendFacMessag.setClickable(true);
+                                                        progeProgressBar.setVisibility(View.INVISIBLE);
+                                                        btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
+                                                        Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
+                                                        count=0;
+                                                        clearFiel();
+
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                btnSendFacMessag.setClickable(true);
+                                                progeProgressBar.setVisibility(View.INVISIBLE);
+                                                btnSendFacMessag.setImageResource(R.drawable.ic_send_red_24dp);
+                                                count=0;
+                                                Toast.makeText(getApplicationContext(),"Message Non envoyé",Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+
+                                    } else {
+                                        Log.d(TAG, "Error getting documents: ", task.getException());
+                                    }
+
+                                }
+                            });
+
+
+
+//                    btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
+//                    Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
                     //TODO CHEK IF CONNECTION
                 }
             }
@@ -159,12 +239,20 @@ public class TabFacCommuni extends AppCompatActivity {
     private Boolean checkIfMessageIsEmpty(){
         Boolean chk=true;
         if ((objectMessage.length()!=0)&&(messageTextFac.length()!=0)){
-            if(spinnerSelecteFac != null &&!(spinnerSelecteFac.getSelectedItem().toString().equals("- - -") )) {
+            if(spinnerSelecteFac == null || (spinnerSelecteFac.getSelectedItemPosition()==0)) {
                 //name = (String)spinnerName.getSelectedItem();
-                chk=false;
-            } else   {chk=true;Toast.makeText(getApplicationContext(),"Choisir un destinateur",Toast.LENGTH_LONG).show();}
+                Toast.makeText(getApplicationContext(),"Choisir une faculté",Toast.LENGTH_LONG).show();
+                chk=true;
+            }
+            else if (spinnerPromo.getSelectedItemPosition()==0)
+            {
+                chk=true;Toast.makeText(getApplicationContext(),"Choisir une promo.",Toast.LENGTH_LONG).show();
+            }
+            else  chk=false;
         }
-        else Toast.makeText(getApplicationContext(),"Remplir l'objet ou message",Toast.LENGTH_LONG).show();
+
+        else  {Toast.makeText(getApplicationContext(),"Remplir l'objet ou message",Toast.LENGTH_LONG).show();
+        chk=true;}
         return chk;
     }
 
@@ -190,6 +278,13 @@ public class TabFacCommuni extends AppCompatActivity {
 //        }
 //    }
 
+    public void clearFiel(){
+        objectMessage.setText("");
+        messageTextFac.setText("");
+        spinnerSelecteFac.setSelection(0);
+        spinnerPromo.setSelection(0);
+        btnSendFacMessag.setImageResource(R.drawable.ic_send_black_24dp);
+    }
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data!= null) {
