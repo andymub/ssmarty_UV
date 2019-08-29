@@ -820,11 +820,11 @@ public class Activity_liste_presence extends AppCompatActivity {
         boolean chck=false;
         if (id[4].equals("1"))
         {
-            if (getIntentNomUniv.toUpperCase().trim().equals(id[0].trim().toUpperCase()))
+            if (getIntentNomUniv.trim().equals(id[0].trim()))
             { //unic checked
-                if (spinnerListFacDep.getSelectedItem().toString().trim().toUpperCase().equals(id[1].trim().toUpperCase()))
+                if (spinnerListFacDep.getSelectedItem().toString().trim().equals(id[1].trim()))
                 { //fac dep checked
-                    if (id[2].toUpperCase().trim().equals(spinnerPromo.getSelectedItem().toString().toUpperCase().trim()))
+                    if (id[2].trim().equals(spinnerPromo.getSelectedItem().toString().trim()))
                     {
 
                         chck=true;

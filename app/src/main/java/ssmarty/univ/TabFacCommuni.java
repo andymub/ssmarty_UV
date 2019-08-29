@@ -115,7 +115,7 @@ public class TabFacCommuni extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView <?> parent) {
-                Toast.makeText(parent.getContext(), "Choiisir une destination du message" ,          Toast.LENGTH_LONG).show();
+                Toast.makeText(parent.getContext(), "Choiisir une Faculté" ,          Toast.LENGTH_LONG).show();
             }
 
 

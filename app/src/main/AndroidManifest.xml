@@ -12,16 +12,16 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activity_ajouts_horaire_prof"></activity>
-        <activity android:name=".Activity_ajouts_horaire_prof" />
+        <activity android:name=".Activity_ajouts_horaire_prof"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" ></activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
 

@@ -142,6 +142,7 @@ public class MainActivity_Prof extends AppCompatActivity {
                 String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_ajouts_horaire_prof.class);
                 switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
                 switch_prof_acti.putExtra("list_fac",fac);
                 startActivity(switch_prof_acti);
             }
