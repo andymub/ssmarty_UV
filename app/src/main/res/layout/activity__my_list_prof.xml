@@ -32,7 +32,7 @@
       android:layout_gravity="center"
       android:layout_marginLeft="5dp"
       android:layout_marginRight="5dp"
-      android:background="#4acbfa" />
+      android:background="#0F1E24" />
 
 
 </RelativeLayout>

@@ -49,6 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <Spinner
+            android:id="@+id/spinnerpromo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:entries="@array/typeListepromo" />
+
         <EditText
             android:id="@+id/objetMessage_fac"
             android:layout_width="match_parent"
@@ -93,11 +100,13 @@
                 app:srcCompat="@drawable/ic_send_black_24dp"
                 tools:ignore="RtlHardcoded,VectorDrawableCompat" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Joinder une photo" />
+            android:text="Joinder une photo"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -116,6 +125,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginRight="3dp"
             android:contentDescription="TODO"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_add_a_photo_black_24dp"
             tools:ignore="VectorDrawableCompat" />
 
@@ -126,6 +136,7 @@
             android:layout_marginLeft="3dp"
             android:layout_marginTop="3dp"
             android:contentDescription="@string/todo"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_image_black_24dp"
             tools:ignore="VectorDrawableCompat" />
 
@@ -137,7 +148,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/l2"
         android:layout_weight="1"
-        android:numColumns="3">
+        android:numColumns="3"
+        android:visibility="invisible">
 
     </ImageView>
 

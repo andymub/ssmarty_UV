@@ -1,5 +1,8 @@
 package ssmarty.univ.database.model;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 public class ListeEnumerationModel {
   String nomDateListeProf,intitulePresent,nombrePresence,etat;
   String[] myliste;
@@ -53,5 +56,7 @@ public class ListeEnumerationModel {
     this.myliste = myliste;
   }
 
-}
+
+
+  }
 

@@ -403,20 +403,20 @@ public class Activity_liste_presence extends AppCompatActivity {
         btnSendToCloud.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-//                String typeEtINtitule;
-//                if (spinnerTypePresence.getSelectedItem().toString().equals("Autre"))
-//                {
-//                    typeEtINtitule=edittxtAutreRainson.getText().toString()+"/"+editxtIntutuleListe.getText().toString();
-//                }else{
-//                    typeEtINtitule=spinnerTypePresence.getSelectedItem().toString()+"/"+editxtIntutuleListe.getText().toString();
-//
-//                }
-//                btnSendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
-//                messageEvolution.setText("Liste non envoyée sur serveur, stockéé dans mes Listes");
-//                setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
-//                        spinnerListFacDep.getSelectedItem().toString()+"-"+spinnerPromo.getSelectedItem().toString()+
-//                                "|"+typeEtINtitule,convertListToString(ListElementsArrayList),"non");
-//                btnSendToCloud.setEnabled(false);
+                String typeEtINtitule;
+                if (spinnerTypePresence.getSelectedItem().toString().equals("Autre"))
+                {
+                    typeEtINtitule=edittxtAutreRainson.getText().toString()+"/"+editxtIntutuleListe.getText().toString();
+                }else{
+                    typeEtINtitule=spinnerTypePresence.getSelectedItem().toString()+"/"+editxtIntutuleListe.getText().toString();
+
+                }
+                btnSendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
+                messageEvolution.setText("Liste non envoyée sur serveur, stockéé dans mes Listes");
+                setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
+                        spinnerListFacDep.getSelectedItem().toString()+"-"+spinnerPromo.getSelectedItem().toString()+
+                                "|"+typeEtINtitule,convertListToString(ListElementsArrayList),"non");
+                btnSendToCloud.setEnabled(false);
                 return false;
             }
         });
@@ -492,7 +492,7 @@ public class Activity_liste_presence extends AppCompatActivity {
             fstream.write((listePresenceToFile.getPromo()+"--").getBytes());
             fstream.write((listePresenceToFile.getList()+"--").getBytes());
             fstream.close();
-            Toast.makeText(getApplicationContext(), "File Saved Successfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Fichier crée",Toast.LENGTH_SHORT).show();
             //intent = new Intent(Activity_liste_presence.this,MainActivity_Prof.class);
 
             //upload file to serveur

@@ -89,6 +89,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+    public int onUpgradeState( String fieldName,String univName) {
+        // Drop older table if existed
+        //db.execSQL("DROP TABLE IF EXISTS " + ListsModel.TABLE_NAME);
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result=0;
+
+        ContentValues values = new ContentValues();
+        values.put(ListsModel.COLUMN_ETAT, "oui");
+
+        try {
+            // updating row
+            db.update(univName+ListsModel.TABLE_NAME, values, ListsModel.COLUMN_N0M_DATE + " = ?",
+                    new String[]{fieldName});
+            result=1;
+        }
+        catch (Exception ex){
+            result=0;
+        }
+
+        return result;
+    }
     public long insert(String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
         long id = 0;
         // get writable database as we want to write data

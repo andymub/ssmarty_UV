@@ -73,7 +73,7 @@
                     android:paddingLeft="10dp"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtIntitulePresent"
@@ -89,7 +89,7 @@
                     android:singleLine="true"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtNombrePresence"
@@ -103,7 +103,7 @@
                     android:paddingLeft="10dp"
                     android:text="TextView"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
         </ScrollView>

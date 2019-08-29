@@ -1,15 +1,7 @@
 package ssmarty.univ;
 
-import android.content.Intent;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,17 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import ssmarty.univ.database.adapter.ListeEnumerationAdapter;
+import ssmarty.univ.database.adapter.MyListePresenceAdapter;
 import ssmarty.univ.database.model.ListeEnumerationModel;
 import ssmarty.univ.database.model.ListsModel;
 import ssmarty.univ.helper.DatabaseHelper;
-
-import static ssmarty.univ.Activity_liste_presence.MIME_TEXT_PLAIN;
 
 public class Activity_MyList_prof extends AppCompatActivity {
     //a List of type ListeEnumerationModel for holding list items
@@ -105,7 +93,7 @@ public class Activity_MyList_prof extends AppCompatActivity {
             }
         }
        //creating the adapter
-        ListeEnumerationAdapter listeEnumerationAdapter  = new ListeEnumerationAdapter(this, R.layout.my_custom_list_prof, listpresence);
+        MyListePresenceAdapter listeEnumerationAdapter  = new MyListePresenceAdapter(this, R.layout.my_custom_listpresence_prof, listpresence,getIntentNomUniv);
 
         //attaching adapter to the listview
         MyListePresListView.setAdapter(listeEnumerationAdapter);
