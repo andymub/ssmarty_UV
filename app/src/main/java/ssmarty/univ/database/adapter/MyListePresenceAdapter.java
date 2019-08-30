@@ -342,7 +342,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         return result;
     }
 
-    public void showDialog(final Context context) {
+    public void showDialog(final Context context) {  //TODO FINIR AVEC REMPLISSAGE LISTE NFC
         final ArrayAdapter<String> adapter;
         final List<String> ListElementsArrayList;
         String[] ListElements=new String[] {};
@@ -441,6 +441,14 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                 }
             }
         });
+
+
+        ///nfc
+
+
+
+
+        //end nfc
     }
 
 

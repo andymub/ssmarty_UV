@@ -22,6 +22,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -143,73 +145,142 @@ public class TabFacCommuni extends AppCompatActivity {
 
         });
 
+        //on TextChange
+        objectMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                btnSendFacMessag.setImageResource(R.drawable.ic_send_black_24dp);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        messageTextFac.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                btnSendFacMessag.setImageResource(R.drawable.ic_send_black_24dp);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         //btn send Data
         btnSendFacMessag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkIfMessageIsEmpty())btnSendFacMessag.setImageResource(R.drawable.ic_send_red_24dp);
                 else{
-                    btnSendFacMessag.setClickable(false);
-                    MessageUniv messageUniv = new MessageUniv();
-                    messageUniv.setTitre(objectMessage.getText().toString());
-                    messageUniv.setEditeur(txtSenderAndDate.getText().toString());
-                    messageUniv.setMessage(messageTextFac.getText().toString());
-                    final Map<String, Object> messageToMap = new HashMap<>();
-                    messageToMap.put("Titre",messageUniv.getTitre());
-                    messageToMap.put("Editeur",messageUniv.getEditeur());
-                    messageToMap.put("Message",messageUniv.getMessage());
-                    progeProgressBar.setVisibility(View.VISIBLE);
+                    // Build an AlertDialog
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TabFacCommuni.this);
 
-                    db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
-                            .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
-                            .collection("Message")
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (DocumentSnapshot document : task.getResult()) {
-                                            count++;
-                                        }
-                                        db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
-                                                .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
-                                                .collection("Message").document("Message"+count)
-                                                .set(messageToMap)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    // Set a title for alert dialog
+                    builder.setTitle("Confirmation");
+
+                    // Ask the final question
+                    builder.setMessage("Envoyer ce message ?");
+
+                    // Set the alert dialog yes button click listener
+                    builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do something when user clicked the Yes button
+                            // Set the TextView visibility GONE
+                            //tv.setVisibility(View.GONE);
+                            btnSendFacMessag.setClickable(false);
+                            MessageUniv messageUniv = new MessageUniv();
+                            messageUniv.setTitre(objectMessage.getText().toString());
+                            messageUniv.setEditeur(txtSenderAndDate.getText().toString());
+                            messageUniv.setMessage(messageTextFac.getText().toString());
+                            final Map<String, Object> messageToMap = new HashMap<>();
+                            messageToMap.put("Titre",messageUniv.getTitre());
+                            messageToMap.put("Editeur",messageUniv.getEditeur());
+                            messageToMap.put("Message",messageUniv.getMessage());
+                            progeProgressBar.setVisibility(View.VISIBLE);
+
+                            db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
+                                    .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
+                                    .collection("Message")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (DocumentSnapshot document : task.getResult()) {
+                                                    count++;
+                                                }
+                                                db.collection(getUnivName).document(spinnerSelecteFac.getSelectedItem().toString())
+                                                        .collection(spinnerPromo.getSelectedItem().toString()).document("Message")
+                                                        .collection("Message").document("Message"+count)
+                                                        .set(messageToMap)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                btnSendFacMessag.setClickable(true);
+                                                                progeProgressBar.setVisibility(View.INVISIBLE);
+                                                                btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
+                                                                Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
+                                                                count=0;
+                                                                clearFiel();
+
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
-                                                    public void onSuccess(Void aVoid) {
+                                                    public void onFailure(@NonNull Exception e) {
                                                         btnSendFacMessag.setClickable(true);
                                                         progeProgressBar.setVisibility(View.INVISIBLE);
-                                                        btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
-                                                        Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
+                                                        btnSendFacMessag.setImageResource(R.drawable.ic_send_red_24dp);
                                                         count=0;
-                                                        clearFiel();
+                                                        Toast.makeText(getApplicationContext(),"Message Non envoyé",Toast.LENGTH_SHORT).show();
 
                                                     }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                btnSendFacMessag.setClickable(true);
-                                                progeProgressBar.setVisibility(View.INVISIBLE);
-                                                btnSendFacMessag.setImageResource(R.drawable.ic_send_red_24dp);
-                                                count=0;
-                                                Toast.makeText(getApplicationContext(),"Message Non envoyé",Toast.LENGTH_SHORT).show();
+                                                });
 
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
                                             }
-                                        });
 
-                                    } else {
-                                        Log.d(TAG, "Error getting documents: ", task.getException());
-                                    }
-
-                                }
-                            });
+                                        }
+                                    });
 
 
 
 //                    btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
 //                    Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
-                    //TODO CHEK IF CONNECTION
+                            //TODO CHEK IF CONNECTION
+                            //btnSendFacMessag.setImageResource(R.drawable.ic_send_bleu_24dp);
+                            // Toast.makeText(getApplicationContext(),"Message envoyé",Toast.LENGTH_SHORT).show();
+                            //TODO CHEK IF CONNECTION
+                        }
+                    });
+
+                    // Set the alert dialog no button click listener
+                    builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do something when No button clicked
+                            Toast.makeText(getApplicationContext(),
+                                    "Non",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    // Display the alert dialog on interface
+                    dialog.show();
+
                 }
             }
         });
@@ -247,6 +318,12 @@ public class TabFacCommuni extends AppCompatActivity {
             else if (spinnerPromo.getSelectedItemPosition()==0)
             {
                 chk=true;Toast.makeText(getApplicationContext(),"Choisir une promo.",Toast.LENGTH_LONG).show();
+            }else if (objectMessage.length()<3)
+            {
+                chk=true;Toast.makeText(getApplicationContext(),"Objet du message est court...",Toast.LENGTH_LONG).show();
+            }else if (messageTextFac.length()<10)
+            {
+                chk=true;Toast.makeText(getApplicationContext(),"Message est court...",Toast.LENGTH_LONG).show();
             }
             else  chk=false;
         }

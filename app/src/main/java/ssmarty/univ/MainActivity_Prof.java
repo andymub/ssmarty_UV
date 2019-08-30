@@ -3,6 +3,7 @@ package ssmarty.univ;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -12,20 +13,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import ssmarty.univ.adapter.ListCommUnivAdapter;
 import ssmarty.univ.database.model.InfoPresistance;
 import ssmarty.univ.database.model.MessageUniv;
 import ssmarty.univ.helper.DatabaseHelper;
@@ -35,9 +45,11 @@ import ssmarty.univ.network.InternetConnectionStatus;
 public class MainActivity_Prof extends AppCompatActivity {
     private ImageView btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
     Intent switch_prof_acti;
-    TextView displayUnivName,displayProfName,txtMsgTitre1,txtMsgEditeur1,txtMsg1,
-            txtMsgTitre2,txtMsgEditeur2,txtMsg2,
-            txtMsgTitre3,txtMsgEditeur3,txtMsg3;
+    TextView displayUnivName,displayProfName,txtMsgTitre1;
+//            txtMsgTitre1,txtMsgEditeur1,txtMsg1,
+//            txtMsgTitre2,txtMsgEditeur2,txtMsg2,
+//            txtMsgTitre3,txtMsgEditeur3,txtMsg3;
+    ListView listViewMesssageUNIV;
     ProgressBar simpleProgressBar;
     SQLiteDatabase mDatabase;
     // Access a Cloud Firestore instance from your Activity
@@ -52,6 +64,8 @@ public class MainActivity_Prof extends AppCompatActivity {
 //    DatabaseHelper databaseHelper =new DatabaseHelper(this);
 //    //databaseHelper.insertIntoTableInfo(listFacDep);
 //    String fac=databaseHelper.getAllFacDepFromLocal();
+    String TAG="TAG";
+    int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +78,17 @@ public class MainActivity_Prof extends AppCompatActivity {
         displayUnivName=findViewById(R.id.prof_txtNom_univ);
          mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        listViewMesssageUNIV= findViewById(R.id.listeViewessage_mainProf);
         //message txt
         txtMsgTitre1=findViewById(R.id.txtmsgtitre1);
-        txtMsgEditeur1=findViewById(R.id.txtmsgediteur1);
-        txtMsg1=findViewById(R.id.txtmsg1);
-        txtMsgTitre2=findViewById(R.id.txtmsgtitre2);
-        txtMsgEditeur2=findViewById(R.id.txtmsgediteur2);
-        txtMsg2=findViewById(R.id.txtmsg2);
-        txtMsgTitre3=findViewById(R.id.txtmsgtitre3);
-        txtMsgEditeur3=findViewById(R.id.txtmsgediteur3);
-        txtMsg3=findViewById(R.id.txtmsg3);
+//        txtMsgEditeur1=findViewById(R.id.txtmsgediteur1);
+//        txtMsg1=findViewById(R.id.txtmsg1);
+//        txtMsgTitre2=findViewById(R.id.txtmsgtitre2);
+//        txtMsgEditeur2=findViewById(R.id.txtmsgediteur2);
+//        txtMsg2=findViewById(R.id.txtmsg2);
+//        txtMsgTitre3=findViewById(R.id.txtmsgtitre3);
+//        txtMsgEditeur3=findViewById(R.id.txtmsgediteur3);
+//        txtMsg3=findViewById(R.id.txtmsg3);
         simpleProgressBar=findViewById(R.id.simpleProgressBar);
         displayProfName=findViewById(R.id.nom_Prof);
         clearfield ();
@@ -90,10 +105,13 @@ public class MainActivity_Prof extends AppCompatActivity {
         String getUserName= getDataFromCard[1]; //todo send username to activities
         displayProfName.setText(getUserName);
 
+        //getMessageFromServer
+        fetch3LastMessages(getDataFromCard[0]);
         displayUnivName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_contatUniv_prof.class);
+                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
                 startActivity(switch_prof_acti);
             }
         });
@@ -153,7 +171,8 @@ public class MainActivity_Prof extends AppCompatActivity {
             @Override
             public void onRefresh() {
                // shuffle();
-                getAllMessage(getDataFromCard[0].toLowerCase()+" message");
+                //getAllMessage(getDataFromCard[0].toLowerCase()+" message");
+                fetch3LastMessages(getDataFromCard[0]);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -179,8 +198,51 @@ public class MainActivity_Prof extends AppCompatActivity {
     public void fetch3LastMessages (String nomUniv){
        // CollectionReference univMessage = db.collection(nomUniv+" message");
 
+        listeOfMessageUniv=new ArrayList<>();
+        simpleProgressBar.setVisibility(View.VISIBLE);
+        final MessageUniv messageUniv=new MessageUniv();
+        ListCommUnivAdapter listCommUnivAdapter;
 
-//        db.collection(nomUniv).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection(nomUniv+" message")
+                .orderBy(FieldPath.documentId(), Query.Direction.ASCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                messageUniv.setMessage(document.getString("Message"));
+                                messageUniv.setEditeur(document.getString("Editeur"));
+                                messageUniv.setTitre(document.getString("Titre"));
+                                listeOfMessageUniv.add(new MessageUniv(document.getString("Titre"),
+                                        document.getString("Message"),
+                                        document.getString("Editeur")));
+                            }
+
+                            ListCommUnivAdapter listCommUnivAdapter = new ListCommUnivAdapter(getApplicationContext(),
+                                    R.layout.my_custum_list_communication_univ,
+                                    listeOfMessageUniv);
+                            listViewMesssageUNIV.setAdapter(listCommUnivAdapter);
+                            simpleProgressBar.setVisibility(View.INVISIBLE);
+
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            simpleProgressBar.setVisibility(View.INVISIBLE);
+
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                simpleProgressBar.setVisibility(View.INVISIBLE);
+
+            }
+        });
+//        db.collection(nomUniv+" message")
+//                .addSnapshotListener(new OnDo)
+////        db.collection(nomUniv).addSnapshotListener(new EventListener<QuerySnapshot>() {
 //            @Override
 //            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 //                String [] message = new String[3];
@@ -246,8 +308,8 @@ public class MainActivity_Prof extends AppCompatActivity {
         else{
             simpleProgressBar.setVisibility(View.INVISIBLE);
             toastResult("Vérifier connection");
-            txtMsg1.setText("Pas de connection ...");
-            txtMsg1.setTextColor(getResources().getColor(R.color.RED_nfc));
+            txtMsgTitre1.setText("Pas de connection ...");
+            txtMsgTitre1.setTextColor(getResources().getColor(R.color.RED_nfc));
         }
 
 
@@ -259,21 +321,21 @@ public class MainActivity_Prof extends AppCompatActivity {
         int j=listeMessage.size()-1;
         for(int i=0; listeMessage.size()>i;i++){
             if ((i==0)&&(listeMessage.get(j).getTitre()!=null)){
-                txtMsgTitre1.setText(listeMessage.get(j).getTitre());
-                txtMsgEditeur1.setText(listeMessage.get(j).getEditeur());
-                txtMsg1.setText(listeMessage.get(j).getMessage());
+//                txtMsgTitre1.setText(listeMessage.get(j).getTitre());
+//                txtMsgEditeur1.setText(listeMessage.get(j).getEditeur());
+//                txtMsg1.setText(listeMessage.get(j).getMessage());
             }
             else if ((i==1)&&(listeMessage.get(j).getTitre()!=null)){
-                txtMsgTitre2.setText(listeMessage.get(j).getTitre());
-                txtMsgEditeur2.setText(listeMessage.get(j).getEditeur());
-                txtMsg2.setText(listeMessage.get(j).getMessage());
-
-                txtMsg1.setTextColor(getResources().getColor(R.color.black_nfc));
+//                txtMsgTitre2.setText(listeMessage.get(j).getTitre());
+//                txtMsgEditeur2.setText(listeMessage.get(j).getEditeur());
+//                txtMsg2.setText(listeMessage.get(j).getMessage());
+//
+//                txtMsg1.setTextColor(getResources().getColor(R.color.black_nfc));
             }
             else if ((i==2)&&(listeMessage.get(j).getTitre()!=null)){
-                txtMsgTitre3.setText(listeMessage.get(j).getTitre());
-                txtMsgEditeur3.setText(listeMessage.get(j).getEditeur());
-                txtMsg3.setText(listeMessage.get(j).getMessage());
+//                txtMsgTitre3.setText(listeMessage.get(j).getTitre());
+//                txtMsgEditeur3.setText(listeMessage.get(j).getEditeur());
+//                txtMsg3.setText(listeMessage.get(j).getMessage());
             }
             //decresing j
             j--;
@@ -281,17 +343,17 @@ public class MainActivity_Prof extends AppCompatActivity {
 
     }
     public  void clearfield (){
-        txtMsgTitre1.setText("");
-        txtMsgEditeur1.setText("");
-        txtMsg1.setText("");
-
-        txtMsgTitre2.setText("");
-        txtMsgEditeur2.setText("");
-        txtMsg2.setText("");
-
-        txtMsgTitre3.setText("");
-        txtMsgEditeur3.setText("");
-        txtMsg3.setText("");
+        txtMsgTitre1.setText("Communication universitaire");
+//        txtMsgEditeur1.setText("");
+//        txtMsg1.setText("");
+//
+//        txtMsgTitre2.setText("");
+//        txtMsgEditeur2.setText("");
+//        txtMsg2.setText("");
+//
+//        txtMsgTitre3.setText("");
+//        txtMsgEditeur3.setText("");
+//        txtMsg3.setText("");
     }
 
     public void getAllFacDepart (String nonUniv){

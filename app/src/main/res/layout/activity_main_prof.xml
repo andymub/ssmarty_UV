@@ -219,19 +219,46 @@
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/linearlayout_message_mainProf"
         android:layout_width="413dp"
         android:layout_height="597dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/bgmenus"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-2dp">
-
-        <include
-            layout="@layout/content_activity_main_prof"
+        <TextView
+            android:id="@+id/txtmsgtitre1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Communication universitaire" />
+        <ProgressBar
+            android:id="@+id/simpleProgressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateOnly="true"
+            android:max="100"
+            android:visibility="invisible"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView_3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="4dp"
+            android:fillViewport="true">
+
+
+        <ListView
+            android:id="@+id/listeViewessage_mainProf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
