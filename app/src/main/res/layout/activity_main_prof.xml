@@ -218,6 +218,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
+
     <LinearLayout
         android:id="@+id/linearlayout_message_mainProf"
         android:layout_width="413dp"
@@ -227,13 +228,20 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-2dp">
+        tools:layout_editor_absoluteX="-2dp"
+        android:layout_marginRight="5dp">
+
         <TextView
             android:id="@+id/txtmsgtitre1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Communication universitaire" />
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/mm"
+            android:gravity="start"
+            android:text="Communication universitaire"
+            android:textColor="#818181"
+            android:textSize="16sp"
+            tools:ignore="RtlCompat" />
         <ProgressBar
             android:id="@+id/simpleProgressBar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -242,22 +250,28 @@
             android:indeterminateOnly="true"
             android:max="100"
             android:visibility="invisible"/>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/textView_3"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="4dp"
             android:fillViewport="true">
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/listeViewessage_mainProf"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                <ListView
+                    android:id="@+id/listeViewessage_mainProf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fastScrollEnabled="true"
+                    android:isScrollContainer="true" />
+            </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 

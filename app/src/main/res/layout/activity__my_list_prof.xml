@@ -18,6 +18,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="5dp"
+      android:fontFamily="@font/mm"
       android:gravity="center"
       android:text="@string/mes_listes_de_pr_sence_enregistr_es"
       android:textColor="#000000" />

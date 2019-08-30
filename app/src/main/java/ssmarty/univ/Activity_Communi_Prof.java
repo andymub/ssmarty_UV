@@ -40,11 +40,11 @@ public class Activity_Communi_Prof extends ActivityGroup {
         tab2.setContent(intentFac);
         // Set the Tab name and Activity
         // that will be opened when particular Tab will be selected
-        tab1.setIndicator("Message à la Fac/Département");
+        tab1.setIndicator("Faculté");
         //tab1.setContent(new Intent(this,TabFacCommuni.class));
         tab1.setContent(intentFac);
 
-        tab2.setIndicator("Message à l'Univerité");
+        tab2.setIndicator("Univerité");
 //        tab2.setContent(new Intent(this,TabUnivCommuni.class));
         tab2.setContent(intentUniv);
 

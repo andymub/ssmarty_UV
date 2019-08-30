@@ -12,6 +12,7 @@
         android:id="@+id/txtListpresTitre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/mm"
         android:gravity="center"
         android:text="Liste de présence" />
 
@@ -40,6 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/mm"
             android:text="Type de liste de presence" />
 
         <Spinner
@@ -54,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/mm"
             android:hint="@string/autre_raison"
             android:inputType="textPersonName"
             android:textColorLink="#FF32C1F5" />
@@ -80,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ems="10"
+            android:fontFamily="@font/mm"
             android:hint="@string/nom_du_cours_ex_intro"
             android:inputType="textPersonName" />
 
@@ -88,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
+            android:fontFamily="@font/mm"
             android:gravity="right"
             android:text="Date et Heure" />
 
@@ -130,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/mm"
                 android:text="Message d'etat" />
         </LinearLayout>
 

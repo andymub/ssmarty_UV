@@ -27,6 +27,7 @@
             android:id="@+id/txtContactNomUniv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/mm"
             android:gravity="center"
             android:text="@string/nom_de_l_univ"
             android:textColor="@android:color/background_dark"
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:autoLink="email"
+            android:fontFamily="@font/mm"
             android:gravity="center"
             android:text="@string/univ_gmail_com"
             android:textColor="@color/design_default_color_primary"
@@ -90,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/mm"
                     android:text="TextView" />
             </LinearLayout>
         </ScrollView>
@@ -100,6 +103,7 @@
         android:id="@+id/txtContatTitre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/mm"
         android:gravity="center"
         android:text="@string/contact_de_l_universit" />
 

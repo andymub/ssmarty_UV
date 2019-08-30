@@ -26,6 +26,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="11dp"
         android:layout_marginRight="11dp"
+        android:fontFamily="@font/mm"
         android:gravity="right"
         android:text="TextView"
         android:textColor="#000000"
@@ -35,6 +36,7 @@
         android:id="@+id/txtCommuFac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/mm"
         android:gravity="center"
         android:text="Communication de la Faculté/Département" />
 

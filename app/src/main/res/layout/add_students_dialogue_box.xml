@@ -30,6 +30,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
+            android:fontFamily="@font/mm"
             android:gravity="center"
             android:text="Ajout étudiants"
             android:textColor="#D14646"
@@ -43,6 +44,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/mm"
             android:hint="Raison de l'ajout"
             android:textColor="@color/black_nfc"
             android:textColorHint="@color/colorAccent"
@@ -85,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/mm"
                     android:text="Message d'etat" />
             </LinearLayout>
 
