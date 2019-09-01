@@ -162,7 +162,7 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
                     horaireDataMap.put("Lieu",lieuHoraire.getText().toString());
                     horaireDataMap.put("Date",dateHoraire.getText().toString());
                     horaireDataMap.put("Titulaire",titulaireHoraire.getText().toString());
-                    horaireDataMap.put("Details",detailsHoraire.getText().toString());
+                    horaireDataMap.put("Détails",detailsHoraire.getText().toString());
                     progressBar.setVisibility(View.VISIBLE);
                     // Hierarchical Data with Subcollection-Document in a Document
                     db.collection(getUnivName).document(facDep)

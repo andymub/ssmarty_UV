@@ -11,6 +11,21 @@ public class HoraireCourOuExam {
         this.autres = autres;
     }
 
+    public HoraireCourOuExam(HoraireCourOuExam courModel) {
+        this.nomCourExam = courModel.nomCourExam;
+        this.lieu = courModel.lieu;
+        this.titulaire = courModel.titulaire;
+        this.date = courModel.date;
+        this.autres = courModel.autres;
+    }
+
+    public HoraireCourOuExam() {
+
+    }
+
+    public HoraireCourOuExam(String examen) {
+    }
+
     public String getNomCourExam() {
         return nomCourExam;
     }

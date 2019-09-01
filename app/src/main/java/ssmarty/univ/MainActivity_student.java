@@ -16,7 +16,7 @@ public class MainActivity_student extends AppCompatActivity {
     Intent switchActiv;
     TextView displayUnivName,displayStudentName,searchStudentName,searchEditorName,searchMessage;
     //SearchView researchFinace;
-    String facDep,promo,annee;
+    String univName,facDep,promo,annee;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +41,10 @@ public class MainActivity_student extends AppCompatActivity {
         displayStudentName.setText(getDataFromCard[1]+" - ");
         String promoYear = getDataFromCard[2];
         String[] facPromoYear = promoYear.split("_");
-        facDep= facPromoYear[0];
-        promo=facPromoYear[1];
-        annee=facPromoYear[2];
+        univName=getDataFromCard[0];
+        facDep= facPromoYear[0]+"_"+facPromoYear[1];
+        promo=facPromoYear[2];
+        annee=facPromoYear[3];
 
 
 //        researchFinace.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -67,6 +68,9 @@ public class MainActivity_student extends AppCompatActivity {
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, HoraireActivity.class);
                 switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
+                switchActiv.putExtra("fac",facDep);
+                switchActiv.putExtra("promotion",promo);
+                switchActiv.putExtra("univ_name",univName);
                 startActivity(switchActiv);
 
             }
@@ -77,6 +81,9 @@ public class MainActivity_student extends AppCompatActivity {
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, ExamActivity.class);
                 switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
+                switchActiv.putExtra("fac",facDep);
+                switchActiv.putExtra("promotion",promo);
+                switchActiv.putExtra("univ_name",univName);
                 startActivity(switchActiv);
 
             }
@@ -88,6 +95,9 @@ public class MainActivity_student extends AppCompatActivity {
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, CommuFacActivity.class);
                 switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
+                switchActiv.putExtra("fac",facDep);
+                switchActiv.putExtra("promotion",promo);
+                switchActiv.putExtra("univ_name",univName);
                 startActivity(switchActiv);
 
             }
@@ -100,6 +110,9 @@ public class MainActivity_student extends AppCompatActivity {
             public void onClick(View v) {
                 switchActiv= new Intent(MainActivity_student.this, CommuUnivActivity.class);
                 switchActiv.putExtra("promo",facDep+" "+promo+"."+annee);
+                switchActiv.putExtra("fac",facDep);
+                switchActiv.putExtra("promotion",promo);
+                switchActiv.putExtra("univ_name",univName);
                 startActivity(switchActiv);
             }
         });

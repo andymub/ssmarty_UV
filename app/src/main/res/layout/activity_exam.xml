@@ -3,7 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".ExamActivity">
+
+    <ListView
+        android:id="@+id/listViewExamEtudiant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtExamPromo"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="3dp" />
+
+    <ProgressBar
+        android:id="@+id/progressExamStudent"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:layout_centerInParent="true" />
 
     <TextView
         android:id="@+id/txtExamTitre"
@@ -11,28 +30,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/mm"
         android:gravity="center"
-        android:text="@string/horaire_d_examens" />
-
-    <View
-        android:id="@+id/hr1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/txtExamTitre"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#0F1E24" />
-
-    <ListView
-        android:id="@+id/listViewExamEtudiant"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtExamPromo"
-        android:layout_marginLeft="5dp"
-        android:paddingTop="3dp"
-        android:layout_marginStart="5dp" />
+        android:text="@string/horaire_d_examens"
+        android:textColor="@color/black_nfc" />
 
     <TextView
         android:id="@+id/txtExamPromo"
@@ -48,4 +47,16 @@
         android:text="TextView"
         android:textColor="#000000"
         tools:ignore="HardcodedText,RtlHardcoded" />
+
+    <View
+        android:id="@+id/hr1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/txtExamTitre"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#0F1E24" />
 </RelativeLayout>

@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".CommuUnivActivity">
+
+    <ListView
+        android:id="@+id/listViewCommUniv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCommUnivPromo"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:paddingTop="3dp" />
 
     <TextView
         android:id="@+id/txtCommUnivPromo"
@@ -21,16 +32,6 @@
         android:text="TextView"
         android:textColor="#000000"
         tools:ignore="HardcodedText,RtlHardcoded" />
-
-    <ListView
-        android:id="@+id/listViewCommUniv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtCommUnivPromo"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="2dp"
-        android:paddingTop="3dp" />
 
     <TextView
         android:id="@+id/txtCommuUnivTitre"

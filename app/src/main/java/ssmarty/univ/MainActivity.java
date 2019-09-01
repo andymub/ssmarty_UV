@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //todo get univ name and user name
 
-        dataTosend= new String[]{"univ", "prof Didier Ortega1","Fac x Dép Y _ G3 _ 2019"};
+        dataTosend= new String[]{"univ", "prof Didier Ortega1","fac1_departement1_G1_2019"};
 
 
         imgNfcState.setOnClickListener(new View.OnClickListener() {
