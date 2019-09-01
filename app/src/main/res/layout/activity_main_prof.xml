@@ -277,7 +277,10 @@
             android:id="@+id/listeViewessage_mainProf"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:paddingBottom="30dp" />
+            android:paddingBottom="30dp"
+            android:transcriptMode="alwaysScroll"
+            android:stackFromBottom="true"
+            />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
