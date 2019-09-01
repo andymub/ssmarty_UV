@@ -72,15 +72,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Joinder une photo"
-                android:visibility="invisible" />
-
             <EditText
                 android:id="@+id/editxtxMessage_Univ"
                 android:layout_width="303dp"

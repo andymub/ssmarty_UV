@@ -93,6 +93,7 @@ public class MainActivity_Prof extends AppCompatActivity {
         simpleProgressBar=findViewById(R.id.simpleProgressBar);
         displayProfName=findViewById(R.id.nom_Prof);
         clearfield ();
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
 
 //        listViewMesssageUNIV.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
