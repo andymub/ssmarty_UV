@@ -255,6 +255,21 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         myListview.setAdapter(adapter);
 
+        myListview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!(ListElementsArrayList.isEmpty())){
+                    if (!(ListElementsArrayList.isEmpty()))
+                    {
+                        ListElementsArrayList.remove(i);
+                        adapter.notifyDataSetChanged();
+                        value=ListElementsArrayList.size()+1;
+                    }
+                }
+                return false;
+            }
+        });
+
         //get date and hour
         getCurrentDate(nomDuProf);
         //spinner ste onclick

@@ -431,7 +431,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                 {
                 ListElementsArrayList.remove(position);
                 adapter.notifyDataSetChanged();
-                value--;
+                value=ListElementsArrayList.size()+1;
                 }
 
                 return false;
