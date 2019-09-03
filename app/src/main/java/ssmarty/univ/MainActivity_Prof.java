@@ -193,7 +193,7 @@ public class MainActivity_Prof extends AppCompatActivity {
         });
 
         //fetch3LastMessages(getDataFromCard[0].toLowerCase()+" message");
-        getAllMessage(getDataFromCard[0].toLowerCase()+" message");
+        //getAllMessage(getDataFromCard[0]+" message");
         int i=0;
 
 
