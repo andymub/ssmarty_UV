@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -113,7 +114,8 @@ public class CommuUnivActivity extends AppCompatActivity {
 
 
                         } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(getApplicationContext(),"Aucun message",Toast.LENGTH_LONG).show();
+                            finish();
                             progressBar.setVisibility(View.INVISIBLE);
 
                         }
