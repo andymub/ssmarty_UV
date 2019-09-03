@@ -36,6 +36,18 @@
             android:textColor="#D14646"
             android:textSize="30dp" />
 
+        <View
+            android:id="@+id/hr3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txtListpresTitre"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/black_nfc" />
+
         <EditText
             android:id="@+id/editxt_addstudents"
             android:layout_width="match_parent"
@@ -70,15 +82,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imgbtnbckgrn"
+                    android:visibility="visible"
                     app:srcCompat="@drawable/ic_done_one_24dp"
                     tools:ignore="VectorDrawableCompat" />
 
                 <ImageButton
-                    android:id="@+id/ImgSaveOffline"
+                    android:id="@+id/imgbtn_add_students_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imgbtnbckgrn"
-                    app:srcCompat="@drawable/ic_cloud_upload_black_24dp"
+                    app:srcCompat="@drawable/ic_save_file_button"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
@@ -93,20 +106,78 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/hr6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txtListpresTitre"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/black_nfc" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <ListView
-                android:id="@+id/listView_presence__addstudents"
+                android:id="@+id/listView_addstudents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/addBtn"
                 android:drawSelectorOnTop="false"
                 android:stackFromBottom="false"
                 android:transcriptMode="alwaysScroll" />
+
         </LinearLayout>
+
+        <View
+            android:id="@+id/hr7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txtListpresTitre"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/black_nfc" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/mm"
+            android:gravity="center"
+            android:text="Nom"
+            android:textColor="@color/black_nfc"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtxtAddDialogueName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:ems="10"
+            android:hint="Ex :  Léonard M.."
+            android:inputType="textPersonName" />
+
+        <ImageButton
+            android:id="@+id/imgBtnAddStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/imgbtnbckgrn"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_add_students_to_list"
+            tools:ignore="VectorDrawableCompat" />
 
 
     </LinearLayout>

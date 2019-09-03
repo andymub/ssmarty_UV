@@ -17,12 +17,15 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +39,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.common.base.Joiner;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -65,22 +69,27 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
 
     //the list values in the List of type hero
     List<ListeEnumerationModel> listPresencec;
+    public ArrayAdapter<String> adapter;
+    public List<String> ListElementsArrayList;
 
     //activity context
     Context context;
-    String facDep,promo,nomCour,typeCHoraire,nomProf,date;
+    String facDep,promo,nomCour,typeCHoraire,nomProf,date,getNameDate;
     FileOutputStream fstream;
     public String nomFichier;
-    public EditText edttxAddSudent;
-    ImageButton btnStart_addStudents, btnSaveOfline_addStudents;
+    public EditText edttxRaisonAddSudent, edtxtAddNameStudent;
+    ImageButton btnStart_addStudents, btnSaveOfline_addStudents, btnAddToListview;
+    String ListOfStudentToAdd;
     ImageView imgCloseDialogue;
     ListView listView_addStudents;
     LinearLayout linearlayout_adstudents;
     public String downloadUrl;
     private StorageReference mStorageRef;
     public String nomUniv,TAG="TAG";
+    public ListeEnumerationModel listeEnumerationModel;
     int value=0;
     ToneGenerator toneGen1;
+    int raisonEmpty=0;
     //public ProgressBar progressBar;
 
     //the layout resource file for the list items
@@ -93,6 +102,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         this.resource = resource;
         this.listPresencec = listPresencec;
         this.nomUniv=getIntentNomUniv;
+
     }
     //this will return the ListView Item as a View
     @NonNull
@@ -107,18 +117,19 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         View view = layoutInflater.inflate(resource, null, false);
 
         //getting the view elements of the list from the view
-        TextView txtNameDate = view.findViewById(R.id.txtNomDateListeProf);
+        final TextView txtNameDate = view.findViewById(R.id.txtNomDateListeProf);
         TextView txtIntitule = view.findViewById(R.id.txtIntitulePresent);
         TextView txtNomprePresence = view.findViewById(R.id.txtNombrePresence);
         final ImageButton btnSendMyListCloud = view.findViewById(R.id.imgbtnSendCloudProfList);
         ImageButton btnSeeMylist = view.findViewById(R.id.imgSeeMyList);
         ImageButton btnModifyMyList = view.findViewById(R.id.imgModifyMyList);
+        LinearLayout linnear_custom_all_button= view.findViewById(R.id.linnear_my_custom_all);
         //progressBar= view.findViewById(R.id.progressBar2);
         //txtIntitule.setMovementMethod(new ScrollingMovementMethod());
 
 
         //getting the hero of the specified position
-        final ListeEnumerationModel listeEnumerationModel = listPresencec.get(position);
+        listeEnumerationModel = listPresencec.get(position);
 
 
         if(listeEnumerationModel.getEtat().equals("oui")){
@@ -134,6 +145,18 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         txtNameDate.setText(listeEnumerationModel.getNomDateListeProf());
         txtIntitule.setText(listeEnumerationModel.getIntitulePresent());
         txtNomprePresence.setText(listeEnumerationModel.getNombrePresence());
+
+        if (txtNomprePresence.getText().length()==0
+                || txtIntitule.getText().equals(" ")
+                ||txtNomprePresence.getText().equals(" ")){
+           //linnear_custom_all_button.setVisibility(View.INVISIBLE);
+            btnSendMyListCloud.setVisibility(View.INVISIBLE);
+            btnSeeMylist.setVisibility(View.INVISIBLE);
+            btnModifyMyList.setVisibility(View.INVISIBLE);
+        }
+        else{
+            //linnear_custom_all_button.setVisibility(View.VISIBLE);
+        }
 
         View v = convertView;
         //adding a click listener to send data to server
@@ -297,6 +320,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                 //we will call this method to remove the selected value from the list
                 //we are passing the position which is to be removed in the method
                 //removeHero(position);
+                getNameDate=txtNameDate.getText().toString();
                 showDialog(context);
             }
         });
@@ -343,8 +367,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
     }
 
     public void showDialog(final Context context) {  //TODO FINIR AVEC REMPLISSAGE LISTE NFC
-        final ArrayAdapter<String> adapter;
-        final List<String> ListElementsArrayList;
+
         String[] ListElements=new String[] {};
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -352,12 +375,69 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         dialog.setContentView(R.layout.add_students_dialogue_box);
 
         btnStart_addStudents = dialog.findViewById(R.id.imgbtnStarList_addstudents);
-        btnSaveOfline_addStudents = dialog.findViewById(R.id.imgbtnStarList_addstudents);
-        edttxAddSudent = dialog.findViewById(R.id.editxt_addstudents);
-        listView_addStudents = dialog.findViewById(R.id.listView_presence__addstudents);
+        btnSaveOfline_addStudents = dialog.findViewById(R.id.imgbtn_add_students_list);
+        btnAddToListview=dialog.findViewById(R.id.imgBtnAddStudent);
+        edttxRaisonAddSudent = dialog.findViewById(R.id.editxt_addstudents);
+        edtxtAddNameStudent = dialog.findViewById(R.id.edtxtAddDialogueName);
+        listView_addStudents = dialog.findViewById(R.id.listView_addstudents);
         linearlayout_adstudents = dialog.findViewById(R.id.linearlayout_adstudents);
         imgCloseDialogue=dialog.findViewById(R.id.imageViewcloseDialogue);
+        //btnSaveOfline_addStudents.setVisibility(View.INVISIBLE);
 
+        btnSaveOfline_addStudents.setVisibility(View.INVISIBLE);
+
+        btnSaveOfline_addStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!(ListElementsArrayList.isEmpty())) {
+                    String value="";
+                    String[] value1 = listeEnumerationModel.getMyliste();
+                    for (int i=0; i<value1.length; i++)
+                    {
+                        value =value+","+value1[i];
+                    }
+
+                    String[] stringArray = new String[listView_addStudents.getCount()];
+                    // convert in string
+                    // use join() method
+                    String dataToAdd = Joiner.on(",").join(ListElementsArrayList);
+                    value = value + "," +
+                            "AJOUT°°" + edttxRaisonAddSudent.getText().toString()
+                            + "°°" + dataToAdd;
+
+                    DatabaseHelper databaseHelper=new DatabaseHelper(context);
+                    String univ=nomUniv;
+                    String nomProfDategetNameDate;
+                    databaseHelper.onUpDateLisField(nomUniv,getNameDate,value);
+
+                    edttxRaisonAddSudent.setText("");
+                    edtxtAddNameStudent.setText("");
+
+                    dialog.cancel();
+
+
+
+                }
+            }
+        });
+
+        listView_addStudents.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long arg3) {
+
+                if (!(ListElementsArrayList.isEmpty()))
+                {
+                ListElementsArrayList.remove(position);
+                adapter.notifyDataSetChanged();
+                value--;
+                }
+
+                return false;
+            }
+
+        });
 
         ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
         adapter = new ArrayAdapter<String>
@@ -376,7 +456,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                           // linearlayout_adstudents.setBackgroundResource(R.color.WHITE_nfc);
+                            // linearlayout_adstudents.setBackgroundResource(R.color.WHITE_nfc);
                             linearlayout_adstudents.setBackgroundResource(R.drawable.listview_border);
                         }
                     }, 250);
@@ -409,11 +489,75 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         btnStart_addStudents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edttxAddSudent.getText().toString().equals("")){
-                    Toast.makeText(context,"Raison d'ajout",Toast.LENGTH_LONG).show();
+                if (edttxRaisonAddSudent.getText().toString().equals("")){
+                    Toast.makeText(context,"Raison d'ajout...",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
+
+                    if (raisonEmpty==0){
+                    raisonEmpty=1;
+                    btnStart_addStudents.setImageResource(R.drawable.ic_done_bleu_24dp);
+                    edttxRaisonAddSudent.setEnabled(false);
+                        btnAddToListview.setVisibility(View.VISIBLE);
+                        //btnSaveOfline_addStudents.setVisibility(View.VISIBLE);
+                    }
+                    else if (raisonEmpty==1){
+                        btnStart_addStudents.setImageResource(R.drawable.ic_done_one_24dp);
+                        edttxRaisonAddSudent.setEnabled(true);
+                        btnAddToListview.setVisibility(View.INVISIBLE);
+                        //btnSaveOfline_addStudents.setVisibility(View.INVISIBLE);
+                        ListElementsArrayList.clear();
+                        adapter.notifyDataSetChanged();
+                        value=0;
+                        raisonEmpty=0;
+
+                    }
+
+
+                }
+            }
+        });
+        edttxRaisonAddSudent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (edttxRaisonAddSudent.length()<0){
+
+                }
+                else  {
+
+                };
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (edttxRaisonAddSudent.getText().length()>0){
+                    btnAddToListview.setVisibility(View.VISIBLE);
+                }
+                else  btnAddToListview.setVisibility(View.INVISIBLE);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+        btnAddToListview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (edtxtAddNameStudent.getText().toString().equals("")||edtxtAddNameStudent.getText().equals(null)){
+                    Toast.makeText(context,"Nom vide",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    String studentName =  edtxtAddNameStudent.getText().toString();
+                    listView_addStudents.setVisibility(View.VISIBLE);
+                    btnSaveOfline_addStudents.setVisibility(View.VISIBLE);
+
                     try {
 
                         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
@@ -436,12 +580,11 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                         e.printStackTrace();
                     }
                     //GetValue= value+++".";
-                    ListElementsArrayList.add(value+++".");
+                    ListElementsArrayList.add(value+++"."+studentName);
                     adapter.notifyDataSetChanged();
                 }
             }
         });
-
 
         ///nfc
 

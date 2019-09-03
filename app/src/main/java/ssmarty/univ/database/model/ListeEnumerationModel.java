@@ -16,7 +16,15 @@ public class ListeEnumerationModel {
     this.myliste=myliste;
   }
 
-  public void setIntitulePresent(String intitulePresent) {
+    public ListeEnumerationModel(String nomDateListeProf, String intitulePresent, String nombrePresence, String[] myliste, String etat, int i) {
+      this.nomDateListeProf = nomDateListeProf;
+      this.intitulePresent = intitulePresent;
+      this.nombrePresence = nombrePresence;
+      this.etat=etat;
+      this.myliste=myliste;
+    }
+
+    public void setIntitulePresent(String intitulePresent) {
     this.intitulePresent = intitulePresent;
   }
 

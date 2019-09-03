@@ -110,6 +110,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linnear_my_custom_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin"
@@ -123,29 +124,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/imgbtnbckgrn"
+            android:contentDescription="@string/todo"
             app:srcCompat="@drawable/ic_cloud_upload_black_24dp"
-            tools:ignore="VectorDrawableCompat"
-            android:contentDescription="@string/todo" />
+            tools:ignore="VectorDrawableCompat" />
 
         <ImageButton
             android:id="@+id/imgModifyMyList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/imgbtnbckgrn"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/ic_mode_edit_black_24dp"
-            tools:ignore="VectorDrawableCompat"
-            android:contentDescription="TODO" />
+            tools:ignore="VectorDrawableCompat" />
 
         <ImageButton
             android:id="@+id/imgSeeMyList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:background="@drawable/imgbtnbckgrn"
-            app:srcCompat="@drawable/ic_visibility_black_24dp"
-            tools:ignore="VectorDrawableCompat"
             android:contentDescription="TODO"
-            android:layout_alignParentRight="true" />
+            app:srcCompat="@drawable/ic_visibility_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
     </LinearLayout>
 
 

@@ -414,14 +414,14 @@ public class MainActivity_Prof extends AppCompatActivity {
         if ((fac=="") || (fac=="|")){
             try{
                 mDatabase.execSQL(insertSQL, new String[]{listString});
-                Toast.makeText(getApplicationContext(),"saved LOCAL",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Liste de département téléchargée...",Toast.LENGTH_LONG).show();
                 int i =4;
             }
 
 //        mDatabase.execSQL(insertSQL, new String[]{listString});}
             catch (Exception ex){
                 Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(),"TABANII",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Votre Unisersité n'est pas en ligne, voir SSMARTY",Toast.LENGTH_LONG).show();
             }
         }
         else {

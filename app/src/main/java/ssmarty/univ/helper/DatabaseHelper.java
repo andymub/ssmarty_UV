@@ -110,6 +110,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result;
     }
+    public int onUpDateLisField (String univName, String nomDuProf_Date,String listeToAdd){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result=0;
+
+        ContentValues values = new ContentValues();
+        values.put(ListsModel.COLUMN_LISTE, listeToAdd);
+        ContentValues valuesState = new ContentValues();
+        valuesState.put(ListsModel.COLUMN_ETAT, "non");
+
+        try {
+            // updating row
+            db.update(univName+ListsModel.TABLE_NAME, values, ListsModel.COLUMN_N0M_DATE + " = ?",
+                    new String[]{nomDuProf_Date});
+            db.update(univName+ListsModel.TABLE_NAME, valuesState, ListsModel.COLUMN_N0M_DATE + " = ?",
+                    new String[]{nomDuProf_Date});
+            result=1;
+        }
+        catch (Exception ex){
+            result=0;
+        }
+
+        return result;
+
+    }
     public long insert(String nomEtDateEditeur, String typeEtIntutile, String listeOfStudents, String etatDeList) {
         long id = 0;
         // get writable database as we want to write data

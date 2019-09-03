@@ -146,10 +146,9 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="autoMirrored" value="true" />
                             <entry key="opacityPercent" value="83" />
-                            <entry key="outputName" value="ic_save_file_button" />
-                            <entry key="sourceFile" value="C:\Users\Andymub\Downloads\save-file-button.svg" />
+                            <entry key="outputName" value="ic_add" />
+                            <entry key="sourceFile" value="C:\Users\Andymub\Downloads\add.svg" />
                           </map>
                         </option>
                       </PersistentState>

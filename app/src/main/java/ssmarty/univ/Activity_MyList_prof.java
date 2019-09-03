@@ -3,6 +3,7 @@ package ssmarty.univ;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +35,7 @@ public class Activity_MyList_prof extends AppCompatActivity {
         setContentView(R.layout.activity__my_list_prof);
         listpresence= new ArrayList<>();
         MyListePresListView = (ListView) findViewById(R.id.listViewMyListePres);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         //final String getIntentNomUniv ;//= getIntent().getStringExtra("nom_univ");
         //final String[] getIntentUserName;
@@ -75,7 +77,7 @@ public class Activity_MyList_prof extends AppCompatActivity {
         if (arraylistModel.isEmpty()) {
             //adding some values to our list
             String [] Myliste =new String[]{"Etudiant(e) 0","Etudiant(e) 1","Etudiant(e) 2","Etudiant(e) 3","Etudiant(e)"};
-            listpresence.add(new ListeEnumerationModel("Aucune Liste", " ", " ", Myliste, "non"));
+            listpresence.add(new ListeEnumerationModel("Aucune Liste", " ", " ", Myliste, "non",1));
           //  listpresence.add(new ListeEnumerationModel("prof M - Date : 06 / 07 / 2019 , 07:28", "En cours/INTRO GEO/L1", "95 Présents", Myliste, "oui"));
 
         }
@@ -102,7 +104,11 @@ public class Activity_MyList_prof extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        //TODO SWIPPER TON REFRESH ACTIVITY
+        super.onResume();
+    }
 }
 
 

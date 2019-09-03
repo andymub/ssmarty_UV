@@ -85,6 +85,7 @@
         <activity
             android:name=".Activity_MyList_prof"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity_contatUniv_prof"
