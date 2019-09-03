@@ -396,17 +396,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                ListsModel ListsModel = new ListsModel();
-                ListsModel.setId(cursor.getInt(cursor.getColumnIndex(ListsModel.COLUMN_ID)));
-                ListsModel.setNom_Date(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_N0M_DATE)));
-                ListsModel.setType(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_TYPE_INTITULE)));
-                ListsModel.setListe(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_LISTE)));
-                ListsModel.setEtat(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_ETAT)));
+        if (cursor==null) {
+            int r=0;
+        }
+        else {
+            if (cursor.moveToFirst()) {
+                do {
+                    ListsModel ListsModel = new ListsModel();
+                    ListsModel.setId(cursor.getInt(cursor.getColumnIndex(ListsModel.COLUMN_ID)));
+                    ListsModel.setNom_Date(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_N0M_DATE)));
+                    ListsModel.setType(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_TYPE_INTITULE)));
+                    ListsModel.setListe(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_LISTE)));
+                    ListsModel.setEtat(cursor.getString(cursor.getColumnIndex(ListsModel.COLUMN_ETAT)));
 
-                arraylistModel.add(ListsModel);
-            } while (cursor.moveToNext());
+                    arraylistModel.add(ListsModel);
+                } while (cursor.moveToNext());
+            }
         }
 
         // close db connection
