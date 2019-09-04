@@ -775,6 +775,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         String s = action + "\n\n" + tag.toString();
+        String s1="";
 
         // parse through all NDEF messages and their records and pick text type only
         Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -794,7 +795,13 @@ public class Activity_liste_presence extends AppCompatActivity {
 //
                             ez=new String(payload, langCodeLen + 1, payload.length - langCodeLen - 1,
                                     textEncoding);
-                            splitPayloadChekAuth(ez);
+                            for(int index = 0; index < ez.length(); index+=9) {
+                                String temp = ez.substring(index, index+8);
+                                int num = Integer.parseInt(temp,2);
+                                char letter = (char) num;
+                                s1 = s1+letter;
+                            }
+                            splitPayloadChekAuth(s1);
                         }
                     }
                 }

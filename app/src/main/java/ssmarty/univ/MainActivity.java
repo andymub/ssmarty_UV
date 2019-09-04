@@ -1,7 +1,6 @@
 package ssmarty.univ;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
@@ -18,15 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+
+import ssmarty.univ.decrypter.StringToHex;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG ="NFC" ;
@@ -171,13 +167,32 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Get the Text
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
-            callActivity(text);
+            StringToHex stringToHex= new StringToHex();
+            //String text2=md5Digest.digest(text);
+            String encrypted = "je suis andy";
+            String decrypted = "";
+            String s="";
+            try {
+
+                for(int index = 0; index < text.length(); index+=9) {
+                    String temp = text.substring(index, index+8);
+                    int num = Integer.parseInt(temp,2);
+                    char letter = (char) num;
+                    s = s+letter;
+                }
+                decrypted = s;
+                Log.d("TEST", "decrypted:" + decrypted);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            callActivity(decrypted);
         } catch (UnsupportedEncodingException e) {
             Log.e("UnsupportedEncoding", e.toString());
         }
 
         //Toast.makeText(getApplicationContext(),"NFC Content: " + text,Toast.LENGTH_LONG).show();
     }
+
 
     public void callActivity(String textFromNfcCard){
         int Year = Calendar.YEAR;
