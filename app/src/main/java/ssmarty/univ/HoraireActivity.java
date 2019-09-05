@@ -109,6 +109,10 @@ public class HoraireActivity extends AppCompatActivity {
                         horaireCourList.add(new HoraireCourOuExam(courModel));
 
                     }
+                    if (horaireCourList.isEmpty()){
+                        finish();
+                        Toast.makeText(getApplicationContext(),"Pas d'Horaire en ligne",Toast.LENGTH_LONG).show();
+                    }
                     ListHoraireEtudiantAdapter HoraireAdapter =
                             new ListHoraireEtudiantAdapter(getApplicationContext(),R.layout.my_custom_list_horaire_exam,
                                     horaireCourList);

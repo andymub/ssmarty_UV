@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryDark">#69bcff</color>
-    <color name="colorAccent">#61798e</color>
+    <color name="colorAccent">#011426</color>
     <color name="bipNfc_etudiant_added">#FF32C1F5</color>
     <color name="WHITE_nfc">#ffffff</color>
     <color name="RED_nfc">#ff0202</color>
     <color name="black_nfc">#000000</color>
-    <color name="Tab">#54CBF7</color>
 </resources>

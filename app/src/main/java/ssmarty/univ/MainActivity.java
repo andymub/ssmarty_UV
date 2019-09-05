@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             //je définis l'accées suivant le code d acces 1=Etudiant 1..= Etud-Chef 2-prof
             switch (codeDacce) {
                 case "1": //Etudiant     1
-                    dataTosend= new String[]{univ, nomEtPrenom , facDep+" _ "+promo +"_"+annee};
+                    dataTosend= new String[]{univ, nomEtPrenom , facDep+"_"+promo +"_"+annee};
                     studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
                     studentIntent.putExtra("data",dataTosend);
                     //studentIntent.putExtra("userName",dataTosend)

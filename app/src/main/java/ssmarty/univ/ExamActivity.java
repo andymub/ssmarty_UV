@@ -32,6 +32,7 @@ public class ExamActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String TAG = "TAG";
     public ProgressBar progressBar;
+    Boolean allListIsEmpty=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,10 @@ public class ExamActivity extends AppCompatActivity {
                         ExamCourList.add(new HoraireCourOuExam(examModel));
 
                     }
+                    if (ExamCourList.isEmpty()){
+                        allListIsEmpty=true;
+                        Toast.makeText(getApplicationContext(),"Aucun Examen",Toast.LENGTH_LONG).show();
+                    }
                     ExamCourList.add(new HoraireCourOuExam("","","","",""));
                     // listViewExam.setAdapter(HoraireAdapter);
 //                    progressBar.setVisibility(View.INVISIBLE);
@@ -149,6 +154,13 @@ public class ExamActivity extends AppCompatActivity {
                         examModel.setAutres(document.getString("Détails"));
                         ExamCourList.add(new HoraireCourOuExam(examModel));
 
+                    }
+                    if (ExamCourList.isEmpty()){
+                        if(allListIsEmpty){
+
+                            finish();
+                        }
+                        Toast.makeText(getApplicationContext(),"Aucune Interrogation",Toast.LENGTH_LONG).show();
                     }
                     ListHoraireEtudiantAdapter HoraireAdapter =
                             new ListHoraireEtudiantAdapter(getApplicationContext(), R.layout.my_custom_list_horaire_exam,

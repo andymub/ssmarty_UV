@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linearlayout_adstudents2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,7 +36,6 @@
             android:textSize="30dp" />
 
         <View
-            android:id="@+id/hr3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/txtListpresTitre"
@@ -95,7 +93,6 @@
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/txtmesageEtatList_addstudents"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -107,7 +104,6 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/hr6"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/txtListpresTitre"
@@ -136,7 +132,6 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/hr7"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/txtListpresTitre"
@@ -149,7 +144,6 @@
             android:background="@color/black_nfc" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

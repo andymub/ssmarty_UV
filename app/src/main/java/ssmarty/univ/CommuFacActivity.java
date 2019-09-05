@@ -106,6 +106,10 @@ public class CommuFacActivity extends AppCompatActivity {
                                         document.getString("Editeur")));
                             }
 
+                            if (listeOfMessageUniv.isEmpty()){
+                                finish();
+                                Toast.makeText(getApplicationContext(),"Aucun Message",Toast.LENGTH_LONG).show();
+                            }
                             ListCommUnivAdapter listCommUnivAdapter = new ListCommUnivAdapter(getApplicationContext(),
                                     R.layout.my_custum_list_communication_univ,
                                     listeOfMessageUniv);

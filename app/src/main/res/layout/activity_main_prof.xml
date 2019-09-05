@@ -22,7 +22,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewLogoUnivProf"
         android:layout_width="71dp"
         android:layout_height="71dp"
         android:layout_marginStart="16dp"
@@ -43,7 +43,7 @@
         android:textColor="#FFF"
         android:fontFamily="@font/mr"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLogoUnivProf"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlCompat" />
 
@@ -57,7 +57,7 @@
         android:fontFamily="@font/ml"
         android:textColor="#FFF"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLogoUnivProf"
         app:layout_constraintTop_toBottomOf="@+id/nom_Prof"
         tools:ignore="RtlCompat" />
 
@@ -73,10 +73,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoUnivProf">
 
         <TextView
-            android:id="@+id/mainmenus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -110,7 +109,6 @@
                      />
 
                 <TextView
-                    android:id="@+id/review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -136,7 +134,6 @@
                      />
 
                 <TextView
-                    android:id="@+id/network"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -161,7 +158,6 @@
                     android:src="@drawable/myfolderliste" />
 
                 <TextView
-                    android:id="@+id/plugins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -187,7 +183,6 @@
                     app:srcCompat="@drawable/horaireprof" />
 
                 <TextView
-                    android:id="@+id/myapps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -203,7 +198,6 @@
 
 
     <TextView
-        android:id="@+id/pagetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -232,7 +226,6 @@
 
 
     <LinearLayout
-        android:id="@+id/linearlayout_message_mainProf"
         android:layout_width="413dp"
         android:layout_height="597dp"
         android:layout_marginTop="5dp"

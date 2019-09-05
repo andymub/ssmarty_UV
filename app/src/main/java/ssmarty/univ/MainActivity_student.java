@@ -1,7 +1,14 @@
 package ssmarty.univ;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -9,6 +16,21 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import ssmarty.univ.database.file.ImageSaver;
 
 public class MainActivity_student extends AppCompatActivity {
 
@@ -17,6 +39,10 @@ public class MainActivity_student extends AppCompatActivity {
     TextView displayUnivName,displayStudentName,searchStudentName,searchEditorName,searchMessage;
     //SearchView researchFinace;
     String univName,facDep,promo,annee;
+    Intent switch_prof_acti;
+    ImageView unvLogo;
+    String localPathFileStorage;
+    ImageSaver imageSaver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +56,8 @@ public class MainActivity_student extends AppCompatActivity {
         searchEditorName =findViewById(R.id.txtediteurSituationFinance);
         searchMessage=findViewById(R.id.messageSituationFinance);
         searchStudentName=findViewById(R.id.txtNomEtudiantSituationFinance);
+        unvLogo=findViewById(R.id.imageViewLogoUniv);
+
 //        researchFinace= findViewById(R.id.recherchSituationFinance);
 //        researchFinace.setVisibility(View.VISIBLE);
 
@@ -45,6 +73,42 @@ public class MainActivity_student extends AppCompatActivity {
         facDep= facPromoYear[0]+"_"+facPromoYear[1];
         promo=facPromoYear[2];
         annee=facPromoYear[3];
+        imageSaver = new ImageSaver(getApplicationContext());
+
+        localPathFileStorage=getApplicationContext().getFilesDir().getPath();
+        File file = new File(getApplicationContext().getFilesDir(),univName+".png");
+        if(file.exists()){
+            //Do something
+            //Toast.makeText(this,"file"+univName+" existe",Toast.LENGTH_LONG).show();
+            //imageSaver.load();
+            //loadImageFromStorage(getApplicationContext().getFilesDir().getPath(),univName);
+
+        }
+        else{
+            //Nothing
+            //Toast.makeText(this,"file"+univName+" No ",Toast.LENGTH_LONG).show();
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://ssmartyuniv.appspot.com/"+univName).child(univName+".png");
+
+            try {
+                final File localFile = File.createTempFile(univName, "png");
+                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        unvLogo.setImageBitmap(bitmap);
+                        //imageSaver.save(bitmap);
+                        //saveToInternalStorage(bitmap,univName);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                    }
+                });
+            } catch (IOException e ) {}
+        }
+
 
 
 //        researchFinace.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -61,7 +125,14 @@ public class MainActivity_student extends AppCompatActivity {
 //            }
 //        });
 //
-        
+        displayUnivName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch_prof_acti=new Intent(MainActivity_student.this,Activity_contatUniv_prof.class);
+                switch_prof_acti.putExtra("data_nom_univ",univName);
+                startActivity(switch_prof_acti);
+            }
+        });
                 //boutton Horaire
         btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +187,46 @@ public class MainActivity_student extends AppCompatActivity {
                 startActivity(switchActiv);
             }
         });
+    }
+
+    private void loadImageFromStorage(String path,String univName)
+    {
+
+        try {
+            File f=new File(path, univName+".png");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            //ImageView img=(ImageView)findViewById(R.id.imgPicker);
+            unvLogo.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage,String univName){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("files", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,univName+".png");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
     
     public void searchInDB(String matricu)

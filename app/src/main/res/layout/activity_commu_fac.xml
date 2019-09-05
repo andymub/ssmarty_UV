@@ -46,9 +46,11 @@
         android:id="@+id/txtCommuFac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
         android:fontFamily="@font/mm"
         android:gravity="center"
-        android:text="Communication de la Faculté/Département" />
+        android:text="Communication de la Faculté ou Section" />
 
     <View
         android:id="@+id/hr1"

@@ -48,7 +48,6 @@
             android:text="Nom Univ" />
 
         <View
-            android:id="@+id/hrmessageUniv2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="center"
@@ -92,7 +91,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

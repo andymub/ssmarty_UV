@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
@@ -29,7 +32,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -67,7 +75,7 @@ public class MainActivity_Prof extends AppCompatActivity {
 //    String fac=databaseHelper.getAllFacDepFromLocal();
     String TAG="TAG";
     int count=0;
-
+    ImageView unvLogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,8 +100,12 @@ public class MainActivity_Prof extends AppCompatActivity {
 //        txtMsg3=findViewById(R.id.txtmsg3);
         simpleProgressBar=findViewById(R.id.simpleProgressBar);
         displayProfName=findViewById(R.id.nom_Prof);
+        unvLogo=findViewById(R.id.imageViewLogoUnivProf);
         clearfield ();
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
+
+
+
 
 //        listViewMesssageUNIV.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
@@ -130,6 +142,41 @@ public class MainActivity_Prof extends AppCompatActivity {
                 startActivity(switch_prof_acti);
             }
         });
+
+        File file = new File(getApplicationContext().getFilesDir(),getDataFromCard[0]+".png");
+        if(file.exists()){
+            //Do something
+            //Toast.makeText(this,"file"+univName+" existe",Toast.LENGTH_LONG).show();
+            //imageSaver.load();
+            //loadImageFromStorage(getApplicationContext().getFilesDir().getPath(),univName);
+
+        }
+        else{
+            //Nothing
+            //Toast.makeText(this,"file"+univName+" No ",Toast.LENGTH_LONG).show();
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://ssmartyuniv.appspot.com/"+getDataFromCard[0]).child(getDataFromCard[0]+".png");
+
+            try {
+                final File localFile = File.createTempFile(getDataFromCard[0], "png");
+                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        unvLogo.setImageBitmap(bitmap);
+                        //imageSaver.save(bitmap);
+                        //saveToInternalStorage(bitmap,univName);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                    }
+                });
+            } catch (IOException e ) {}
+        }
+
+
 
         btnBuildList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,6 +283,10 @@ public class MainActivity_Prof extends AppCompatActivity {
                                         document.getString("Editeur")));
                             }
 
+                            if (listeOfMessageUniv.isEmpty()){
+                                finish();
+                                Toast.makeText(getApplicationContext(),"Aucun Message",Toast.LENGTH_LONG).show();
+                            }
                             ListCommUnivAdapter listCommUnivAdapter = new ListCommUnivAdapter(getApplicationContext(),
                                     R.layout.my_custum_list_communication_univ,
                                     listeOfMessageUniv);

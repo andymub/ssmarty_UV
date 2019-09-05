@@ -9,6 +9,18 @@
     >
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:baselineAlignBottom="true"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bk3" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="230dp"
@@ -19,7 +31,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewLogoUniv"
         android:layout_width="71dp"
         android:layout_height="71dp"
         android:layout_marginStart="16dp"
@@ -40,7 +52,7 @@
         android:text="Angga Risky"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLogoUniv"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlCompat" />
 
@@ -54,7 +66,7 @@
         android:text="USD Wallet"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLogoUniv"
         app:layout_constraintTop_toBottomOf="@+id/nom_etudiant"
         tools:ignore="RtlCompat" />
 
@@ -70,10 +82,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogoUniv">
 
         <TextView
-            android:id="@+id/mainmenus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -107,7 +118,6 @@
                     />
 
                 <TextView
-                    android:id="@+id/review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -133,7 +143,6 @@
                     />
 
                 <TextView
-                    android:id="@+id/network"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -158,7 +167,6 @@
                     android:src="@drawable/facmessage" />
 
                 <TextView
-                    android:id="@+id/plugins"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -184,7 +192,6 @@
                     />
 
                 <TextView
-                    android:id="@+id/myapps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/mm"
@@ -200,7 +207,6 @@
 
 
     <TextView
-        android:id="@+id/pagetitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -214,15 +220,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:layout_width="413dp"
-        android:layout_height="597dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bgmenus"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-2dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
