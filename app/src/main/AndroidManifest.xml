@@ -28,9 +28,7 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/tag_tech" />
+
         </activity>
         <activity
             android:name=".MainActivity_student"
@@ -60,15 +58,22 @@
             android:name=".Activity_liste_presence"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.nfc.action.TAG_DISCOVERED" />-->
+
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
             <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/tag_tech" />
+<!--            <meta-data-->
+<!--                android:name="android.nfc.action.TECH_DISCOVERED"-->
+<!--                android:resource="@xml/tag_tech" />-->
         </activity>
         <activity
             android:name=".Activity_Communi_Prof"

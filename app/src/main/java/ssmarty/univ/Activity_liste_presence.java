@@ -1,6 +1,7 @@
 package ssmarty.univ;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -148,7 +150,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         //nfc adapter
         btnSendToCloud.setVisibility(View.INVISIBLE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        //NFC DISABLE
+
 
 
 
@@ -167,11 +169,12 @@ public class Activity_liste_presence extends AppCompatActivity {
             //enabled
         }
         //handleIntent(getIntent());
-        readFromIntent(getIntent());
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent
-                (this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
-        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
+        //onNewIntent(getIntent());
+        //readFromIntent(getIntent());
+//        pendingIntent = PendingIntent.getActivity(this, 0, new Intent
+//                (this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+//        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
+//        tagDetected.addCategory(Intent.CATEGORY_DEFAULT);
 
         getIntentNomUniv = getIntent().getStringExtra("data_nom_univ");
 
@@ -720,16 +723,25 @@ public class Activity_liste_presence extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        stopForegroundDispatch(this, nfcAdapter);
         super.onPause();
-        nfcAdapter.disableForegroundDispatch(this);
+//        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+//        nfcAdapter.disableForegroundDispatch(this);
 
     }
 
     @Override
     protected void onResume() {
+//        super.onResume();
+//        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
         super.onResume();
-        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+//        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        setupForegroundDispatch(this, nfcAdapter);
+        // to catch all NFC discovery events:
+        //nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
     }
+
 
 
     private void readFromIntent(Intent intent) {
@@ -767,8 +779,10 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         //tvNFCContent.setText("NFC Content: " + text);
     }
+
     @Override
     protected void onNewIntent(Intent intent){
+        readFromIntent(intent);
         getTagInfo(intent);
         String ez = "p";
         String action = intent.getAction();
@@ -811,6 +825,8 @@ public class Activity_liste_presence extends AppCompatActivity {
         }
 
     }
+
+
     private void getTagInfo(Intent intent) {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
     }
@@ -952,4 +968,38 @@ public class Activity_liste_presence extends AppCompatActivity {
         }
 
     }
+    /**
+     * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
+
+        IntentFilter[] filters = new IntentFilter[1];
+        String[][] techList = new String[][]{};
+
+        // Notice that this is the same filter as in our manifest.
+        filters[0] = new IntentFilter();
+        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addCategory(Intent.CATEGORY_DEFAULT);
+        try {
+            filters[0].addDataType(MIME_TEXT_PLAIN);
+        } catch (IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("Check your mime type.");
+        }
+
+        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+    }
+
+    /**
+     *
+     * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
+     */
+    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+        adapter.disableForegroundDispatch(activity);
+    }
+
 }

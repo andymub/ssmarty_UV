@@ -169,8 +169,8 @@
                     android:layout_below="@+id/addBtn"
                     android:background="@color/WHITE_nfc"
                     android:drawSelectorOnTop="false"
-                    android:stackFromBottom="false"
-                    android:transcriptMode="alwaysScroll" />
+                    android:stackFromBottom="true"
+                    android:transcriptMode="alwaysScroll"/>
             </RelativeLayout>
         </ScrollView>
     </LinearLayout>

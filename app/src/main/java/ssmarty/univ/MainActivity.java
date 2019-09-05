@@ -25,6 +25,9 @@ import java.math.BigInteger;
 import ssmarty.univ.decrypter.StringToHex;
 
 public class MainActivity extends AppCompatActivity {
+
+    //ETUDIANT EX --univ/fac1_departement1/G1/2019/1/Grég Mélanie
+    //PROF EX-univ/fac1_departement1/G1/2019/0/Jean Yves Mélanie
     private static final String TAG ="NFC" ;
     private ImageView imgNfcState;
     private TextView txtStateNfc;
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             text = new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
             StringToHex stringToHex= new StringToHex();
             //String text2=md5Digest.digest(text);
-            String encrypted = "je suis andy";
+            //String encrypted = "je suis andy";
             String decrypted = "";
             String s="";
             try {
