@@ -1,6 +1,7 @@
 package ssmarty.univ;
 
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -36,6 +37,11 @@ public class Activity_MyList_prof extends AppCompatActivity {
         listpresence= new ArrayList<>();
         MyListePresListView = (ListView) findViewById(R.id.listViewMyListePres);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //DESACTIVATE NFC
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
 
         //final String getIntentNomUniv ;//= getIntent().getStringExtra("nom_univ");
         //final String[] getIntentUserName;

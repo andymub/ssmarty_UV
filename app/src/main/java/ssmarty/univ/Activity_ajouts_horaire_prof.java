@@ -67,9 +67,9 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
         dateHoraire= findViewById(R.id.editxtDateCoursAjoutCours);
         detailsHoraire= findViewById(R.id.detailAjoutCours);
         //DESACTIVATE NFC
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //
 

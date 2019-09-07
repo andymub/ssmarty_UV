@@ -152,9 +152,9 @@ public class Activity_liste_presence extends AppCompatActivity {
         btnSendToCloud.setVisibility(View.INVISIBLE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 //DESACTIVATE NFC
-        NfcAdapter NFCadapter = NfcAdapter.getDefaultAdapter(this);
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            NFCadapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //        li
 
@@ -336,9 +336,9 @@ public class Activity_liste_presence extends AppCompatActivity {
                             btnStartList.setImageResource(R.drawable.ic_done_bleu_24dp);
                             messageEvolution.setText("Pour completer la liste, bipé une carte");
                             //DESACTIVATE NFC
-                            NfcAdapter NFCadapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
+                            NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                NFCadapter.enableReaderMode((Activity) getApplicationContext(), null, NfcAdapter.STATE_ON, null);
+                                adapterNfc.enableReaderMode((Activity) getApplicationContext(), null, NfcAdapter.STATE_ON, null);
                             }
 //        li
 

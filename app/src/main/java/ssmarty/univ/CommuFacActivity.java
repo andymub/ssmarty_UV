@@ -68,9 +68,9 @@ public class CommuFacActivity extends AppCompatActivity {
         messageCommList=new ArrayList<>();
 
         //DESACTIVATE NFC
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //        li
         fetch3LastMessages(univName);

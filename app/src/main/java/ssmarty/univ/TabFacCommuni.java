@@ -112,9 +112,9 @@ public class TabFacCommuni extends AppCompatActivity {
         progeProgressBar=findViewById(R.id.progressBar3);
         progeProgressBar.setVisibility(View.INVISIBLE);
 //DESACTIVATE NFC
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //        li
 

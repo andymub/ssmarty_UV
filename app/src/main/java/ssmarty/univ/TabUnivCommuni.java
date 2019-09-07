@@ -64,9 +64,9 @@ public class TabUnivCommuni extends AppCompatActivity {
         txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
         txtNomUniv.setText(getUnivName);
 //DESACTIVATE NFC
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //        li
 
