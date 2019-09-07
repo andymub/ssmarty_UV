@@ -86,6 +86,8 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
     public String downloadUrl;
     private StorageReference mStorageRef;
     public String nomUniv,TAG="TAG";
+    public String userName;
+    public String[] listOwnerName;
     public ListeEnumerationModel listeEnumerationModel;
     int value=0;
     ToneGenerator toneGen1;
@@ -96,12 +98,13 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
     int resource;
 
     //constructor initializing the values
-    public MyListePresenceAdapter(Context context, int resource, List<ListeEnumerationModel> listPresencec, String getIntentNomUniv) {
+    public MyListePresenceAdapter(Context context, int resource, List<ListeEnumerationModel> listPresencec, String getIntentNomUniv, String getIntentUserName) {
         super(context, resource, listPresencec);
         this.context = context;
         this.resource = resource;
         this.listPresencec = listPresencec;
         this.nomUniv=getIntentNomUniv;
+        this.userName=getIntentUserName;
 
     }
     //this will return the ListView Item as a View
@@ -123,7 +126,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
         final ImageButton btnSendMyListCloud = view.findViewById(R.id.imgbtnSendCloudProfList);
         ImageButton btnSeeMylist = view.findViewById(R.id.imgSeeMyList);
         ImageButton btnModifyMyList = view.findViewById(R.id.imgModifyMyList);
-        LinearLayout linnear_custom_all_button= view.findViewById(R.id.linnear_my_custom_all);
+        //LinearLayout linnear_custom_all_button= view.findViewById(R.id.linnear_my_custom_all);
         //progressBar= view.findViewById(R.id.progressBar2);
         //txtIntitule.setMovementMethod(new ScrollingMovementMethod());
 
@@ -141,10 +144,13 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
             btnSendMyListCloud.setClickable(true);
         }
 
+        String owner= listeEnumerationModel.getNomDateListeProf();
         //adding values to the list item
-        txtNameDate.setText(listeEnumerationModel.getNomDateListeProf());
+        txtNameDate.setText(owner);
         txtIntitule.setText(listeEnumerationModel.getIntitulePresent());
         txtNomprePresence.setText(listeEnumerationModel.getNombrePresence());
+
+        listOwnerName=owner.split(" - ");
 
         if (txtNomprePresence.getText().length()==0
                 || txtIntitule.getText().equals(" ")
@@ -152,6 +158,9 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
            //linnear_custom_all_button.setVisibility(View.INVISIBLE);
             btnSendMyListCloud.setVisibility(View.INVISIBLE);
             btnSeeMylist.setVisibility(View.INVISIBLE);
+            btnModifyMyList.setVisibility(View.INVISIBLE);
+        }
+        if (!(listOwnerName[0].equals(userName))){
             btnModifyMyList.setVisibility(View.INVISIBLE);
         }
         else{
@@ -402,8 +411,8 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                     // use join() method
                     String dataToAdd = Joiner.on(",").join(ListElementsArrayList);
                     value = value + "," +
-                            "AJOUT°°" + edttxRaisonAddSudent.getText().toString()
-                            + "°°" + dataToAdd;
+                            "AJOUT pour raison :" + edttxRaisonAddSudent.getText().toString()
+                            + "\n" + dataToAdd;
 
                     DatabaseHelper databaseHelper=new DatabaseHelper(context);
                     String univ=nomUniv;
@@ -582,6 +591,7 @@ public class MyListePresenceAdapter extends ArrayAdapter<ListeEnumerationModel> 
                     //GetValue= value+++".";
                     ListElementsArrayList.add(value+++"."+studentName);
                     adapter.notifyDataSetChanged();
+                    edtxtAddNameStudent.setText("");
                 }
             }
         });

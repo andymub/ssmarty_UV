@@ -10,6 +10,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -106,7 +108,11 @@ public class MainActivity_Prof extends AppCompatActivity {
 
 
 
-
+//DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
 //        listViewMesssageUNIV.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(AbsListView view, int scrollState) {

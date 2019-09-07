@@ -2,6 +2,9 @@ package ssmarty.univ;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,11 +47,17 @@ public class ExamActivity extends AppCompatActivity {
         String getPromo = getIntent().getStringExtra("promo");
         txtPromo.setText(getPromo);
         progressBar = findViewById(R.id.progressExamStudent);
-
+        String[] gtpromo1= getPromo.split("_");
+        txtPromo.setText(gtpromo1[0]+" "+gtpromo1[1]);
         univName = getIntent().getStringExtra("univ_name");
         facDep = getIntent().getStringExtra("fac");
         promo = getIntent().getStringExtra("promotion");
-        txtPromo.setText(getPromo);
+//DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
 
         ExamCourList = new ArrayList<>();
         //TODO RECUPERER LES ELEMENTS DANS LA DB et -> dans la liste

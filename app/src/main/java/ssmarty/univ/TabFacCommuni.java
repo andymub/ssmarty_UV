@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -110,7 +111,12 @@ public class TabFacCommuni extends AppCompatActivity {
         imageView14=findViewById(R.id.gv);
         progeProgressBar=findViewById(R.id.progressBar3);
         progeProgressBar.setVisibility(View.INVISIBLE);
-
+//DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
 
         //View v = this.getLayoutInflater().inflate(R.layout.activity_tab1_fac_communi,null);
         //todo get name of sender

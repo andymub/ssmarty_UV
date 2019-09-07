@@ -10,10 +10,9 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="139dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
         android:baselineAlignBottom="true"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,9 +73,9 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="182dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/bgmenustudent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,8 +113,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/horairestudent"
-                    />
+                    android:src="@drawable/horairestudent" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,8 +137,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/test"
-                    />
+                    android:src="@drawable/test" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,8 +185,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/univmessage"
-                    />
+                    android:src="@drawable/univmessage" />
 
                 <TextView
                     android:layout_width="wrap_content"

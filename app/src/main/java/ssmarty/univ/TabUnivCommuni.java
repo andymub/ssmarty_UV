@@ -5,6 +5,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -61,7 +63,12 @@ public class TabUnivCommuni extends AppCompatActivity {
         getCurrentDate getCurrentDate = new getCurrentDate();
         txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
         txtNomUniv.setText(getUnivName);
-
+//DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
 
         //on TextChange
         objectMessage.addTextChangedListener(new TextWatcher() {

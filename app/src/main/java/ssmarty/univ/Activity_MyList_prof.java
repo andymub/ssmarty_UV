@@ -95,7 +95,7 @@ public class Activity_MyList_prof extends AppCompatActivity {
             }
         }
        //creating the adapter
-        MyListePresenceAdapter listeEnumerationAdapter  = new MyListePresenceAdapter(this, R.layout.my_custom_listpresence_prof, listpresence,getIntentNomUniv);
+        MyListePresenceAdapter listeEnumerationAdapter  = new MyListePresenceAdapter(this, R.layout.my_custom_listpresence_prof, listpresence,getIntentNomUniv,getIntentUserName);
 
         //attaching adapter to the listview
         MyListePresListView.setAdapter(listeEnumerationAdapter);

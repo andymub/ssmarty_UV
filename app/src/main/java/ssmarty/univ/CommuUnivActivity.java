@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,9 +68,16 @@ public class CommuUnivActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressCommuUnivStudent);
         messageCommList = new ArrayList<>();
         listView.setVisibility(View.INVISIBLE);
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
 
-
-        promo.setText(facDep);
+        String[] gtpromo1= facDep.split("_");
+        promo.setText(gtpromo1[0]+" "+gtpromo1[1]);
+       // promo.setText(facDep);
         fetch3LastMessages(univName);
         messageCommList.add(new MessageUniv("Congé de fin d'Exam Univ", "xxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxxx"));
         messageCommList.add(new MessageUniv("Journée cultur..", "xxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxxx"));

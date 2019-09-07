@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,9 +67,16 @@ public class CommuFacActivity extends AppCompatActivity {
         listView.setVisibility(View.INVISIBLE);
         messageCommList=new ArrayList<>();
 
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
         fetch3LastMessages(univName);
-
-        promo.setText(facDep);
+        String[] gtpromo1= facDep.split("_");
+        promo.setText(gtpromo1[0]+" "+gtpromo1[1]);
+        //promo.setText(facDep);
         messageCommList.add(new MessageUniv("Message Univ Fac 1","xxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxx"));
         messageCommList.add(new MessageUniv("Fac 1 infos","xxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxx"));
         messageCommList.add(new MessageUniv("infos fac 1","xxxxxxxxxxxxxx","xxxxxxxxxxxxxxxxxx"));

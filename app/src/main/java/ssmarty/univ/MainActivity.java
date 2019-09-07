@@ -121,9 +121,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             if (nfcAdapter.isNdefPushEnabled()){
-                Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_SHORT).show();
                 //imgNfcState.setImageResource(R.mipmap.nfc_ouvert_round);
                 txtStateNfc.setText(R.string.ntc_activE);
+                txtStateNfc.setTextColor(getResources().getColor(R.color.colorAccent));
 
 
             }

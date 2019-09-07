@@ -137,6 +137,7 @@ public class Activity_liste_presence extends AppCompatActivity {
         //TODO  Get data from nf  card to feel in list
 
 
+
         //firebase
 
 
@@ -150,7 +151,12 @@ public class Activity_liste_presence extends AppCompatActivity {
         //nfc adapter
         btnSendToCloud.setVisibility(View.INVISIBLE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
+//DESACTIVATE NFC
+        NfcAdapter NFCadapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            NFCadapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//        li
 
 
 
@@ -329,6 +335,12 @@ public class Activity_liste_presence extends AppCompatActivity {
                             spinnerTypePresence.setEnabled(false);
                             btnStartList.setImageResource(R.drawable.ic_done_bleu_24dp);
                             messageEvolution.setText("Pour completer la liste, bipé une carte");
+                            //DESACTIVATE NFC
+                            NfcAdapter NFCadapter = NfcAdapter.getDefaultAdapter(getApplicationContext());
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                NFCadapter.enableReaderMode((Activity) getApplicationContext(), null, NfcAdapter.STATE_ON, null);
+                            }
+//        li
 
                             //set visible Scrollliste
                             scrollListePresence.setVisibility(View.VISIBLE);

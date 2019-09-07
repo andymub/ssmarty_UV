@@ -3,6 +3,8 @@ package ssmarty.univ;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +66,12 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
         titulaireHoraire = findViewById(R.id.edittxtTitulaireAjoutCours);
         dateHoraire= findViewById(R.id.editxtDateCoursAjoutCours);
         detailsHoraire= findViewById(R.id.detailAjoutCours);
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+//
 
         progressBar.setVisibility(View.INVISIBLE);
         final String getUnivName= getIntent().getStringExtra("data_nom_univ");

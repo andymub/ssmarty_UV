@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -53,9 +55,6 @@ public class MainActivity_student extends AppCompatActivity {
         btnHoraire=findViewById(R.id.imgbtn_liste);
         displayUnivName=findViewById(R.id.studen_txtNom_univ);
         displayStudentName=findViewById(R.id.nom_etudiant);
-        searchEditorName =findViewById(R.id.txtediteurSituationFinance);
-        searchMessage=findViewById(R.id.messageSituationFinance);
-        searchStudentName=findViewById(R.id.txtNomEtudiantSituationFinance);
         unvLogo=findViewById(R.id.imageViewLogoUniv);
 
 //        researchFinace= findViewById(R.id.recherchSituationFinance);
@@ -74,7 +73,11 @@ public class MainActivity_student extends AppCompatActivity {
         promo=facPromoYear[2];
         annee=facPromoYear[3];
         imageSaver = new ImageSaver(getApplicationContext());
-
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
         localPathFileStorage=getApplicationContext().getFilesDir().getPath();
         File file = new File(getApplicationContext().getFilesDir(),univName+".png");
         if(file.exists()){
