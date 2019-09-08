@@ -150,10 +150,10 @@ public class Activity_contatUniv_prof extends AppCompatActivity {
         emailUniv.setLinksClickable(false);
         emailUniv.setText("Email ...");
         nomUniv.setClickable(false);
-        nomUniv.setText(" ....");
+        nomUniv.setText("Univ  ...");
         numUnivOne.setClickable(false);
-        numUnivTwo.setText("Num 2 de téléphone ...");
-        numUnivOne.setText("Num 1 de téléphone ...");
+        numUnivTwo.setText("Num  ...");
+        numUnivOne.setText("     ...");
         numUnivTwo.setLinksClickable(false);
         detail.setText("En cours ...");
     }

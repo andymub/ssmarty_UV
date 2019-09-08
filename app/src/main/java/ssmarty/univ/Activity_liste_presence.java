@@ -42,6 +42,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.multidex.MultiDexApplication;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,7 +68,6 @@ import java.util.Map;
 
 import ssmarty.univ.database.file.ListePresenceToFile;
 import ssmarty.univ.helper.DatabaseHelper;
-
 
 public class Activity_liste_presence extends AppCompatActivity {
     ListView myListview;
@@ -152,17 +152,10 @@ public class Activity_liste_presence extends AppCompatActivity {
         btnSendToCloud.setVisibility(View.INVISIBLE);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 //DESACTIVATE NFC
-        NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
-        }
+
 //        li
 
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-        }
         if (nfcAdapter == null) {
             // Stop here, we definitely need NFC
             Toast.makeText(this, "Ce support ne possède pas de techno  NFC.", Toast.LENGTH_LONG).show();
@@ -335,11 +328,11 @@ public class Activity_liste_presence extends AppCompatActivity {
                             spinnerTypePresence.setEnabled(false);
                             btnStartList.setImageResource(R.drawable.ic_done_bleu_24dp);
                             messageEvolution.setText("Pour completer la liste, bipé une carte");
-                            //DESACTIVATE NFC
-                            NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                adapterNfc.enableReaderMode((Activity) getApplicationContext(), null, NfcAdapter.STATE_ON, null);
-                            }
+//                            //DESACTIVATE NFC
+//                            NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                                adapterNfc.enableReaderMode(getApplicationContext(), null, NfcAdapter.STATE_ON, null);
+//                            }
 //        li
 
                             //set visible Scrollliste

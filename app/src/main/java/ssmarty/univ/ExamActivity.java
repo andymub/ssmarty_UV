@@ -106,6 +106,8 @@ public class ExamActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 ExamCourList = new ArrayList<>();
+                //HoraireAdapter.clear();
+                ExamCourList.clear();
                 HoraireCourOuExam examModel = new HoraireCourOuExam();
                 if (task.isSuccessful()) {
                     for (DocumentSnapshot document : task.getResult()) {
@@ -176,6 +178,9 @@ public class ExamActivity extends AppCompatActivity {
                                     ExamCourList);
                     listViewExam.setAdapter(HoraireAdapter);
                     progressBar.setVisibility(View.INVISIBLE);
+                    //ExamCourList.clear();
+
+
 
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());

@@ -1,15 +1,18 @@
 package ssmarty.univ;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
@@ -127,6 +130,7 @@ public class MainActivity_Prof extends AppCompatActivity {
 //        });
 
 
+
         //SQLITE
         mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);
 
@@ -181,7 +185,14 @@ public class MainActivity_Prof extends AppCompatActivity {
                 });
             } catch (IOException e ) {}
         }
-
+        unvLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_contatUniv_prof.class);
+                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
+                startActivity(switch_prof_acti);
+            }
+        });
 
 
         btnBuildList.setOnClickListener(new View.OnClickListener() {
@@ -514,5 +525,52 @@ public class MainActivity_Prof extends AppCompatActivity {
 
     public String getNomUnivDisplayed() {
         return nomUnivDisplayed;
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        // builder.setCancelable(false);
+        builder.setTitle("Deconnexion");
+        builder.setMessage("Fermer votre compte ?");
+        builder.setPositiveButton("OUI",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                //Toast.makeText(getApplicationContext(), "Yes i wanna exit", Toast.LENGTH_LONG).show();
+
+                finish();
+            }
+        });
+        builder.setNegativeButton("NON",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                //Toast.makeText(getApplicationContext(), "i wanna stay on this page", Toast.LENGTH_LONG).show();
+                dialog.cancel();
+
+            }
+        });
+        builder.setNeutralButton("Rate us",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
+                }
+
+            }
+        });
+        AlertDialog alert=builder.create();
+        alert.show();
+        //super.onBackPressed();
     }
 }
