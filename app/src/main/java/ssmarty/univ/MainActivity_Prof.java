@@ -78,7 +78,8 @@ public class MainActivity_Prof extends AppCompatActivity {
 //    DatabaseHelper databaseHelper =new DatabaseHelper(this);
 //    //databaseHelper.insertIntoTableInfo(listFacDep);
 //    String fac=databaseHelper.getAllFacDepFromLocal();
-    String TAG="TAG";
+    String TAG="TAG",facCP, promoCP="";
+    Boolean isACp=false;
     int count=0;
     ImageView unvLogo;
     @Override
@@ -139,8 +140,19 @@ public class MainActivity_Prof extends AppCompatActivity {
         final String []getDataFromCard = getIntent().getStringArrayExtra("data");
         displayUnivName.setText(getDataFromCard[0]);
         nomUnivDisplayed=getDataFromCard[0];
-        String getUserName= getDataFromCard[1]; //todo send username to activities
-        displayProfName.setText(getUserName);
+        if (getIntent().getStringExtra("facCP")!=null){
+            facCP=getIntent().getStringExtra("facCP");
+            promoCP=getIntent().getStringExtra("promoCP");
+            displayProfName.setText(getDataFromCard[1]);
+            isACp=true;
+
+        }
+        else
+        {
+            String getUserName= getDataFromCard[1]; //todo send username to activities
+            displayProfName.setText(getUserName);
+        }
+
 
         //getMessageFromServer
         fetch3LastMessages(getDataFromCard[0]);
@@ -200,12 +212,25 @@ public class MainActivity_Prof extends AppCompatActivity {
             public void onClick(View v) {
                 DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
                 //databaseHelper.insertIntoTableInfo(listFacDep);
+                if (!isACp){
                 String fac=databaseHelper.getAllFacDepFromLocal();
                 switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
                 switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
                 switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
                 switch_prof_acti.putExtra("list_fac",fac);
-                startActivity(switch_prof_acti);
+                    switch_prof_acti.putExtra("promoCP","1");
+                startActivity(switch_prof_acti);}
+                else if (isACp) {
+                    String fac=databaseHelper.getAllFacDepFromLocal();
+                    switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
+                    switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                    switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
+                    switch_prof_acti.putExtra("list_fac",facCP);
+                    switch_prof_acti.putExtra("promoCP","01");
+                    switch_prof_acti.putExtra("promoCP1",promoCP);
+                    startActivity(switch_prof_acti);
+
+                }
 
             }
         });

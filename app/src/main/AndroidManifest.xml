@@ -3,6 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ssmarty.univ">
 
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true"
+        tools:ignore="DuplicateUsesFeature" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
@@ -12,13 +30,18 @@
         android:theme="@style/Theme.AppCompat.Light"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activity_ajouts_horaire_prof"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" ></activity>
-        <activity android:name=".WelcomeActivity"
+        <activity android:name=".ActivityIDCp"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".Activity_ajouts_horaire_prof"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,16 +49,14 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
-
-
         </activity>
         <activity
             android:name=".MainActivity_student"
@@ -65,11 +86,13 @@
             android:name=".Activity_liste_presence"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.nfc.action.TAG_DISCOVERED" />-->
 
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.nfc.action.TAG_DISCOVERED" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
 
@@ -78,9 +101,9 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
 
-<!--            <meta-data-->
-<!--                android:name="android.nfc.action.TECH_DISCOVERED"-->
-<!--                android:resource="@xml/tag_tech" />-->
+            <!-- <meta-data -->
+            <!-- android:name="android.nfc.action.TECH_DISCOVERED" -->
+            <!-- android:resource="@xml/tag_tech" /> -->
         </activity>
         <activity
             android:name=".Activity_Communi_Prof"
@@ -97,8 +120,8 @@
         <activity
             android:name=".Activity_MyList_prof"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".Activity_contatUniv_prof"
             android:screenOrientation="portrait"
@@ -114,23 +137,5 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
-    <uses-feature android:name="android.hardware.camera" />
-
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true"
-        tools:ignore="DuplicateUsesFeature" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

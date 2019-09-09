@@ -91,6 +91,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     PendingIntent pendingIntent;
     public String getListFacDetIntent;
+    public String getpromoCp;
     int i=1, stateBtnStartList =0;
    // public String DATABASE_NAME1 =  getResources().getString(R.string.database_name_sqlite);
     String receieveOk,nomDuProf, getIntentNomUniv;
@@ -184,17 +185,55 @@ public class Activity_liste_presence extends AppCompatActivity {
         //spinnerListeFac
         List<String> listFac;
 
+        String sss=getIntent().getStringExtra("promoCP");
         try {
-            getListFacDetIntent= getIntent().getStringExtra("list_fac");
-            getListFacDetIntent=getListFacDetIntent.replace("|",",");
-            getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
-            String [] tabl=getListFacDetIntent.split(",");
-            listFac=Arrays.asList(tabl);
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_spinner_item, listFac);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerListFacDep.setAdapter(dataAdapter);
+            if ((getIntent().getStringExtra("promoCP").equals("01"))){
+                getListFacDetIntent = getIntent().getStringExtra("list_fac");
+//                getListFacDetIntent = getListFacDetIntent.replace("|", ",");
+//                getListFacDetIntent = getListFacDetIntent.replaceFirst("", "Choisir la Fac/Dép");
+                String[] tabl = getListFacDetIntent.split(",");
+                listFac = Arrays.asList(tabl);
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerListFacDep.setAdapter(dataAdapter);
+                spinnerListFacDep.setSelection(0);
+                spinnerListFacDep.setEnabled(false);
+                if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("PREPA")){
+                    spinnerPromo.setSelection(1);
+                }
+                else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G1")){
+                    spinnerPromo.setSelection(2);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G2")){
+                    spinnerPromo.setSelection(3);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G3")){
+                    spinnerPromo.setSelection(4);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L1")){
+                    spinnerPromo.setSelection(5);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L2")){
+                    spinnerPromo.setSelection(6);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc1")){
+                    spinnerPromo.setSelection(7);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc2")){
+                    spinnerPromo.setSelection(8);
+                }
+                spinnerPromo.setEnabled(false);
 
+            }
+            else if(sss.equals("1"))  {
+                spinnerPromo.setEnabled(true);
+                spinnerListFacDep.setEnabled(true);
+                getListFacDetIntent = getIntent().getStringExtra("list_fac");
+                getListFacDetIntent = getListFacDetIntent.replace("|", ",");
+                getListFacDetIntent = getListFacDetIntent.replaceFirst("", "Choisir la Fac/Dép");
+                String[] tabl = getListFacDetIntent.split(",");
+                listFac = Arrays.asList(tabl);
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerListFacDep.setAdapter(dataAdapter);
+
+            }
             //SQLITE
             //opening the database
             mDatabase = openOrCreateDatabase(MainActivity.DATABASE_NAME, MODE_PRIVATE, null);

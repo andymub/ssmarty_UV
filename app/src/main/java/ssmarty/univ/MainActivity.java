@@ -1,6 +1,7 @@
 package ssmarty.univ;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
@@ -13,10 +14,15 @@ import android.provider.Settings;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.UnsupportedEncodingException;
@@ -208,13 +214,23 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else {
-            String univ, facDep, promo, annee,codeDacce, nomEtPrenom;
+            final String univ;
+            final String facDep;
+            final String promo;
+            final String annee;
+            final String codeDacce;
+            final String nomEtPrenom;
+            final String pass1;
+            String pass="";
             univ =dataFromNfcCard[0];
             facDep=dataFromNfcCard[1];
             promo=dataFromNfcCard[2];
             annee=dataFromNfcCard[3];
             codeDacce=dataFromNfcCard[4];
             nomEtPrenom=dataFromNfcCard[5];
+            if (codeDacce.equals("01")){
+                pass=dataFromNfcCard[6];
+            }
             Intent studentIntent;
 
 
@@ -235,6 +251,30 @@ public class MainActivity extends AppCompatActivity {
                     studentIntent.putExtra("data",dataTosend);
                     //studentIntent.putExtra("userName",dataTosend)
                     startActivity(studentIntent);
+                    break;
+
+                case "01" :
+
+
+
+
+                    pass1=pass;
+
+
+                                        //Intent studentIntent;
+                                       // dataTosend= new String[]{univ,nomEtPrenomCp.getText().toString() };
+
+                                        studentIntent=new Intent(MainActivity.this, ActivityIDCp.class);
+                                        studentIntent.putExtra("univ",univ);
+                                        studentIntent.putExtra("pass",pass1);
+                                        studentIntent.putExtra("facCP",facDep);
+                                        studentIntent.putExtra("promoCP",promo);
+                                        //studentIntent.putExtra("userName",dataTosend)
+                                        startActivity(studentIntent);
+
+                                    //}
+
+
                     break;
             }
 

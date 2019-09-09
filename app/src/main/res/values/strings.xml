@@ -42,16 +42,15 @@
     </string-array>
     <string-array name="typeListepromo">
         <item>Choisir la promotion</item>
-        <item>Prépa</item>
+        <item>PREPA</item>
         <item>G1</item>
         <item>G2</item>
         <item>G3</item>
         <item>L1</item>
         <item>L2</item>
-        <item>Msc 1</item>
-        <item>Msc 2</item>
+        <item>Msc1</item>
+        <item>Msc2</item>
     </string-array>
-
 
 
     <string name="title_activity_welcome">Home Screen</string>
