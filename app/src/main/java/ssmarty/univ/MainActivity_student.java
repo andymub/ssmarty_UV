@@ -285,6 +285,8 @@ public class MainActivity_student extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "Yes i wanna exit", Toast.LENGTH_LONG).show();
 
                 finish();
+                Intent intent = new Intent(MainActivity_student.this,MainActivity.class);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("NON",new DialogInterface.OnClickListener() {

@@ -44,12 +44,15 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
     List<String> listFac;
     String facDep="",promo="",typeHoraire="";
     FileOutputStream fstream;
+    String getUnivName,getUser;
     private StorageReference mStorageRef;
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String TAG="TAG";
+    String sss;
     ProgressBar progressBar;
     int count = 0;
+    public String getListFacDetIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -72,20 +75,73 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
             adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //
-
-        progressBar.setVisibility(View.INVISIBLE);
-        final String getUnivName= getIntent().getStringExtra("data_nom_univ");
+        sss=getIntent().getStringExtra("promoCP");
+        getUnivName= getIntent().getStringExtra("data_nom_univ");
+        getUser= getIntent().getStringExtra("data_nom_user");
         String getListFacDetIntent= getIntent().getStringExtra("list_fac");
-        getListFacDetIntent=getListFacDetIntent.replace("|",",");
-        getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
-        // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
-        final String [] tabl=getListFacDetIntent.split(",");
-        listFac= Arrays.asList(tabl);
-        //Fill my spinner
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listFac);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerFac.setAdapter(arrayAdapter);
+        try {
+            progressBar.setVisibility(View.INVISIBLE);
+            if ((getIntent().getStringExtra("promoCP").equals("01"))){
+                getListFacDetIntent = getIntent().getStringExtra("list_fac");
+//                getListFacDetIntent = getListFacDetIntent.replace("|", ",");
+//                getListFacDetIntent = getListFacDetIntent.replaceFirst("", "Choisir la Fac/Dép");
+                String[] tabl = getListFacDetIntent.split(",");
+                listFac = Arrays.asList(tabl);
+                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerFac.setAdapter(dataAdapter);
+                spinnerFac.setSelection(0);
+                spinnerFac.setEnabled(false);
+                if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("PREPA")){
+                    spinnerPromo.setSelection(1);
+                }
+                else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G1")){
+                    spinnerPromo.setSelection(2);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G2")){
+                    spinnerPromo.setSelection(3);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G3")){
+                    spinnerPromo.setSelection(4);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L1")){
+                    spinnerPromo.setSelection(5);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L2")){
+                    spinnerPromo.setSelection(6);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc1")){
+                    spinnerPromo.setSelection(7);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc2")){
+                    spinnerPromo.setSelection(8);
+                }
+                spinnerPromo.setEnabled(false);
+
+            }
+            else if(sss.equals("1"))  {
+                progressBar.setVisibility(View.INVISIBLE);
+
+                getListFacDetIntent=getListFacDetIntent.replace("|",",");
+                getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
+                // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
+                final String [] tabl=getListFacDetIntent.split(",");
+                listFac= Arrays.asList(tabl);
+                //Fill my spinner
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerFac.setAdapter(arrayAdapter);
+            }
+
+        }
+        catch (Exception ex){
+
+
+
+        }
+
+
+
+
+
+
+
         spinnerFac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -95,7 +151,7 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView <?> parent) {
-                Toast.makeText(parent.getContext(), "Choisir une Faculté" ,          LENGTH_LONG).show();
+               // Toast.makeText(parent.getContext(), "Choisir une Faculté" ,          LENGTH_LONG).show();
             }
         });
         spinnerPromo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,7 +209,7 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
                         || dateHoraire.getText().toString()=="" || titulaireHoraire.getText().toString()==""){
                     Toast.makeText(getApplicationContext(),"Remplir l'horaire", LENGTH_LONG).show();
                 }
-                else if (spinnerFac.getSelectedItemPosition()==0)
+                else if ((spinnerFac.getSelectedItemPosition()==0) && !(sss.equals("01")))
                 {
 
                     Toast.makeText(getApplicationContext(), "Choisir une Faculté" ,LENGTH_LONG).show();
@@ -170,7 +226,7 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
                     horaireDataMap.put("Lieu",lieuHoraire.getText().toString());
                     horaireDataMap.put("Date",dateHoraire.getText().toString());
                     horaireDataMap.put("Titulaire",titulaireHoraire.getText().toString());
-                    horaireDataMap.put("Détails",detailsHoraire.getText().toString());
+                    horaireDataMap.put("Détails",detailsHoraire.getText().toString()+" \n Ecrit par : "+getUser);
                     progressBar.setVisibility(View.VISIBLE);
                     // Hierarchical Data with Subcollection-Document in a Document
                     db.collection(getUnivName).document(facDep)
@@ -206,10 +262,13 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
                                                         Log.w(TAG, "Error writing document", e);
                                                         btnAjout.setImageResource(R.drawable.ic_done_red_24dp);
                                                         progressBar.setVisibility(View.INVISIBLE);
+                                                        resetField();
                                                     }
                                                 });
                                     } else {
+                                        progressBar.setVisibility(View.INVISIBLE);
                                         Log.d(TAG, "Error getting documents: ", task.getException());
+                                        resetField();
                                     }
                                 }
                             });

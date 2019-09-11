@@ -82,6 +82,9 @@ public class TabFacCommuni extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     String userChoosenTask="";
+    public String getListFacDetIntent;
+    public String getpromoCp;
+    int i=1, stateBtnStartList =0;
 
     String currentPhotoPath;
     ImageView imageView14;
@@ -117,26 +120,71 @@ public class TabFacCommuni extends AppCompatActivity {
             adapterNfc.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
         }
 //        li
-
+        String sss=getIntent().getStringExtra("promoCP");
         //View v = this.getLayoutInflater().inflate(R.layout.activity_tab1_fac_communi,null);
         //todo get name of sender
         nameOfSender= getIntent().getStringExtra("data_nom_user");
          getUnivName =getIntent().getStringExtra("data_nom_univ");
         //set sender name and date
-        getCurrentDate getCurrentDate = new getCurrentDate();
-        txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
+        try {
+            if ((getIntent().getStringExtra("promoCP").equals("01"))){
+                getCurrentDate getCurrentDate = new getCurrentDate();
+                txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
+                getListFacDetIntent = getIntent().getStringExtra("list_fac");
+//                getListFacDetIntent = getListFacDetIntent.replace("|", ",");
+//                getListFacDetIntent = getListFacDetIntent.replaceFirst("", "Choisir la Fac/Dép");
+                String[] tabl = getListFacDetIntent.split(",");
+                listFac = Arrays.asList(tabl);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerSelecteFac.setAdapter(arrayAdapter);
+                spinnerSelecteFac.setSelection(0);
+                spinnerSelecteFac.setEnabled(false);
+                if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("PREPA")){
+                    spinnerPromo.setSelection(1);
+                }
+                else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G1")){
+                    spinnerPromo.setSelection(2);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G2")){
+                    spinnerPromo.setSelection(3);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("G3")){
+                    spinnerPromo.setSelection(4);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L1")){
+                    spinnerPromo.setSelection(5);
+                }else if (getIntent().getStringExtra("promoCP1").toUpperCase().trim().equals("L2")){
+                    spinnerPromo.setSelection(6);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc1")){
+                    spinnerPromo.setSelection(7);
+                }else if (getIntent().getStringExtra("promoCP1").trim().equals("Msc2")){
+                    spinnerPromo.setSelection(8);
+                }
+                spinnerPromo.setEnabled(false);
 
-        String getListFacDetIntent= getIntent().getStringExtra("list_fac");
-        getListFacDetIntent=getListFacDetIntent.replace("|",",");
-        getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
-        // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
-        String [] tabl=getListFacDetIntent.split(",");
-        listFac= Arrays.asList(tabl);
-        //Fill my spinner
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listFac);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerSelecteFac.setAdapter(arrayAdapter);
+            }
+            else if(sss.equals("1"))  {
+
+                getCurrentDate getCurrentDate = new getCurrentDate();
+                txtSenderAndDate.setText(nameOfSender+" - Date :"+getCurrentDate.getCurrentDate());
+
+                String getListFacDetIntent= getIntent().getStringExtra("list_fac");
+                getListFacDetIntent=getListFacDetIntent.replace("|",",");
+                getListFacDetIntent= getListFacDetIntent.replaceFirst("","Choisir la Fac/Dép");
+                // getListFacDetIntent= getListFacDetIntent.substring(getListFacDetIntent.indexOf(","),getListFacDetIntent.indexOf(","));
+                String [] tabl=getListFacDetIntent.split(",");
+                listFac= Arrays.asList(tabl);
+                //Fill my spinner
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, listFac);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerSelecteFac.setAdapter(arrayAdapter);
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+
         spinnerSelecteFac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

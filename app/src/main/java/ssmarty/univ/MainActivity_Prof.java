@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,12 +17,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +40,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import ssmarty.univ.adapter.ListCommUnivAdapter;
 import ssmarty.univ.database.model.InfoPresistance;
@@ -57,7 +50,7 @@ import ssmarty.univ.network.InternetConnectionStatus;
 
 
 public class MainActivity_Prof extends AppCompatActivity {
-    private ImageView btnBuildList, btnCOmmuni, btnMyList, btnContactUniv;
+    private ImageView btnBuildList, btnCOmmuni, btnMyList, btnHoraire;
     Intent switch_prof_acti;
     TextView displayUnivName,displayProfName,txtMsgTitre1;
 //            txtMsgTitre1,txtMsgEditeur1,txtMsg1,
@@ -88,7 +81,7 @@ public class MainActivity_Prof extends AppCompatActivity {
         setContentView(R.layout.activity_main_prof);
         btnBuildList=findViewById(R.id.imgbtn_liste);
         btnCOmmuni=findViewById(R.id.imgbtn_communi_prof);
-        btnContactUniv=findViewById(R.id.imgbtn_contact_univ);
+        btnHoraire =findViewById(R.id.imgbtn_contact_univ);
         btnMyList=findViewById(R.id.imgbtn_my_listes);
         displayUnivName=findViewById(R.id.prof_txtNom_univ);
          mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
@@ -221,7 +214,7 @@ public class MainActivity_Prof extends AppCompatActivity {
                     switch_prof_acti.putExtra("promoCP","1");
                 startActivity(switch_prof_acti);}
                 else if (isACp) {
-                    String fac=databaseHelper.getAllFacDepFromLocal();
+                    //String fac=databaseHelper.getAllFacDepFromLocal();
                     switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_liste_presence.class);
                     switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
                     switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
@@ -239,12 +232,26 @@ public class MainActivity_Prof extends AppCompatActivity {
             public void onClick(View v) {
                 DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
                 //databaseHelper.insertIntoTableInfo(listFacDep);
-                String fac=databaseHelper.getAllFacDepFromLocal();
-                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_Communi_Prof.class);
-                switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
-                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
-                switch_prof_acti.putExtra("list_fac",fac);
-                startActivity(switch_prof_acti);
+                if (!isACp) {
+                    String fac = databaseHelper.getAllFacDepFromLocal();
+                    switch_prof_acti = new Intent(MainActivity_Prof.this, Activity_Communi_Prof.class);
+                    switch_prof_acti.putExtra("data_nom_user", getDataFromCard[1]);
+                    switch_prof_acti.putExtra("data_nom_univ", getDataFromCard[0]);
+                    switch_prof_acti.putExtra("list_fac", fac);
+                    switch_prof_acti.putExtra("promoCP","1");
+                    startActivity(switch_prof_acti);
+                }
+                else if (isACp){
+                    switch_prof_acti = new Intent(MainActivity_Prof.this, Activity_Communi_Prof.class);
+                    switch_prof_acti.putExtra("data_nom_user", getDataFromCard[1]);
+                    switch_prof_acti.putExtra("data_nom_univ", getDataFromCard[0]);
+                    switch_prof_acti.putExtra("list_fac", facCP);
+                    switch_prof_acti.putExtra("facCP", facCP);
+                    switch_prof_acti.putExtra("promoCP","01");
+                    switch_prof_acti.putExtra("promoCP1",promoCP);
+                    startActivity(switch_prof_acti);
+
+                }
 
             }
         });
@@ -258,16 +265,30 @@ public class MainActivity_Prof extends AppCompatActivity {
 
             }
         });
-        btnContactUniv.setOnClickListener(new View.OnClickListener() {
+        btnHoraire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
-                String fac=databaseHelper.getAllFacDepFromLocal();
-                switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_ajouts_horaire_prof.class);
-                switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
-                switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
-                switch_prof_acti.putExtra("list_fac",fac);
-                startActivity(switch_prof_acti);
+                if (!isACp) {
+                    DatabaseHelper databaseHelper =new DatabaseHelper(getApplicationContext());
+                    String fac=databaseHelper.getAllFacDepFromLocal();
+                    switch_prof_acti=new Intent(MainActivity_Prof.this,Activity_ajouts_horaire_prof.class);
+                    switch_prof_acti.putExtra("data_nom_user",getDataFromCard[1]);
+                    switch_prof_acti.putExtra("data_nom_univ",getDataFromCard[0]);
+                    switch_prof_acti.putExtra("list_fac",fac);
+                    switch_prof_acti.putExtra("promoCP","1");
+                    startActivity(switch_prof_acti);
+                }
+                else  if (isACp){
+
+                    switch_prof_acti = new Intent(MainActivity_Prof.this, Activity_ajouts_horaire_prof.class);
+                    switch_prof_acti.putExtra("data_nom_userdata_nom_user", getDataFromCard[1]);
+                    switch_prof_acti.putExtra("data_nom_univ", getDataFromCard[0]);
+                    switch_prof_acti.putExtra("list_fac", facCP);
+                    switch_prof_acti.putExtra("facCP", facCP);
+                    switch_prof_acti.putExtra("promoCP","01");
+                    switch_prof_acti.putExtra("promoCP1",promoCP);
+                    startActivity(switch_prof_acti);
+                }
             }
         });
 
@@ -566,6 +587,8 @@ public class MainActivity_Prof extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 //Toast.makeText(getApplicationContext(), "Yes i wanna exit", Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(MainActivity_Prof.this,MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
