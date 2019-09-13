@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ssmarty.univ">
 
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="true"
+        android:required="false"
         tools:ignore="DuplicateUsesFeature" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,6 +18,9 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
     <application
         android:appComponentFactory="whateverString"
@@ -129,6 +130,10 @@
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".Activity_contatUniv_prof"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".QR.QrCodeScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 

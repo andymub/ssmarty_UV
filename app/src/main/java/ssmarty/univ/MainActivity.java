@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 
+import ssmarty.univ.QR.QrCodeScannerActivity;
 import ssmarty.univ.decrypter.StringToHex;
 
 public class MainActivity extends AppCompatActivity {
@@ -96,7 +97,13 @@ public class MainActivity extends AppCompatActivity {
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
 
-
+        txtStateNfc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentQR =new Intent(MainActivity.this, QrCodeScannerActivity.class);
+                startActivity(intentQR);
+            }
+        });
 
 
     }
@@ -123,13 +130,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void ncfCompatible (){
         NfcManager nfcManager = (NfcManager) getApplication().getSystemService(Context.NFC_SERVICE);
         NfcAdapter nfcAdapter = nfcManager.getDefaultAdapter();
         if (nfcAdapter == null) {
+            txtStateNfc.setText("Cliquer pour scanner votre QR code");
             // Device not compatible for NFC support
             Toast.makeText(getApplicationContext(),"Votre dispositif ne supporte pas de NFC",Toast.LENGTH_LONG).show();
+            // Build an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            // Set a title for alert dialog
+            builder.setTitle("QR code ");
+
+            // Ask the final question
+            builder.setMessage("scanner votre code QR ?");
+
+            // Set the alert dialog yes button click listener
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do something when user clicked the Yes button
+                    // Set the TextView visibility GONE
+                    //tv.setVisibility(View.GONE);
+                    Intent intentQR =new Intent(MainActivity.this, QrCodeScannerActivity.class);
+                    startActivity(intentQR);
+
+                }
+            });
+
+            // Set the alert dialog no button click listener
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do something when No button clicked
+//                    Toast.makeText(getApplicationContext(),
+//                            "No Button Clicked",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            // Display the alert dialog on interface
+            dialog.show();
         }
+
         else{
             if (nfcAdapter.isNdefPushEnabled()){
                 //Toast.makeText(getApplicationContext(), R.string.ntc_activE,Toast.LENGTH_SHORT).show();
