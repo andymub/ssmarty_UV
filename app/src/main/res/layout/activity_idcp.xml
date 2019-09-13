@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_dialog_layout_design_user_input"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="clip_horizontal"
     android:background="@drawable/bgapps"
     android:foregroundGravity="center_vertical"
@@ -56,20 +56,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:id="@+id/hr2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/txtCommuFac"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="#0F1E24" />
-
     <EditText
         android:id="@+id/codeDialog"
         android:layout_width="match_parent"
@@ -83,6 +69,20 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/hr2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/txtCommuFac"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="#0F1E24" />
 
     <ImageButton
         android:id="@+id/imgbtnIDCp"

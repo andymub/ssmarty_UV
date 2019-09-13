@@ -65,5 +65,7 @@
     <string name="slide_3_desc">Votre carte ID, vore passe accès application</string>
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Repasser</string>
+    <string name="notification_title">titre</string>
+    <string name="default_notification_channel_id">chanel</string>
 
 </resources>

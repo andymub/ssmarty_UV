@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "263436929611-qlr2pdhsi2evmaktfu6ud1247v89e238.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ssmarty.univ",
+            "certificate_hash": "b033f6bee3da4d85de2a494b89fa68e0fff0629a"
+          }
+        },
+        {
           "client_id": "263436929611-o88nf7dv3cg4tl1247dfu13mu2nol79n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
