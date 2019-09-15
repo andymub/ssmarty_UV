@@ -163,7 +163,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/mm"
                 android:gravity="center"
-                android:text="Cliquer sur le nom pour rétirer de la liste"
+                android:text="Maintenir le doigt sur le nom pour éffacer de la liste"
                 android:textSize="10sp"
                 android:visibility="invisible" />
         </LinearLayout>

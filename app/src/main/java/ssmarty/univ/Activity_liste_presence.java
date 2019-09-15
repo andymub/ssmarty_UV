@@ -238,6 +238,9 @@ public class Activity_liste_presence extends AppCompatActivity {
                 getListFacDetIntent = getListFacDetIntent.replace("|", ",");
                 getListFacDetIntent = getListFacDetIntent.replaceFirst("", "Choisir la Fac/Dép");
                 String[] tabl = getListFacDetIntent.split(",");
+//                for (int i=0;i <tabl.length;i++){
+//                    tabl[i]=tabl[i].replace("_"," - ");
+//                }
                 listFac = Arrays.asList(tabl);
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_item, listFac);
@@ -358,6 +361,8 @@ public class Activity_liste_presence extends AppCompatActivity {
                             editxtIntutuleListe.setEnabled(true);
                             spinnerTypePresence.setClickable(true);
                             spinnerPromo.setClickable(true);
+                            txtNumberInliste.setVisibility(View.INVISIBLE);
+                            txtHowTodelete.setVisibility(View.INVISIBLE);
                             btnStartList.setImageResource(R.drawable.ic_done_red_24dp);
                             //set visible Scrollliste
                             scrollListePresence.setVisibility(View.INVISIBLE);
@@ -392,6 +397,8 @@ public class Activity_liste_presence extends AppCompatActivity {
                             spinnerTypePresence.setClickable(false);
                             spinnerPromo.setClickable(false);
                             spinnerTypePresence.setEnabled(false);
+                            txtNumberInliste.setVisibility(View.VISIBLE);
+                            txtHowTodelete.setVisibility(View.VISIBLE);
                             ncfCompatible ();
                             if (edittxtAutreRainson.getVisibility() == View.VISIBLE) {
                                 edittxtAutreRainson.setEnabled(false);
@@ -418,6 +425,8 @@ public class Activity_liste_presence extends AppCompatActivity {
                     editxtIntutuleListe.setEnabled(true);
                     spinnerTypePresence.setClickable(true);
                     spinnerPromo.setClickable(true);
+                    txtNumberInliste.setVisibility(View.INVISIBLE);
+                    txtHowTodelete.setVisibility(View.INVISIBLE);
                     spinnerTypePresence.setEnabled(true);
                     if (edittxtAutreRainson.getVisibility() == View.VISIBLE) {
                         edittxtAutreRainson.setEnabled(true);
