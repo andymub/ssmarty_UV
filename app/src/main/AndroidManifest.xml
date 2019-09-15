@@ -54,7 +54,8 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
@@ -91,7 +92,8 @@
         <activity
             android:name=".Activity_liste_presence"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:launchMode="singleTask">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.nfc.action.TAG_DISCOVERED" /> -->
@@ -100,7 +102,8 @@
             <!-- <category android:name="android.intent.category.DEFAULT" /> -->
             <!-- </intent-filter> -->
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+<!--                <action android:name="android.nfc.action.NDEF_DISCOVERED" />-->
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 

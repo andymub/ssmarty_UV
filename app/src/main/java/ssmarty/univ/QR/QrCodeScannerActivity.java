@@ -19,7 +19,9 @@ import androidx.core.content.ContextCompat;
 
 import com.google.zxing.Result;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import ssmarty.univ.ActivityIDCp;
 import ssmarty.univ.MainActivity;
+import ssmarty.univ.MainActivity_Prof;
 import ssmarty.univ.MainActivity_student;
 
 import static android.Manifest.permission.CAMERA;
@@ -36,6 +38,7 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
      String codeDacce;
      String nomEtPrenom;
      String pass1;
+    Intent studentIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,7 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= android.os.Build.VERSION_CODES.M) {
             if (checkPermission()) {
-                Toast.makeText(getApplicationContext(), "Permission already granted", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Permission already granted", Toast.LENGTH_LONG).show();
 
             } else {
                 requestPermission();
@@ -77,25 +80,52 @@ public class QrCodeScannerActivity extends AppCompatActivity implements ZXingSca
         });
         builder.setMessage(rawResult.getText());
         AlertDialog alert1 = builder.create();
-        alert1.show();
+        //alert1.show();
         String [] dataFromNfcCard= rawResult.getText().split("/");
-        univ =dataFromNfcCard[0];
-        facDep=dataFromNfcCard[1];
-        promo=dataFromNfcCard[2];
-        annee=dataFromNfcCard[3];
-        codeDacce=dataFromNfcCard[4];
-        nomEtPrenom=dataFromNfcCard[5];
-        if (codeDacce.equals("1")){
-        Intent studentIntent;
-        dataTosend= new String[]{univ, nomEtPrenom , facDep+"_"+promo +"_"+annee};
-        studentIntent=new Intent(this, MainActivity_student.class);
-        studentIntent.putExtra("data",dataTosend);
-        //studentIntent.putExtra("userName",dataTosend)
-        startActivity(studentIntent);
+        if (dataFromNfcCard.length < 6){
+            Toast.makeText(getApplicationContext(), "Not a ssmarty QR code", Toast.LENGTH_LONG).show();
+            alert1.dismiss();
+            onResume();
         }
-        else {Toast.makeText(getApplicationContext(),"Désole, accès réfusé pour cette carte",Toast.LENGTH_LONG).show();
-            alert1.dismiss();}
+        else {
+            univ = dataFromNfcCard[0];
+            facDep = dataFromNfcCard[1];
+            promo = dataFromNfcCard[2];
+            annee = dataFromNfcCard[3];
+            codeDacce = dataFromNfcCard[4];
+            nomEtPrenom = dataFromNfcCard[5];
+            if (codeDacce.equals("1")) {
 
+                dataTosend = new String[]{univ, nomEtPrenom, facDep + "_" + promo + "_" + annee};
+                studentIntent = new Intent(this, MainActivity_student.class);
+                studentIntent.putExtra("data", dataTosend);
+                //studentIntent.putExtra("userName",dataTosend)
+                startActivity(studentIntent);
+            }
+            else if (codeDacce.equals("0")){
+                dataTosend= new String[]{univ,nomEtPrenom };
+
+                studentIntent=new Intent(this, MainActivity_Prof.class);
+                studentIntent.putExtra("data",dataTosend);
+                //studentIntent.putExtra("userName",dataTosend)
+                startActivity(studentIntent);
+            }
+            else if (codeDacce.equals("01")){
+                pass1=dataFromNfcCard[6];
+                studentIntent=new Intent(this, ActivityIDCp.class);
+                studentIntent.putExtra("univ",univ);
+                studentIntent.putExtra("pass",pass1);
+                studentIntent.putExtra("facCP",facDep);
+                studentIntent.putExtra("promoCP",promo);
+                startActivity(studentIntent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Seul l'accès NFC est requise pour vous", Toast.LENGTH_LONG).show();
+                alert1.dismiss();
+                onResume();
+            }
+
+        }
     }
     private boolean checkPermission() {
         return ( ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA ) == PackageManager.PERMISSION_GRANTED);

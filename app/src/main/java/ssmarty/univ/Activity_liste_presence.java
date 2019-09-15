@@ -85,7 +85,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     private DatabaseHelper db;
     //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
     int clickCounter=0;
-    private TextView txtExpediteurDate,messageEvolution;
+    private TextView txtExpediteurDate,messageEvolution,txtNumberInliste,txtHowTodelete;
     Spinner spinnerTypePresence,spinnerListFacDep,spinnerPromo;
     ImageButton btnStartList,btnSendToCloud;
     private NfcAdapter nfcAdapter;
@@ -111,6 +111,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     public String nomFichier;
     public String downloadUrl;
     private StorageReference mStorageRef;
+    NfcAdapter adapterNFC;
     //
 
 
@@ -135,11 +136,21 @@ public class Activity_liste_presence extends AppCompatActivity {
         myListview = (ListView) findViewById(R.id.listView_presence);
         myListview.setBackgroundResource(R.color.WHITE_nfc);
         scrollListePresence = findViewById(R.id.scroll_liste_presence);
+        txtHowTodelete=findViewById(R.id.txtCliqueToDelete);
+        txtNumberInliste=findViewById(R.id.txtNumberInList);
+
         //TODO  Get data from nf  card to feel in list
 
-
+//ACTIVATE NFC
+//        adapterNFC = NfcAdapter.getDefaultAdapter(this);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            adapterNFC.enableReaderMode(this, null, NfcAdapter.STATE_ON, null);
+//        }
 
         //firebase
+
+        //turnOnNfc();
+        //activateNFC();
 
 
 
@@ -159,10 +170,10 @@ public class Activity_liste_presence extends AppCompatActivity {
 
         if (nfcAdapter == null) {
             // Stop here, we definitely need NFC
-            Toast.makeText(this, "Ce support ne possède pas de techno  NFC.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Non compatible  NFC ", Toast.LENGTH_LONG).show();
             finish();
             return; }
-        if (!nfcAdapter.isEnabled()) {
+        else if (!nfcAdapter.isEnabled()) {
             //Nfc not enabled
             startActivity(new Intent(Settings.ACTION_NFC_SETTINGS));
         } else {
@@ -305,6 +316,7 @@ public class Activity_liste_presence extends AppCompatActivity {
                         ListElementsArrayList.remove(i);
                         adapter.notifyDataSetChanged();
                         value=ListElementsArrayList.size()+1;
+                        txtNumberInliste.setText("Nombre :"+ListElementsArrayList.size());
                     }
                 }
                 return false;
@@ -361,18 +373,17 @@ public class Activity_liste_presence extends AppCompatActivity {
                             //set visible Scrollliste
                             scrollListePresence.setVisibility(View.INVISIBLE);
                         } else {
+                            //ACTIVATE NFC
+
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                                adapterNFC.enableReaderMode(Activity_liste_presence.this, null, NfcAdapter.STATE_TURNING_ON, null);
+//                            }
                             btnSendToCloud.setVisibility(View.VISIBLE);
                             spinnerPromo.setEnabled(false);
                             spinnerListFacDep.setEnabled(false);
                             spinnerTypePresence.setEnabled(false);
                             btnStartList.setImageResource(R.drawable.ic_done_bleu_24dp);
                             messageEvolution.setText("Pour completer la liste, bipé une carte");
-//                            //DESACTIVATE NFC
-//                            NfcAdapter adapterNfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                                adapterNfc.enableReaderMode(getApplicationContext(), null, NfcAdapter.STATE_ON, null);
-//                            }
-//        li
 
                             //set visible Scrollliste
                             scrollListePresence.setVisibility(View.VISIBLE);
@@ -438,6 +449,11 @@ public class Activity_liste_presence extends AppCompatActivity {
                     }
 
                     else {
+                        //DESACTIVATE NFC
+                        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(Activity_liste_presence.this);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            adapter.enableReaderMode(Activity_liste_presence.this, null, NfcAdapter.STATE_OFF, null);
+                        }
                     createInternalFile();
                     btnSendToCloud.setImageResource(R.drawable.ic_cloud_done_black_24dp);
                    // messageEvolution.setText("Liste envoyéé");
@@ -449,6 +465,11 @@ public class Activity_liste_presence extends AppCompatActivity {
                    // f=f+"";
                 }
                 else {
+                    //DESACTIVATE NFC
+                    NfcAdapter adapter = NfcAdapter.getDefaultAdapter(Activity_liste_presence.this);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        adapter.enableReaderMode(Activity_liste_presence.this, null, NfcAdapter.STATE_OFF, null);
+                    }
                     btnSendToCloud.setImageResource(R.drawable.ic_cloud_off_black_24dp);
                     messageEvolution.setText("Liste non envoyée sur serveur, stockéé dans mes Listes");
                     setListMyDB(getIntentNomUniv+TABLE_NAME,txtExpediteurDate.getText().toString(),
@@ -769,8 +790,8 @@ public class Activity_liste_presence extends AppCompatActivity {
     protected void onPause() {
         stopForegroundDispatch(this, nfcAdapter);
         super.onPause();
-//        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-//        nfcAdapter.disableForegroundDispatch(this);
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        nfcAdapter.disableForegroundDispatch(this);
 
     }
 
@@ -779,11 +800,9 @@ public class Activity_liste_presence extends AppCompatActivity {
 //        super.onResume();
 //        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
         super.onResume();
-//        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        setupForegroundDispatch(this, nfcAdapter);
-        // to catch all NFC discovery events:
-        //nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        nfcAdapter.enableForegroundDispatch(this, pendingIntent, null, null);
     }
 
 
@@ -825,7 +844,13 @@ public class Activity_liste_presence extends AppCompatActivity {
     }
 
     @Override
-    protected void onNewIntent(Intent intent){
+    protected void onNewIntent(Intent intent) {
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
+            int i=56;
+        }
+
+
         readFromIntent(intent);
         getTagInfo(intent);
         String ez = "p";
@@ -833,14 +858,14 @@ public class Activity_liste_presence extends AppCompatActivity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
         String s = action + "\n\n" + tag.toString();
-        String s1="";
+        String s1 = "";
 
         // parse through all NDEF messages and their records and pick text type only
         Parcelable[] data = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         if (data != null) {
             try {
                 for (int i = 0; i < data.length; i++) {
-                    NdefRecord [] recs = ((NdefMessage)data[i]).getRecords();
+                    NdefRecord[] recs = ((NdefMessage) data[i]).getRecords();
                     for (int j = 0; j < recs.length; j++) {
                         if (recs[j].getTnf() == NdefRecord.TNF_WELL_KNOWN &&
                                 Arrays.equals(recs[j].getType(), NdefRecord.RTD_TEXT)) {
@@ -851,13 +876,13 @@ public class Activity_liste_presence extends AppCompatActivity {
 //                            s += ("\n\nNdefMessage[" + i + "], NdefRecord[" + j + "]:\n\"" +
 //                                    new String(payload, langCodeLen + 1, payload.length - langCodeLen - 1, textEncoding) + "\"");
 //
-                            ez=new String(payload, langCodeLen + 1, payload.length - langCodeLen - 1,
+                            ez = new String(payload, langCodeLen + 1, payload.length - langCodeLen - 1,
                                     textEncoding);
-                            for(int index = 0; index < ez.length(); index+=9) {
-                                String temp = ez.substring(index, index+8);
-                                int num = Integer.parseInt(temp,2);
+                            for (int index = 0; index < ez.length(); index += 9) {
+                                String temp = ez.substring(index, index + 8);
+                                int num = Integer.parseInt(temp, 2);
                                 char letter = (char) num;
-                                s1 = s1+letter;
+                                s1 = s1 + letter;
                             }
                             splitPayloadChekAuth(s1);
                         }
@@ -867,8 +892,9 @@ public class Activity_liste_presence extends AppCompatActivity {
                 Log.e("TagDispatch", e.toString());
             }
         }
-
     }
+
+
 
 
     private void getTagInfo(Intent intent) {
@@ -954,6 +980,9 @@ public class Activity_liste_presence extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         myListview.setVisibility(View.VISIBLE);
         myListview.setAdapter(adapter);
+        txtNumberInliste.setVisibility(View.VISIBLE);
+        txtNumberInliste.setText("Nombre :"+ListElementsArrayList.size());
+        txtHowTodelete.setVisibility(View.VISIBLE);
     }
 
     public void Savelocal(){
@@ -1044,6 +1073,30 @@ public class Activity_liste_presence extends AppCompatActivity {
      */
     public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
+    }
+
+    public void activateNFC(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_ON, null);
+            int i=564;
+        }
+    }
+
+    public void turnOffNfc(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_TURNING_OFF, null);
+        }
+    }
+    public void turnOnNfc(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_TURNING_ON, null);
+        }
     }
 
 }

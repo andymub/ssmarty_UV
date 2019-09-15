@@ -7,8 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.icu.util.Calendar;
 import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
+import android.nfc.Tag;
+import android.os.Build;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.os.Bundle;
@@ -27,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import ssmarty.univ.QR.QrCodeScannerActivity;
 import ssmarty.univ.decrypter.StringToHex;
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //ETUDIANT EX --univ/fac1_departement1/G1/2019/1/Grég Mélanie
     //PROF EX-univ/fac1_departement1/G1/2019/0/Jean Yves Mélanie
     private static final String TAG ="NFC" ;
-    private ImageView imgNfcState;
+    private ImageView imgNfcState,imgStudentQR;
     private TextView txtStateNfc;
     public  AnimationDrawable frameAnimation;
     public static final String DATABASE_NAME =  "ssmarty_univ";
@@ -53,11 +57,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Context context=getApplicationContext();
         imgNfcState= findViewById(R.id.imgNfcState);
+        imgStudentQR =findViewById(R.id.imgeViewStudentQR);
 
 
        // imgNfcState.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.ssmart_nfc_connect, null));
         txtStateNfc=findViewById(R.id.txtStateNfc);
         ncfCompatible ();
+
+        imgStudentQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentQR =new Intent(MainActivity.this, QrCodeScannerActivity.class);
+                startActivity(intentQR);
+            }
+        });
 
         //NFC
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -198,6 +211,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        readFromIntent(intent);
+
+
+    }
+
     private void readFromIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -289,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
                     studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
                     studentIntent.putExtra("data",dataTosend);
                     //studentIntent.putExtra("userName",dataTosend)
+
                     startActivity(studentIntent);
                 break;
 
@@ -298,7 +320,10 @@ public class MainActivity extends AppCompatActivity {
                     studentIntent=new Intent(MainActivity.this, MainActivity_Prof.class);
                     studentIntent.putExtra("data",dataTosend);
                     //studentIntent.putExtra("userName",dataTosend)
+                    //desactivateNFC();
                     startActivity(studentIntent);
+                    //desactivateNFC();
+                    //turnOffNfc();
                     break;
 
                 case "01" :
@@ -327,6 +352,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
     }
 
 //    public int alertBox (){
@@ -353,6 +379,36 @@ public class MainActivity extends AppCompatActivity {
 //
 //        return retour[0];
 //    }
+
+    public  void desactivateNFC (){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
+        }
+    }
+    public void activateNFC(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_ON, null);
+        }
+    }
+
+    public void turnOffNfc(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_TURNING_OFF, null);
+        }
+    }
+    public void turnOnNfc(){
+        //DESACTIVATE NFC
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            adapter.enableReaderMode(this, null, NfcAdapter.STATE_TURNING_ON, null);
+        }
+    }
 
 
 

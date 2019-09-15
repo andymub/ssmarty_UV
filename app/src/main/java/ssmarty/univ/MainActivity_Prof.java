@@ -75,6 +75,7 @@ public class MainActivity_Prof extends AppCompatActivity {
     Boolean isACp=false;
     int count=0;
     ImageView unvLogo;
+    String []getDataFromCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,12 +105,6 @@ public class MainActivity_Prof extends AppCompatActivity {
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark));
 
 
-
-//DESACTIVATE NFC
-        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            adapter.enableReaderMode(this, null, NfcAdapter.STATE_OFF, null);
-        }
 //        listViewMesssageUNIV.setOnScrollListener(new AbsListView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -130,7 +125,7 @@ public class MainActivity_Prof extends AppCompatActivity {
 
 
         //todo get prof's name and uniV n
-        final String []getDataFromCard = getIntent().getStringArrayExtra("data");
+        getDataFromCard = getIntent().getStringArrayExtra("data");
         displayUnivName.setText(getDataFromCard[0]);
         nomUnivDisplayed=getDataFromCard[0];
         if (getIntent().getStringExtra("facCP")!=null){
@@ -313,7 +308,8 @@ public class MainActivity_Prof extends AppCompatActivity {
                 /*
                  * Do something
                  */
-                getAllFacDepart (getDataFromCard[0].toLowerCase());
+                getAllFacDepart (getDataFromCard[0]);
+//                getAllFacDepart (getDataFromCard[0].toLowerCase());
             }
         });
 
@@ -548,16 +544,6 @@ public class MainActivity_Prof extends AppCompatActivity {
 //        int i= facDep.length;
     }
 
-
-
-
-
-
-
-
-
-
-
     ///SQLITE
 
     private void createListeTable() {
@@ -620,5 +606,16 @@ public class MainActivity_Prof extends AppCompatActivity {
         AlertDialog alert=builder.create();
         alert.show();
         //super.onBackPressed();
+    }
+
+    public void notification ()
+    {
+//         functions = require('firebase-functions');
+////       db.collection(getDataFromCard[0]+" message").document()
+//       Object event = functions.firestore.collection(getDataFromCard[0]+" message").document()
+//                .onUpdate(event =>{
+//                var transactionId = event.params.transactionId
+//                console.log(transactionId);  // Moj2HBrxepX5R7FonvrO
+//    });
     }
 }
