@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,8 +24,11 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -59,6 +63,11 @@ public class MainActivity_student extends AppCompatActivity {
         displayUnivName=findViewById(R.id.studen_txtNom_univ);
         displayStudentName=findViewById(R.id.nom_etudiant);
         unvLogo=findViewById(R.id.imageViewLogoUniv);
+
+
+        //notification TOPIC
+
+        //NOTIF TOPIC end
 
 //        researchFinace= findViewById(R.id.recherchSituationFinance);
 //        researchFinace.setVisibility(View.VISIBLE);

@@ -22,6 +22,7 @@
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
+            android:alpha=".75"
             android:src="@drawable/id_welcome_image"
             app:srcCompat="@drawable/id_welcome_image" />
         <TextView

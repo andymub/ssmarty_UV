@@ -38,7 +38,7 @@ public class NotificationsService extends FirebaseMessagingService {
 
     // ---
 
-    private void sendVisualNotification(String messageBody,String title) {
+    public void sendVisualNotification(String messageBody, String title) {
 
         // 1 - Create an Intent that will be shown when user will click on the Notification
         Intent intent = new Intent(this, MainActivity.class);

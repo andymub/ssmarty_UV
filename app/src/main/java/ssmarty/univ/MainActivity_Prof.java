@@ -47,6 +47,7 @@ import ssmarty.univ.database.model.InfoPresistance;
 import ssmarty.univ.database.model.MessageUniv;
 import ssmarty.univ.helper.DatabaseHelper;
 import ssmarty.univ.network.InternetConnectionStatus;
+import ssmarty.univ.notification.NotifactionDataAdded;
 
 
 public class MainActivity_Prof extends AppCompatActivity {
@@ -617,5 +618,12 @@ public class MainActivity_Prof extends AppCompatActivity {
 //                var transactionId = event.params.transactionId
 //                console.log(transactionId);  // Moj2HBrxepX5R7FonvrO
 //    });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        NotifactionDataAdded notifactionDataAdded = new NotifactionDataAdded();
+//        notifactionDataAdded.checkChange(nomUnivDisplayed,this);
     }
 }
