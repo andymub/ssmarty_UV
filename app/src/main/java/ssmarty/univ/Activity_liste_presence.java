@@ -82,7 +82,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     String[] ListElements=new String[] {
     };
 
-    private DatabaseHelper db;
+     DatabaseHelper db;
     //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
     int clickCounter=0;
     private TextView txtExpediteurDate,messageEvolution,txtNumberInliste,txtHowTodelete;
@@ -110,7 +110,7 @@ public class Activity_liste_presence extends AppCompatActivity {
     FileOutputStream fstream;
     public String nomFichier;
     public String downloadUrl;
-    private StorageReference mStorageRef;
+    StorageReference mStorageRef;
     NfcAdapter adapterNFC;
     //
 

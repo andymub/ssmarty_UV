@@ -121,7 +121,7 @@ public class HoraireActivity extends AppCompatActivity {
                     }
                     if (horaireCourList.isEmpty()){
                         finish();
-                        Toast.makeText(getApplicationContext(),"Pas d'Horaire en ligne",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(),"Pas d'Horaire en ligne",Toast.LENGTH_LONG).show();
                     }
                     ListHoraireEtudiantAdapter HoraireAdapter =
                             new ListHoraireEtudiantAdapter(getApplicationContext(),R.layout.my_custom_list_horaire_exam,
@@ -139,7 +139,7 @@ public class HoraireActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(getApplicationContext(),"Aucun horaire disponible",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Aucun horaire disponible",Toast.LENGTH_SHORT).show();
                 finish();
 
 

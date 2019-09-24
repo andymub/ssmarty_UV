@@ -23,7 +23,6 @@ import ssmarty.univ.helper.DatabaseHelper;
 public class Activity_MyList_prof extends AppCompatActivity {
     //a List of type ListeEnumerationModel for holding list items
     List<ListeEnumerationModel> listpresence;
-    private DatabaseHelper db;
     //the listview
     ListView MyListePresListView;
     public String getIntentUserName;
@@ -69,7 +68,7 @@ public class Activity_MyList_prof extends AppCompatActivity {
         }
 
         //todo Get data from sqlite Datbase et display
-        db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
         List<ListsModel> arraylistModel = new ArrayList<>();
       //  try {
 

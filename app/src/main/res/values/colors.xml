@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#A7D8FF</color>
     <color name="colorPrimaryDark">#69bcff</color>
     <color name="colorAccent">#011426</color>
+    <color name="colorAccentscren">#5A7D8A</color>
     <color name="bipNfc_etudiant_added">#FF32C1F5</color>
+    <color name="colorAccentscren1">#427A8F</color>
     <color name="WHITE_nfc">#ffffff</color>
     <color name="RED_nfc">#ff0202</color>
     <color name="black_nfc">#000000</color>
     <!-- Screens background color-->
-    <color name="bg_slider_screen1">#E99C03</color>
-    <color name="bg_slider_screen2">#16bc7d</color>
-    <color name="bg_slider_screen3">#60F3E2</color>
+    <color name="bg_slider_screen2">#777673</color>
+    <color name="bg_slider_screen3">#247492</color>
     <!-- dots inactive colors -->
-    <color name="dot_inactive_screen1">#F5C35F</color>
-    <color name="dot_inactive_screen2">#008c57</color>
-    <color name="dot_inactive_screen3">#4374F7</color>
+    <color name="dot_inactive_screen1">#8D9E82</color>
+    <color name="dot_inactive_screen2">#8D9E82</color>
+    <color name="dot_inactive_screen3">#8D9E82</color>
     <!-- dots active colors -->
-    <color name="dot_active_screen1">#F7DBA4</color>
-    <color name="dot_active_screen2">#74f7c5</color>
-    <color name="dot_active_screen3">#4677F8</color>
+    <color name="dot_active_screen1">#F1EFED</color>
+    <color name="dot_active_screen2">#F1EFED</color>
+    <color name="dot_active_screen3">#F1EFED</color>
     <array name="array_dot_active">
         <item>@color/dot_active_screen1</item>
         <item>@color/dot_active_screen2</item>

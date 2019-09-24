@@ -38,20 +38,29 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class Activity_ajouts_horaire_prof extends AppCompatActivity {
 
-    ImageButton btnAjout;
-    Spinner spinnerFac, spinnerPromo,spinnerType;
-    EditText nomCoursHoraire,lieuHoraire,titulaireHoraire,dateHoraire,detailsHoraire;
-    List<String> listFac;
-    String facDep="",promo="",typeHoraire="";
+    private ImageButton btnAjout;
+    private Spinner spinnerFac;
+    private Spinner spinnerPromo;
+    private Spinner spinnerType;
+    private EditText nomCoursHoraire;
+    private EditText lieuHoraire;
+    private EditText titulaireHoraire;
+    private EditText dateHoraire;
+    private EditText detailsHoraire;
+    private List<String> listFac;
+    private String facDep="";
+    private String promo="";
+    private String typeHoraire="";
     FileOutputStream fstream;
-    String getUnivName,getUser;
+    private String getUnivName;
+    private String getUser;
     private StorageReference mStorageRef;
     // Access a Cloud Firestore instance from your Activity
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String TAG="TAG";
-    String sss;
-    ProgressBar progressBar;
-    int count = 0;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String TAG="TAG";
+    private String sss;
+    private ProgressBar progressBar;
+    private int count = 0;
     public String getListFacDetIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -285,7 +294,7 @@ public class Activity_ajouts_horaire_prof extends AppCompatActivity {
 
 
     }
-    public void resetField()
+    private void resetField()
     {
         nomCoursHoraire.setText("");
         lieuHoraire.setText("");

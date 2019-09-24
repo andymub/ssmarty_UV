@@ -12,6 +12,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcManager;
 import android.nfc.Tag;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATABASE_NAME =  "ssmarty_univ";
     public String nomUtilisteur;
     String []dataTosend;
+    Thread thread = new Thread();
+    Handler handler = new Handler();
     //sqlite
     SQLiteDatabase mDatabase;
     NfcAdapter nfcAdapter;
@@ -89,23 +92,40 @@ public class MainActivity extends AppCompatActivity {
         imgNfcState.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent studentIntent;
-                studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
-                studentIntent.putExtra("data",dataTosend);
-                //studentIntent.putExtra("userName",dataTosend)
-                startActivity(studentIntent);
+//                Intent studentIntent;
+//                studentIntent=new Intent(MainActivity.this, MainActivity_student.class);
+//                studentIntent.putExtra("data",dataTosend);
+//                //studentIntent.putExtra("userName",dataTosend)
+//                startActivity(studentIntent);
+                imgNfcState.animate()
+                        .alpha(0f)
+                        .setDuration(2000).start();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intentQR =new Intent(MainActivity.this, QrCodeScannerActivity.class);
+                        startActivity(intentQR);
+                        imgNfcState.animate()
+                                .alpha(1f)
+                                .setDuration(2000).setListener(null);
+                        //Do something after 100ms
+                    }
+                }, 2000);
+
+
+
             }
         });
-        imgNfcState.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent studentIntent;
-                studentIntent=new Intent(MainActivity.this, MainActivity_Prof.class);
-                studentIntent.putExtra("data",dataTosend);
-                startActivity(studentIntent);
-                return false;
-            }
-        });
+//        imgNfcState.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                Intent studentIntent;
+//                studentIntent=new Intent(MainActivity.this, MainActivity_Prof.class);
+//                studentIntent.putExtra("data",dataTosend);
+//                startActivity(studentIntent);
+//                return false;
+//            }
+//        });
 
         //creating a database
         mDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_PRIVATE, null);
@@ -411,6 +431,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.enableReaderMode(this, null, NfcAdapter.STATE_TURNING_ON, null);
         }
     }
+
 
 
 

@@ -53,18 +53,15 @@
     </string-array>
 
 
-    <string name="title_activity_welcome">Home Screen</string>
     <string name="next">SUIVANT</string>
     <string name="skip">PASSER</string>
     <string name="start">COMPRIS</string>
     <string name="slide_1_title">Communication</string>
     <string name="slide_1_desc">Mise en ligne des informations par les enseignants</string>
     <string name="slide_2_title">Accès étudiant </string>
-    <string name="slide_2_desc">Etre informer à tout heure </string>
+    <string name="slide_2_desc">A l\'information à tout heure </string>
     <string name="slide_3_title">Mon identité</string>
-    <string name="slide_3_desc">Votre carte ID, vore passe accès application</string>
-    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
-    <string name="play_again">Repasser</string>
+    <string name="slide_3_desc">Votre carte ID, votre passe d\'accès à l\'application</string>
     <string name="notification_title">titre</string>
     <string name="default_notification_channel_id">chanel</string>
 

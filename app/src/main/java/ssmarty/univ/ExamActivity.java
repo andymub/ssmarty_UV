@@ -123,7 +123,7 @@ public class ExamActivity extends AppCompatActivity {
                     }
                     if (ExamCourList.isEmpty()){
                         allListIsEmpty=true;
-                        Toast.makeText(getApplicationContext(),"Aucun Examen",Toast.LENGTH_LONG).show();
+                       // Toast.makeText(getApplicationContext(),"Aucun Examen",Toast.LENGTH_LONG).show();
                     }
                     ExamCourList.add(new HoraireCourOuExam("","","","",""));
                     // listViewExam.setAdapter(HoraireAdapter);
@@ -139,7 +139,7 @@ public class ExamActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getApplicationContext(), "Aucun horaire disponible", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Aucun horaire disponible", Toast.LENGTH_SHORT).show();
                         finish();
 
 
